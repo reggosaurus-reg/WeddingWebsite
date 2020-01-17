@@ -1,8 +1,41 @@
-h1 {
-	text-align: center;
-	padding: 8px;
+:root {
+    --margin: 3em;
+    --max-article-width: 50em; /* Doesn't work */
+	--color-top:royalblue;
+	--color-background:cornflowerblue;
+	--color-bottom:#74A5FD;
+	--color-side:royalblue;
+}
+body {
+	background-color: var(--color-background);
 }
 
-#countdown {
+h1#names {
+	background-color: var(--color-top);
 	text-align: center;
+	padding: 8px;
+	font-style: italic;
+}
+
+p#bottom {
+	background-color: var(--color-bottom);
+	text-align: right;
+
+.center {
+	text-align: center; /* Doesn't work anymore */
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: var(--color-bottom);
+   color: white;
+   text-align: right;
+}
+
+article {
+	max-width: var(--max-article-width);
+	align: center;
 }
