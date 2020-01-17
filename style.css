@@ -6,8 +6,19 @@
 	--color-bottom:#74A5FD;
 	--color-side:royalblue;
 }
+
 body {
 	background-color: var(--color-background);
+}
+
+article {
+	max-width: var(--max-article-width);
+	align: right;
+}
+
+img {
+	border-radius: 2%;
+	border: 3px solid black;
 }
 
 h1#names {
@@ -28,11 +39,6 @@ h1#names {
 	width: 100%;
 	background-color: var(--color-bottom);
 	text-align: right;
-}
-
-article {
-	max-width: var(--max-article-width);
-	align: right;
 }
 
 .hidden-url:link {
