@@ -34,3 +34,8 @@ article {
 	max-width: var(--max-article-width);
 	align: right;
 }
+
+.hidden-url:link {
+	text-decoration: none;
+	text-color: black;
+}
