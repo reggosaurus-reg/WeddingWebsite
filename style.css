@@ -11,31 +11,26 @@ body {
 }
 
 h1#names {
-	background-color: var(--color-top);
-	text-align: center;
-	padding: 8px;
 	font-style: italic;
+  	font-size: 30px;
 }
 
-p#bottom {
-	background-color: var(--color-bottom);
-	text-align: right;
-
-.center {
-	text-align: center; /* Doesn't work anymore */
+.header {
+	padding: 10px;
+	text-align: center;
+	background: var(--color-top);
 }
 
 .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: var(--color-bottom);
-   color: white;
-   text-align: right;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: var(--color-bottom);
+	text-align: right;
 }
 
 article {
 	max-width: var(--max-article-width);
-	align: center;
+	align: right;
 }
