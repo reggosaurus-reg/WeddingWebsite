@@ -1,6 +1,5 @@
 :root {
     --margin: 3em;
-    --max-article-width: 50em; /* Doesn't work */
 	--color-top:royalblue;
 	--color-background:cornflowerblue;
 	--color-bottom:#74A5FD;
@@ -12,13 +11,17 @@ body {
 }
 
 article {
-	max-width: var(--max-article-width);
-	align: right;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
 }
 
 img {
 	border-radius: 2%;
 	border: 3px solid black;
+}
+
+.center {
 }
 
 h1#names {
