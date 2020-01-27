@@ -35,6 +35,10 @@ var x = setInterval(function() {
 
 window.onload = () => { 
 	document.querySelector("nav").onclick = (e) => {
-		document.querySelector(".dropdown-menu").classList.add("show");
+		let classes = document.querySelector(".dropdown-menu").classList;
+		if (classes.contains("show"))
+			classes.remove("show");
+		else
+			classes.add("show");
 	};
 };
