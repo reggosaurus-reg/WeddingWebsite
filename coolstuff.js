@@ -1,3 +1,5 @@
+// COUNTDOWN
+
 // From https://www.w3schools.com/howto/howto_js_countdown.asp 
 
 // Set the date we're counting down to
@@ -28,3 +30,5 @@ var x = setInterval(function() {
     document.getElementById("countdown").innerHTML = "NYGIFTA!";
   }
 }, 1000);
+
+// MENU
