@@ -52,28 +52,34 @@ h1#names {
 	text-color: black;
 }
 
-.menubar {
-	overflow: hidden;
-	height: 40em;
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
 	background-color: darkgray;
+}
+
+h2 {
+	margin: 0;
+	padding: 0.5em;
 	color: pink;
 	font-size: 1.5em;
 	font-style: italic;
 }
 
-.menubar a:hover {
-	background-color: darkgray;
-	font-style: bold;
-}
-
 .dropdown-menu {
-	position: fixed;
-	left: 0;
-	top: 0;
+	visibility: hidden;
+	display: none;
 	width: 100vw;
 	background-color: gray;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;
+}
+
+.dropdown-menu.show {
+	visibility: visible;
+	display: block;
 }
 
 .dropdown-menu a {
@@ -90,39 +96,3 @@ h1#names {
 	background-color: darkgray;
 }
 
-
-/* MOBILE ONLY */
-
-@media only screen and (max-width: 400px) {
-	.menubar {
-		text-align: right;
-	}
-
-	.menubar:hover .dropdown-menu {
-		display: block;
-	}
-
-	.dropdown-menu {
-		display: none;
-		width: 100%;
-	}
-
-	.dropdown-menu a {
-		text-align: center;
-	}
-}
-
-
-/* DESKTOP ONLY */
-
-@media only screen and (min-width: 961px) {
-	.menubar {
-		text-align: left;
-	}
-
-	.dropdown-menu {
-		display: block;
-		min-width: 160px;
-		height: 100%;
-	}
-}

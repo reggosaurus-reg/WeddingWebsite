@@ -32,3 +32,9 @@ var x = setInterval(function() {
 }, 1000);
 
 // MENU
+
+window.onload = () => { 
+	document.querySelector("nav").onclick = (e) => {
+		document.querySelector(".dropdown-menu").classList.add("show");
+	};
+};
