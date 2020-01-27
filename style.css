@@ -53,7 +53,7 @@ h1#names {
 }
 
 nav {
-	position: fixed;
+	//position: fixed;
 	top: 0;
 	left: 0;
 	width: 100vw;
@@ -63,9 +63,9 @@ nav {
 h2 {
 	margin: 0;
 	padding: 0.5em;
+	word-spacing: 65vw;
 	color: pink;
 	font-size: 1.5em;
-	font-style: italic;
 }
 
 .dropdown-menu {
@@ -86,9 +86,10 @@ h2 {
 	float: none;
 	color: pink;
 	padding: 12px 16px;
+	width: 100%;
+	text-align: center;
 	text-decoration: none;
 	display: block;
-	text-align: left;
 	font-style: bold;
 }
 
