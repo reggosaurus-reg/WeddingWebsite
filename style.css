@@ -2,10 +2,15 @@
 
 :root {
     --margin: 3em;
+	/* Colors */
 	--color-top:thistle;
 	--color-background:lavender;
-	--color-bottom:#74A5FD;
+	--color-bottom:thistle;
 	--color-side:royalblue;
+	--color-menu-text:pink;
+	--color-menu-background:darkgray;
+	--color-menu-background-marked:gray;
+	--color-headlines:seagreen;
 }
 
 /* GENERAL */ 
@@ -28,8 +33,21 @@ img {
 }
 
 h1#names {
+	color: black;
 	font-style: italic;
   	font-size: 2em;
+}
+
+h1 {
+	color: var(--color-headlines);
+}
+
+h2 {
+	margin: 0;
+	padding: 0.5em;
+	word-spacing: 65vw;
+	color: var(--color-menu-text);
+	font-size: 1.5em;
 }
 
 .header {
@@ -49,7 +67,7 @@ h1#names {
 
 .hidden-url:link {
 	text-decoration: none;
-	text-color: black;
+	color: black;
 }
 
 nav {
@@ -57,22 +75,14 @@ nav {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	background-color: darkgray;
-}
-
-h2 {
-	margin: 0;
-	padding: 0.5em;
-	word-spacing: 65vw;
-	color: pink;
-	font-size: 1.5em;
+	background-color: var(--color-menu-background);
 }
 
 .dropdown-menu {
 	visibility: hidden;
 	display: none;
 	width: 100vw;
-	background-color: gray;
+	background-color: var(--color-menu-background);
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;
 }
@@ -84,16 +94,15 @@ h2 {
 
 .dropdown-menu a {
 	float: none;
-	color: pink;
+	color: var(--color-menu-text);
 	padding: 12px 16px;
 	width: 100%;
 	text-align: center;
 	text-decoration: none;
 	display: block;
-	font-style: bold;
 }
 
 .dropdown-menu a:hover {
-	background-color: darkgray;
+	background-color: var(--color-menu-background-marked);
 }
 
