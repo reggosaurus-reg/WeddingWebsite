@@ -73,7 +73,10 @@ p {
 }
 
 .flex-container {
-	flex-direction: column;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .hidden-url:link {
