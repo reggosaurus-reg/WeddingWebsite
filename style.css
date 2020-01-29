@@ -58,6 +58,7 @@ p {
 }
 
 .header {
+	margin-top: 3.5em;
 	padding: 10px;
 	text-align: center;
 	background: var(--color-top);
@@ -71,13 +72,17 @@ p {
 	text-align: center;
 }
 
+.flex-container {
+	flex-direction: column;
+}
+
 .hidden-url:link {
 	text-decoration: none;
 	color: var(--color-text);
 }
 
 nav {
-	//position: fixed;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100vw;
