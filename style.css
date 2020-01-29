@@ -7,10 +7,11 @@
 	--color-background:lavender;
 	--color-bottom:thistle;
 	--color-side:royalblue;
+	--color-text:darkslategray;
 	--color-menu-text:pink;
 	--color-menu-background:darkgray;
 	--color-menu-background-marked:gray;
-	--color-headlines:seagreen;
+	--color-headlines:maroon;
 }
 
 /* GENERAL */ 
@@ -29,7 +30,8 @@ article {
 
 img {
 	border-radius: 2%;
-	border: 3px solid black;
+	border: 3px solid var(--color-top);
+	margin:1em;
 }
 
 h1#names {
@@ -40,6 +42,7 @@ h1#names {
 
 h1 {
 	color: var(--color-headlines);
+	text-align: center;
 }
 
 h2 {
@@ -49,6 +52,10 @@ h2 {
 	color: var(--color-menu-text);
 	font-size: 1.5em;
 }
+ 
+p {
+	color: var(--color-text);
+}
 
 .header {
 	padding: 10px;
@@ -57,17 +64,16 @@ h2 {
 }
 
 .footer {
-	position: fixed; /* Not permanent */
 	left: 0;
 	bottom: 0;
 	width: 100%;
 	background-color: var(--color-bottom);
-	text-align: right;
+	text-align: center;
 }
 
 .hidden-url:link {
 	text-decoration: none;
-	color: black;
+	color: var(--color-text);
 }
 
 nav {
