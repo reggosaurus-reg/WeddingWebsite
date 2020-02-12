@@ -4,8 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
-	<script type="text/javascript" src="coolstuff.js"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<script src="{{ url_for('static', filename='js/coolstuff.js') }}">
+	</script>
 	<title>Per-Emil ♥ Maja</title>
 </head>
 
@@ -22,7 +23,7 @@
  		     <a href="vardar">Värdar</a>
  		     <a href="onskelista">Önskelista</a>
  		     <a href="boende">Boende</a>
- 		     <a href="allmant">Anmälan</a>
+ 		     <a href="anmalan">Anmälan</a>
  		 </div>
 	</nav>
 
@@ -31,10 +32,10 @@
 	</div>
 
 	<article>
-		<div><h1>Välkomna!</h1></div>
+		<div><h1>Värdar<h1></div>
 	<div class="flex-container">
 		<div style="background:#666">
-		<img src="majaochperemil.jpg" 
+			<img src="{{ url_for('static', filename ='img/majaochperemil.jpg') }}" 
 			alt="Maja och Per-Emils förlovningsbild" 
 			height=300>
 	  	</div>
