@@ -26,5 +26,9 @@ def hotels_page():
 def general_page():
     return render_template("anmalan.html")
 
+@app.route('/allaanmalda')
+def list_page():
+    return render_template("allaanmalda.html")
+
 if __name__ == '__main__':
     app.run()

@@ -1,0 +1,11 @@
+{% extends "templates/page.html" %}
+
+{% block script %}
+	<script src="{{ url_for('static', filename='js/password.js') }}"></script>
+{% endblock %}
+
+{% block pagename %}Alla anmälda{% endblock %}
+
+{% block content %}
+<p>Snart kommer man att se en lista med alla anmälda här!</p>
+{% endblock %}

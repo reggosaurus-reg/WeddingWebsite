@@ -1,6 +1,4 @@
-// COUNTDOWN
-
-// From https://www.w3schools.com/howto/howto_js_countdown.asp 
+// From https://www.w3schools.com/howto/howto_js_countdown.asp
 
 // Set the date we're counting down to
 var countDownDate = new Date("Aug 8, 2020 14:00:00").getTime();
@@ -30,15 +28,3 @@ var x = setInterval(function() {
     document.getElementById("countdown").innerHTML = "NYGIFTA!";
   }
 }, 1000);
-
-// MENU
-
-window.onload = () => { 
-	document.querySelector("nav").onclick = (e) => {
-		let classes = document.querySelector(".dropdown-menu").classList;
-		if (classes.contains("show"))
-			classes.remove("show");
-		else
-			classes.add("show");
-	};
-};
