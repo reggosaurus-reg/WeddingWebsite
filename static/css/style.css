@@ -14,7 +14,7 @@
 	--color-headlines:maroon;
 }
 
-/* GENERAL */ 
+/* GENERAL */
 
 body {
 	background-color: var(--color-background);
@@ -52,7 +52,7 @@ h2 {
 	color: var(--color-menu-text);
 	font-size: 1.5em;
 }
- 
+
 p {
 	color: var(--color-text);
 }
@@ -77,6 +77,12 @@ p {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+}
+
+.flex-decenter {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .hidden-url:link {
