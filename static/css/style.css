@@ -4,7 +4,8 @@
     --margin: 3em;
 	/* Colors */
 	--color-top:thistle;
-	--color-background:lavender;
+	--color-background:#d3d3f7;
+	--color-background-light:lavender;
 	--color-bottom:thistle;
 	--color-side:royalblue;
 	--color-text:darkslategray;
@@ -23,8 +24,9 @@ body {
 }
 
 article {
+	background-color: var(--color-background-light);
 	margin: auto;
-	width: 70%;
+	width: 80%;
 	padding: 10px;
 }
 
