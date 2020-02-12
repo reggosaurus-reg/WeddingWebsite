@@ -72,6 +72,7 @@ p {
 	width: 100%;
 	background-color: var(--color-bottom);
 	text-align: center;
+	padding: 0.5em;
 }
 
 .flex-container {
