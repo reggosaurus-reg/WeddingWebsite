@@ -1,3 +1,10 @@
 {% extends "templates/page.html" %}
 
 {% block pagename %}Önskelista{% endblock %}
+
+{% block content %}
+<p>Här kommer instruktioner om hur önskelistan funkar att finnas.</p>
+<form action="/action_page.php">
+  <input type="checkbox" name="test" value="Test" checked>
+  <label for="test">Ett test</label><br>
+{% endblock %}

@@ -1,3 +1,16 @@
 {% extends "templates/page.html" %}
 
 {% block pagename %}Anmälan{% endblock %}
+
+{% block content %}
+<!--Click the "Submit" button and the form-data will be sent to a page on the server called "/action_page.php".-->
+<form action="/action_page.php">
+  <label for="fname">Förnamn:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Efternamn:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <input type="checkbox" name="allergi" value="Allergi">
+  <label for="allergi">Allergisk</label><br>
+  <input type="submit" value="Anmäl!">
+</form>
+{% endblock %}
