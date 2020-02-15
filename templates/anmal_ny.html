@@ -1,0 +1,10 @@
+{% extends "templates/page.html" %}
+
+{% block pagename %}Anmälan{% endblock %}
+
+{% block content %}
+<p>Tack för din anmälan!</p>
+<form action="/anmalan" method="get">
+  <input type="submit" value="Anmäl en till">
+</form>
+{% endblock %}
