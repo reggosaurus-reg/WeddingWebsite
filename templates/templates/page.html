@@ -15,9 +15,9 @@
 
 	<div class="flex-decenter" style="flex-direction:column;height:100vh">
 		{% include "templates/menu.html" %}
-		{% include "templates/header.html" %}
 
 		<article style="flex-grow:2">
+		{% include "templates/header.html" %}
 			<div><h1>
 				{% block pagename %}Denna sida har inget namn än{% endblock %}
 			</h1></div>

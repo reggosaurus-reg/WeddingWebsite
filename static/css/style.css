@@ -12,11 +12,12 @@
 	 */
 	--color-background:#f5dbd3;
 	--color-background-light:#f9f7f1;
-	--color-menu-background:#bbc173;
-	--color-menu-background-marked:#c5cc7f;
+	--color-menu-background-marked:#bbc173;
+	--color-menu-background:#c5cc7f;
+ 	--color-names:#dce1a1;
 	--color-text:darkslategray;
-	--color-text-menu:#783347;
-	--color-text-menu-marked:#a64263;
+	--color-text-menu-marked:#783347;
+	--color-text-menu:#a64263;
 	--color-headlines:#783347;
 }
 
@@ -38,17 +39,17 @@ article {
 img {
 	border-radius: 2%;
 	border: 3px solid var(--color-menu-background);
-	margin:1em;
+	margin: 1em;
 }
 
 h1#names {
-	color: black;
+	color: var(--color-headlines);
 	font-style: italic;
   	font-size: 2em;
 }
 
 h1 {
-	color: var(--color-headlines);
+	color: var(--color-text-menu);
 	text-align: center;
 }
 
@@ -65,10 +66,13 @@ p {
 }
 
 .header {
+	margin: 1em;
 	margin-top: 3.5em;
 	padding: 10px;
 	text-align: center;
-	background: var(--color-menu-background);
+	background: var(--color-names);
+	border-radius: 2%;
+	border: 3px solid var(--color-menu-background);
 }
 
 .footer {
