@@ -3,16 +3,21 @@
 :root {
     --margin: 3em;
 	/* Colors */
-	--color-top:thistle;
-	--color-background:#d3d3f7;
-	--color-background-light:lavender;
-	--color-bottom:thistle;
-	--color-side:royalblue;
+	/*
+	 * #f0cdbe light pink
+	 * #f5dbd3 middle pink
+	 * #bbc173 warm pink
+	 * #783347 dark pink
+	 * #bbc173 light green
+	 */
+	--color-background:#f5dbd3;
+	--color-background-light:#f9f7f1;
+	--color-menu-background:#bbc173;
+	--color-menu-background-marked:#c5cc7f;
 	--color-text:darkslategray;
-	--color-menu-text:pink;
-	--color-menu-background:darkgray;
-	--color-menu-background-marked:gray;
-	--color-headlines:maroon;
+	--color-text-menu:#783347;
+	--color-text-menu-marked:#a64263;
+	--color-headlines:#783347;
 }
 
 /* GENERAL */
@@ -32,7 +37,7 @@ article {
 
 img {
 	border-radius: 2%;
-	border: 3px solid var(--color-top);
+	border: 3px solid var(--color-menu-background);
 	margin:1em;
 }
 
@@ -51,7 +56,7 @@ h2 {
 	margin: 0;
 	padding: 0.5em;
 	word-spacing: 65vw;
-	color: var(--color-menu-text);
+	color: var(--color-text-menu);
 	font-size: 1.5em;
 }
 
@@ -63,14 +68,14 @@ p {
 	margin-top: 3.5em;
 	padding: 10px;
 	text-align: center;
-	background: var(--color-top);
+	background: var(--color-menu-background);
 }
 
 .footer {
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	background-color: var(--color-bottom);
+	background-color: var(--color-menu-background);
 	text-align: center;
 	padding: 0.5em;
 }
@@ -90,6 +95,10 @@ p {
 .hidden-url:link {
 	text-decoration: none;
 	color: var(--color-text);
+}
+
+.hidden-url:visited {
+	color: var(--color-text-menu);
 }
 
 nav {
@@ -116,7 +125,7 @@ nav {
 
 .dropdown-menu a {
 	float: none;
-	color: var(--color-menu-text);
+	color: var(--color-text-menu);
 	padding: 12px 16px;
 	width: 100%;
 	text-align: center;
@@ -126,5 +135,6 @@ nav {
 
 .dropdown-menu a:hover {
 	background-color: var(--color-menu-background-marked);
+	color: var(--color-text-menu-marked);
 }
 
