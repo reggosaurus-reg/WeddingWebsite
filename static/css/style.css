@@ -58,7 +58,7 @@ h2 {
 	font-style:italic;
 }
 
-p {
+.text {
 	color: var(--color-text);
 }
 
@@ -75,6 +75,7 @@ p {
 	background-color: var(--color-menu-background);
 	text-align: center;
 	padding: 0.5em;
+	color: var(--color-text-menu);
 }
 
 .flex-container {
@@ -92,13 +93,13 @@ p {
 	margin:0;
 }
 
-.hidden-url:link {
-	text-decoration: none;
-	color: var(--color-text);
+.hidden-url {
+	font-style: italic;
+	color: var(--color-text-menu);
 }
 
-.hidden-url:visited {
-	color: var(--color-text-menu);
+.hidden-url:link {
+	text-decoration: none;
 }
 
 nav {
