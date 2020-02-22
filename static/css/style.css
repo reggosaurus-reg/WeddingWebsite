@@ -10,6 +10,7 @@
 	--color-text: #4f5529;
 	--color-text-menu-marked: #fef2ea;
 	--color-text-menu: #f6d3c3;
+	--color-military-green: #868c46;
 }
 
 /* GENERAL */
@@ -25,7 +26,7 @@ article {
 	margin: auto;
 	width: 90vw;
 	padding: 10px;
-	box-shadow: 1px 1px 40px -20px var(--color-text-menu);
+	box-shadow: 1px 1px 40px -20px var(--color-military-green);
 }
 
 img.border {
@@ -46,6 +47,10 @@ h1 {
 	color: var(--color-menu-background);
 	text-align: center;
 	font-size: 2em;
+}
+
+div#counter {
+	margin-top:-10em;
 }
 
 h2 {
@@ -144,9 +149,14 @@ nav {
 @media only screen and (max-width: 600px) {
 	article {
 		width: 80vw;
-		box-shadow: 1px 1px 30px -10px var(--color-text-menu);
+		box-shadow: 1px 1px 30px -10px var(--color-military-green);
 	}
+
 	.header {
 		margin-top: -2.5em;
+	}
+
+	div#counter {
+		margin-top:0;
 	}
 }
