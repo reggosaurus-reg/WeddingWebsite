@@ -19,6 +19,7 @@ body {
 	background-color: var(--color-background);
 	padding: 0em;
 	margin: 0em;
+	overflow: hidden;
 }
 
 article {
@@ -35,6 +36,10 @@ img.border {
 	margin: 1em;
 }
 
+img.welcome {
+	height: 60vh;
+}
+
 img.flip-horizontally {
 	transform: scaleX(-1);
 }
@@ -45,8 +50,8 @@ img.flip-vertically {
 
 h1 {
 	color: var(--color-menu-background);
-	text-align: center;
 	font-size: 2em;
+	text-align: center;
 }
 
 div#counter {
@@ -70,7 +75,7 @@ h2 {
 .header {
 	margin: 0;
 	margin-top: -4.5em;
-	text-align: center;
+	text-align: left;
 }
 
 .footer {
@@ -154,9 +159,14 @@ nav {
 
 	.header {
 		margin-top: -2.5em;
+		margin-left: 0;
 	}
 
 	div#counter {
 		margin-top:0;
+	}
+
+	img.welcome {
+		height: 50vh;
 	}
 }
