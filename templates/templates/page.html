@@ -15,17 +15,23 @@
 
 	<div class="flex-decenter" style="flex-direction:column;height:100vh">
 		{% include "templates/menu.html" %}
-		{% include "templates/header.html" %}
-
 		<article style="flex-grow:2">
-			<div><h1>
-				{% block pagename %}Denna sida har inget namn än{% endblock %}
-			</h1></div>
-			{% block content %}
-			<p style="text-align:center">
-				Den som väntar på något gott... Innehåll kommer!
-			</p>
-			{% endblock %}
+			<img 
+			style="transform:scale(-1);margin-top:2.5em"
+		 	src="{{ url_for('static', filename ='img/small_flower.png') }}"
+			alt="Blomranka"
+			height=80>
+
+			<div class="header">
+				<h1>{% block pagename %}Namnlös sida{% endblock %}</h1>
+			</div>
+			<div style="z-index:1">
+				{% block content %}
+				<p class="text" style="text-align:center">
+					Den som väntar på något gott... Innehåll kommer!
+				</p>
+				{% endblock %}
+			</div>
 		</article>
 
 		{% include "templates/footer.html" %}
