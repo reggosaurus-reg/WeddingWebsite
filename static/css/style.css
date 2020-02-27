@@ -102,13 +102,13 @@ h2 {
 }
 
 .hotel div {
-	margin-top: 1em;
+	margin-left: 1em;
 	flex-grow: 2;
 }
 
 .hotel h1 {
 	text-align: left;
-	font-size: 1em;
+	font-size: 1.5em;
 }
 
 .hotel p.text {
