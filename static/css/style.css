@@ -136,6 +136,16 @@ h2 {
 	margin:0;
 }
 
+a.normal:link {
+	color: var(--color-menu-background);
+}
+a.normal:visited {
+	color: var(--color-text);
+}
+a.normal:hover {
+	color: var(--color-menu-background-marked);
+}
+
 .hidden-url {
 	font-style: italic;
 	color: var(--color-text-menu);
