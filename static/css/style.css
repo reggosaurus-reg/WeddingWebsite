@@ -97,7 +97,7 @@ h2 {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	//flex-wrap: wrap;
+	flex-wrap: wrap;
 	justify-content: left;
 }
 
@@ -114,6 +114,7 @@ h2 {
 .hotel p.text {
 	text-align: left;
 }
+
 .hotel img {
 	width: 230px;
 	height: 230px;
@@ -198,7 +199,18 @@ nav {
 		margin-top:0;
 	}
 
+	#hotels {
+		width: 90%;
+		margin-left: 5vw;
+	}
+
 	img.welcome {
 		height: 50vh;
+	}
+
+	.hotel img {
+		width: 180px;
+		height: 180px;
+		object-fit: cover;
 	}
 }
