@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request
 import sqlite3
 
 app = Flask(__name__)
@@ -41,6 +41,8 @@ def signup_page():
 
 @app.route('/anmalan', methods=["POST"])
 def sign_another_page():
+    data = request.get_json()
+    print("Data from post:", data)
     return render_template("anmal_ny.html")
 
 @app.route('/allaanmalda')

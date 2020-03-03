@@ -1,12 +1,16 @@
 {% extends "templates/page.html" %}
 
 {% block pagename %}Anmälan{% endblock %}
+{% block script %}
+	<script src="{{ url_for('static', filename='js/send_anmalan.js') }}"></script>
+{% endblock %}
+
 
 {% block content %}
 <form action="/anmalan" method="post">
   <label for="namn">Ditt namn: </label>
-  <input type="text" id="namn" name="namn">
+  <input type="text" id="name" name="namn">
   <br><br>
-  <input type="submit" value="Anmäl">
+  <input type="submit" id="post_anmalan" value="Anmäl">
 </form>
 {% endblock %}
