@@ -8,8 +8,14 @@ window.onload = () => {
 		};
 		xhttp.open("POST", "anmalan", true);
 		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-		xhttp.send(JSON.stringify({
+		var jsonobj = JSON.stringify({
 			name: document.getElementById("name").value,
-			time: new Date()}));
+			time: new Date()});
+		alert(jsonobj);
+		xhttp.send(jsonobj);
 	};
 };
+
+// Problems:
+// Double posts? Sometimes unpermitted post, sometimes received data is none
+// Nav. script is overwritten by this one?

@@ -41,7 +41,7 @@ def signup_page():
 
 @app.route('/anmalan', methods=["POST"])
 def sign_another_page():
-    data = request.get_json()
+    data = request.get_json(force=True)
     print("Data from post:", data)
     return render_template("anmal_ny.html")
 
