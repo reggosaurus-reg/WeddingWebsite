@@ -101,9 +101,10 @@ h2 {
 	justify-content: left;
 }
 
-.hotel div {
+div.hotel_content {
 	margin-left: 1em;
 	flex-grow: 2;
+	order: 2;
 }
 
 .hotel h1 {
@@ -119,6 +120,7 @@ h2 {
 	width: 230px;
 	height: 230px;
 	object-fit: cover;
+	order: 1;
 }
 
 .flex-container {
@@ -218,9 +220,16 @@ nav {
 		height: 50vh;
 	}
 
+	div.hotel_content {
+		margin-left: 1em;
+		flex-grow: 2;
+		order: 1;
+	}
+
 	.hotel img {
 		width: 180px;
 		height: 180px;
 		object-fit: cover;
+		order: 2;
 	}
 }
