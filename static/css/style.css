@@ -121,6 +121,49 @@ h2 {
 	object-fit: cover;
 }
 
+div#signup_form {
+	margin-left: 10vw;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
+button {
+	background-color: var(--color-menu-background-marked);
+	color: var(--color-text-menu-marked);
+	font-size: large;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-right: 2em;
+	padding-left: 2em;
+	width: -moz-min-content;
+}
+
+label {
+	color: var(--color-text);
+	font-size: large;
+	margin-bottom: 0.3em;
+}
+
+input[type=text] {
+  	display: inline-block;
+  	border: none;
+  	border-bottom: 2px solid var(--color-text-menu);
+  	box-sizing: border-box;
+}
+
+input[type=text]:hover, input[type=text]:focus {
+  	border-bottom: 2px solid var(--color-menu-background-marked);
+}
+
+button#signup {
+	margin-top: 10vh;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .flex-container {
 	display: flex;
 	flex-direction: row;

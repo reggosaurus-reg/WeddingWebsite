@@ -7,10 +7,9 @@
 
 
 {% block content %}
-<form>
-  <label for="namn">Ditt namn: </label>
-  <input type="text" id="name" name="namn">
-  <br><br>
-  <input type="submit" id="post_anmalan" value="Anmäl">
-</form>
+<div id="signup_form">
+  <label for="name">Ditt namn: </label>
+  <input type="text" id="name" placeholder="Förnamn + efternamn">
+  <button id="signup">Anmäl</button>
+</div>
 {% endblock %}

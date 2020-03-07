@@ -1,5 +1,5 @@
 window.onload = () => {
-	document.getElementById("post_anmalan").onclick = (e) => {
+	document.getElementById("signup").onclick = (e) => {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
