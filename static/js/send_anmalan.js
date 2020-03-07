@@ -17,5 +17,5 @@ window.onload = () => {
 };
 
 // Problems:
-// Double posts? Sometimes unpermitted post, sometimes received data is none
+// SOLVED!? Double posts? Sometimes unpermitted post, sometimes received data is none
 // Nav. script is overwritten by this one?
