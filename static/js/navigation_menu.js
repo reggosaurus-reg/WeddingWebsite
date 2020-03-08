@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener("load",function(event) {
 	document.querySelector("nav").onclick = (e) => {
 		let classes = document.querySelector(".dropdown-menu").classList;
 		if (classes.contains("show"))
@@ -6,4 +6,4 @@ window.onload = () => {
 		else
 			classes.add("show");
 	};
-};
+});

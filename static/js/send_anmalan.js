@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener("load",function(event) {
 	document.getElementById("signup").onclick = (e) => {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -11,11 +11,10 @@ window.onload = () => {
 		var jsonobj = JSON.stringify({
 			name: document.getElementById("name").value,
 			time: new Date()});
-		alert(jsonobj);
 		xhttp.send(jsonobj);
 	};
-};
+});
 
-// Problems:
-// SOLVED!? Double posts? Sometimes unpermitted post, sometimes received data is none
-// Nav. script is overwritten by this one?
+
+// TODO: Value checks + mark fauly fields
+// TODO: Have classes on required fields, change onclick or something
