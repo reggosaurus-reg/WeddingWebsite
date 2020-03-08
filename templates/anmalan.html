@@ -8,8 +8,50 @@
 
 {% block content %}
 <div id="signup_form">
-  <label for="name">Ditt namn: </label>
-  <input type="text" id="name" placeholder="Förnamn + efternamn">
+	<div class="signup_entry">
+		<label for="name">Ditt namn:</label>
+		<input type="text" id="name" placeholder="Förnamn + efternamn">
+	</div>
+
+	<!-- TODO: Handle the new info in js and db --!>
+	<div class="signup_entry">
+		<label for="email">Din e-postaddress:</label>
+		<input type="text" id="email" placeholder="exempel@hotmail.com">
+	</div>
+
+	<div class="signup_entry">
+		<!-- TODO: Move label to right and style this section --!>
+		<h2>Specialkost</h2>
+		<p>Jag är...</p>
+		<label class="container">Glutenintolerant
+			<input type="checkbox">
+			<span class="checkmark"></span>
+		</label>
+		<label class="container">Laktosintolerant
+			<input type="checkbox">
+			<span class="checkmark"></span>
+		</label>
+		<label class="container">Vegetarian
+			<input type="checkbox" checked="checked">
+			<span class="checkmark"></span>
+		</label>
+		<label class="container">Vegan
+			<input type="checkbox">
+			<span class="checkmark"></span>
+		</label>
+		<!-- TODO: Add input text for Annat --!>
+		<label class="container">Annat:
+			<input type="checkbox">
+			<span class="checkmark"></span>
+		</label>
+	</div>
+
+	<div class="signup_entry">
+		<label for="other">Något annat vi bör veta?</label>
+		<!-- TODO: Make this a textarea (but style it as the rest) --!>
+		<input type="text" id="other" placeholder="Berätta i så fall vad här!">
+	</div>
+
   <button id="signup">Anmäl</button>
 </div>
 {% endblock %}

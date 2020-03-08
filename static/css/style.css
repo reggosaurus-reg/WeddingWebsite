@@ -141,6 +141,12 @@ button {
 	width: -moz-min-content;
 }
 
+div.signup_entry {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2em;
+}
+
 label {
 	color: var(--color-text);
 	font-size: large;
@@ -149,13 +155,30 @@ label {
 
 input[type=text] {
   	display: inline-block;
-  	border: none;
+  	border: 1px solid var(--color-text-menu-marked);
   	border-bottom: 2px solid var(--color-text-menu);
   	box-sizing: border-box;
+	color: var(--color-text);
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-top: 0.2em;
 }
 
 input[type=text]:hover, input[type=text]:focus {
   	border-bottom: 2px solid var(--color-menu-background-marked);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-military-green);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--color-military-green);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--color-military-green);
 }
 
 button#signup {
