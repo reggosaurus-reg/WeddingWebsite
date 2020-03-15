@@ -2,58 +2,55 @@
 
 {% block pagename %}Boende{% endblock %}
 
-
 {% block content %}
 
-<div id="hotels">
-	<p class="text" style="text-align:center;margin-bottom:3em">
-	Har du/ni långt att åka och letar efter ett ställe att övernatta på i samband med
-	bröllopet? Här kommer några förslag på boende!
-	</p>
+<p class="text ingress">
+Har du/ni långt att åka och letar efter ett ställe att övernatta på i samband med
+bröllopet? Här kommer några förslag på boende!
+</p>
 
-	<div class="hotel">
-		<img class="border"
-			 src="{{ url_for('static', filename ='img/boende_hlm_gard.jpg') }}"
-			 alt="Hässleholmsgårdens vandrarhem">
-		<div class="hotel_content">
-			<h1>Hässleholmsgårdens vandrarhem</h1>
-			<p class="text hotell_desc">
-			Närmre festligheterna går det knappast komma! 
-			</p>
-			<a class="normal" href="http://www.hassleholmsgardensvandrarhem.se/">
-				Mer information om boendet här</a>
-		</div>
+<div class="hotel">
+	<img class="border"
+		 src="{{ url_for('static', filename ='img/boende_hlm_gard.jpg') }}"
+		 alt="Hässleholmsgårdens vandrarhem">
+	<div class="hotel_content">
+		<h1 class="small">Hässleholmsgårdens vandrarhem</h1>
+		<p class="text hotell_desc">
+		Närmre festligheterna går det knappast komma! 
+		</p>
+		<a class="normal" href="http://www.hassleholmsgardensvandrarhem.se/">
+			Mer information om boendet här</a>
 	</div>
-
-	<div class="hotel">
-		<img class="border"
-			 src="{{ url_for('static', filename ='img/boende_hlm_statt.jpg') }}"
-			 alt="Hotell Statt">
-		<div class="hotel_content">
-			<h1>Hotell Statt</h1>
-			<p class="text hotell_desc">
-			Närmre stationen går det knappast komma! 
-			</p>
-			<a class="normal" href="https://statt.se/">
-				Mer information om boendet här</a>
-		</div>
-	</div>
-
-	<div class="hotel">
-		<img class="border"
-			 src="{{ url_for('static', filename ='img/boende_hva_hotell.jpg') }}"
-			 alt="Hotell Vita Hästen">
-		<div class="hotel_content">
-			<h1>Hotell Vita Hästen</h1>
-			<p class="text hotell_desc">
-			Närmre brudgummens föräldrahem går det knappast komma! 
-			</p>
-			<a class="normal" href="http://www.vita-hasten.com/">
-				Mer information om boendet här</a>
-		</div>
-	</div>
-
 </div>
+
+<div class="hotel">
+	<img class="border"
+		 src="{{ url_for('static', filename ='img/boende_hlm_statt.jpg') }}"
+		 alt="Hotell Statt">
+	<div class="hotel_content">
+		<h1 class="small">Hotell Statt</h1>
+		<p class="text hotell_desc">
+		Närmre stationen går det knappast komma! 
+		</p>
+		<a class="normal" href="https://statt.se/">
+			Mer information om boendet här</a>
+	</div>
+</div>
+
+<div class="hotel">
+	<img class="border"
+		 src="{{ url_for('static', filename ='img/boende_hva_hotell.jpg') }}"
+		 alt="Hotell Vita Hästen">
+	<div class="hotel_content">
+		<h1 class="small">Hotell Vita Hästen</h1>
+		<p class="text hotell_desc">
+		Närmre brudgummens föräldrahem går det knappast komma! 
+		</p>
+		<a class="normal" href="http://www.vita-hasten.com/">
+			Mer information om boendet här</a>
+	</div>
+</div>
+
 {% endblock %}
 
 
