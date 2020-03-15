@@ -30,6 +30,13 @@ article {
 	box-shadow: 1px 1px 40px -20px var(--color-military-green);
 }
 
+div#content {
+	width: 80%;
+	z-index: 1;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 img.border {
 	border-radius: 2%;
 	border: 3px solid var(--color-menu-background);
@@ -59,10 +66,6 @@ h3 {
 	display: inline;
 }
 
-div#counter {
-	margin-top:-10em;
-}
-
 h2 {
 	margin: 1em;
 	margin-top:0;
@@ -86,16 +89,11 @@ h2 {
 .footer {
 	left: 0;
 	bottom: 0;
-	width: 100%;
+	width: 100vw;
 	background-color: var(--color-menu-background);
 	text-align: center;
 	padding: 0.5em;
 	color: var(--color-text-menu);
-}
-
-#hotels {
-	width: 80%;
-	margin-left: 10vw;
 }
 
 .hotel {
@@ -135,12 +133,20 @@ div.hotel_content {
 	justify-content: center;
 }
 
+.flex-container.nowrap {
+	flex-wrap: nowrap;
+}
+
 .flex-decenter {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: none;
 	justify-content: space-between;
 	margin:0;
+}
+
+.flex-decenter.column {
+	flex-direction: column;
 }
 
 a.normal:link {
@@ -212,13 +218,8 @@ nav {
 		margin-left: 0;
 	}
 
-	div#counter {
-		margin-top:0;
-	}
-
-	#hotels {
+	div#content {
 		width: 90%;
-		margin-left: 5vw;
 	}
 
 	img.welcome {

@@ -7,23 +7,20 @@
 {% block pagename %}Välkomna!{% endblock %}
 
 {% block content %}
-	<div class="flex-container">
-		<div>
-			<img class="border welcome"
-		 	src="{{ url_for('static', filename ='img/majaochperemil.jpg') }}"
-			alt="Maja och Per-Emils förlovningsbild">
-		</div>
-		<div style="min-width:30%;max-width:60%">
-			<p class="text">
-			Vad roligt att just du hittat hit.
-			Vi hoppas att du har möjlighet att vara med och förgylla vår dag!
-			Här på hemsidan kommer du att hitta massor av information, anmälan och vår önskelista. 
-			Om du vill hålla tal eller liknande, kontakta då våra värdar. Du hittar information om detta under deras flik.
+	<div class="flex-container nowrap">
+		<img class="border welcome"
+		src="{{ url_for('static', filename ='img/majaochperemil.jpg') }}"
+		alt="Maja och Per-Emils förlovningsbild">
+		<div class="flex-decenter column">
+			<p class="text" style="margin-top:2em">
+			Vad roligt att just du hittat hit. Vi hoppas att du har möjlighet
+			att vara med och förgylla vår dag! Här på hemsidan kommer du att
+			hitta massor av information, anmälan och vår önskelista. 
 			</p>
+			<div id="counter">
+				<h1>Bröllop om</h1>
+				<h1 style="font-style:italic" id="countdown"></h1>
+			</div>
 		</div>
-	</div>
-	<div id="counter">
-		<h1>Bröllop om</h1>
-		<h1 style="font-style:italic" id="countdown"></h1>
 	</div>
 {% endblock %}
