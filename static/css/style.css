@@ -47,6 +47,12 @@ img.welcome {
 	height: 60vh;
 }
 
+img.center {
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 img.flip-horizontally {
 	transform: scaleX(-1);
 }
@@ -66,9 +72,10 @@ h1.small {
 	text-align: left;
 }
 
-h3 {
+span.inline_header {
 	color: var(--color-menu-background);
-	display: inline;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 h2 {
@@ -81,7 +88,7 @@ h2 {
 	font-style:italic;
 }
 
-.text {
+p {
 	color: var(--color-text);
 }
 
@@ -103,6 +110,9 @@ h2 {
 	background-color: var(--color-menu-background);
 	text-align: center;
 	padding: 0.5em;
+}
+
+.footer p {
 	color: var(--color-text-menu);
 }
 
