@@ -93,8 +93,8 @@ p {
 }
 
 .ingress {
- text-align: center;
- margin-bottom: 3em;
+ 	text-align: center;
+ 	margin-bottom: 3em;
 }
 
 .header {
@@ -134,7 +134,7 @@ div.post_content {
 	text-align: left;
 }
 
-.post img {
+img.post {
 	width: 230px;
 	height: 230px;
 	object-fit: cover;
@@ -221,6 +221,9 @@ nav {
 	color: var(--color-text-menu-marked);
 }
 
+#countdown {
+	font-style: italic;
+}
 
 @media only screen and (max-width: 600px) {
 	article {
@@ -245,7 +248,7 @@ nav {
 		flex-wrap: wrap;
 	}
 
-	.post h1 {
+	h1.small {
 		text-align: center;
 	}
 
@@ -255,10 +258,23 @@ nav {
 		order: 1;
 	}
 
-	.post img {
+	img.post {
 		width: 180px;
 		height: 180px;
 		object-fit: cover;
 		order: 2;
+	}
+
+	.ingress {
+		margin-bottom: 1.5em;
+	}
+
+	#countdown_header {
+		margin-bottom: 0;
+	}
+
+	#countdown {
+		font-size: 1.5em;
+		margin-top: 0.5em;
 	}
 }
