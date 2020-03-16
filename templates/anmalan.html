@@ -10,49 +10,48 @@
 <div id="signup_form">
 	<div class="signup_entry">
 		<label for="name">Ditt namn:</label>
-		<input type="text" id="name" placeholder="Förnamn + efternamn">
+		<input type="text" id="name" placeholder="Förnamn + Efternamn">
 	</div>
 
 	<!-- TODO: Handle the new info in js and db --!>
 	<div class="signup_entry">
-		<label for="email">Din e-postaddress:</label>
+		<label for="email">Din e-postadress:</label>
 		<input type="text" id="email" placeholder="exempel@hotmail.com">
 	</div>
 
 	<div class="signup_entry">
-		<!-- TODO: Move label to right and style this section --!>
-		<h2>Specialkost</h2>
-		<p>Jag är...</p>
+		<label>Jag är...</label>
 		<label class="container">
 			<input type="checkbox">
-			Glutenintolerant
 			<span class="checkmark"></span>
+			glutenintolerant
 		</label>
 		<label class="container">
 			<input type="checkbox">
-			Laktosintolerant
 			<span class="checkmark"></span>
+			laktosintolerant
 		</label>
 		<label class="container">
 			<input type="checkbox" checked="checked">
-			Vegetarian
 			<span class="checkmark"></span>
+			vegetarian
 		</label>
 		<label class="container">
 			<input type="checkbox">
-			Vegan
 			<span class="checkmark"></span>
+			vegan
 		</label>
-		<!-- TODO: Add input text for Annat --!>
 		<label class="container">
 			<input type="checkbox">
-			Annat:
 			<span class="checkmark"></span>
+			annat:
+			<!-- TODO: Mark/unmark checkbox when entering/removing text --!>
+			<input type="text" id="annat" placeholder="övriga allergier">
 		</label>
 	</div>
 
 	<div class="signup_entry">
-		<label for="other">Något annat vi bör veta?</label>
+		<label for="other">Något mer vi bör veta?</label>
 		<!-- TODO: Make this a textarea (but style it as the rest) --!>
 		<input type="text" id="other" placeholder="Berätta i så fall vad här!">
 	</div>

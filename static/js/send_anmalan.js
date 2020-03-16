@@ -10,6 +10,7 @@ window.addEventListener("load",function(event) {
 		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		var jsonobj = JSON.stringify({
 			name: document.getElementById("name").value,
+			email: document.getElementById("email").value,
 			time: new Date()});
 		xhttp.send(jsonobj);
 	};
