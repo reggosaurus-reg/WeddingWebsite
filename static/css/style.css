@@ -72,6 +72,15 @@ h1.small {
 	text-align: left;
 }
 
+.bold {
+	font-weight: bold;
+}
+
+span.inline {
+	color: var(--color-menu-background);
+	font-weight: bold;
+}
+
 span.inline_header {
 	color: var(--color-menu-background);
 	font-size: 1.2em;
