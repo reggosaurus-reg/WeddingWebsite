@@ -135,6 +135,7 @@ div.hotel_content {
 	flex-direction: row;
 	flex-wrap: none;
 	justify-content: space-between;
+	align-items: center;
 	margin:0;
 }
 
@@ -231,5 +232,9 @@ nav {
 		height: 180px;
 		object-fit: cover;
 		order: 2;
+	}
+
+	h2#menu_names {
+		font-size: 1em;
 	}
 }
