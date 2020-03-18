@@ -115,7 +115,7 @@ p {
 .footer {
 	left: 0;
 	bottom: 0;
-	width: 100vw;
+	//width: 100%;
 	background-color: var(--color-menu-background);
 	text-align: center;
 	padding: 0.5em;
@@ -150,6 +150,14 @@ img.post {
 	order: 1;
 }
 
+img.post.web {
+	display: block;
+}
+
+img.post.mobile {
+	display: none;
+}
+
 .flex-container {
 	display: flex;
 	flex-direction: row;
@@ -171,6 +179,10 @@ img.post {
 
 .flex-decenter.column {
 	flex-direction: column;
+}
+
+a.normal {
+	font-style: italic;
 }
 
 a.normal:link {
@@ -196,7 +208,7 @@ nav {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 100%;
 	background-color: var(--color-menu-background);
 	z-index: 3;
 }
@@ -204,7 +216,7 @@ nav {
 .dropdown-menu {
 	visibility: hidden;
 	display: none;
-	width: 100vw;
+	width: 100%;
 	background-color: var(--color-menu-background);
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 2;
@@ -272,6 +284,14 @@ nav {
 		height: 180px;
 		object-fit: cover;
 		order: 2;
+	}
+
+	img.post.web {
+		display: none;
+	}
+
+	img.post.mobile {
+		display: block;
 	}
 
 	.ingress {
