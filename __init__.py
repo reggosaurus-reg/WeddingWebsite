@@ -1,5 +1,6 @@
 from flask import Flask, render_template, g, request
 import sqlite3
+import re
 
 app = Flask(__name__)
 DATABASE = 'database/database.db'
@@ -52,22 +53,44 @@ def sign_another_page():
     data = request.get_json(force=True)
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
-    try:
-        c.execute("insert into Person (name, info) \
-                values ('%s', 'Testdata')" % data['name'])
-        db.commit()
-    except sqlite3.IntegrityError:
-        # TODO: Send error to html page? (Mark area red) Or do that check earlier (js)?
-        print("That person already signed up!")
-    # TODO: Except name error (wrong json...)
+    faulty = check_signup_data(data)
+    print(faulty)
+    if not faulty:
+        """
+        try:
+            c.execute("insert into Person (name, info) \
+                    values ('%s', 'Testdata')" % data['name'])
+            db.commit()
+        except sqlite3.IntegrityError:
+            # TODO: Send error to html page? (Mark area red) Or do that check earlier (js)?
+            print("That person already signed up!")
+        # TODO: Except name error (wrong json...)
+        """
+        return "OK", 200
+    else:
+        # TODO: Jsonify faulty
+        return faulty, 418
 
     show_db()
-    return render_template("anmal_ny.html")
+    return render_template("anmal_ny.html"), 200
 
 
 @app.route('/allaanmalda')
 def list_page():
     return render_template("allaanmalda.html")
+
+
+### OTHER
+
+def check_signup_data(data):
+    faulty = {}
+    ok_email = re.compile("[A-z0-9]+@[A-z0-9]+\.[A-z0-9]+")
+    if not data['name']:
+        faulty['name'] = "Du måste ange ditt fullständiga namn!"
+    # TODO: Namnet redan anmält
+    if not ok_email.fullmatch(data['email']):
+        faulty['email'] = "'" + data['email'] + "' är inte en giltig e-postadress."
+    return faulty
 
 
 if __name__ == '__main__':

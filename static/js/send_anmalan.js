@@ -3,7 +3,12 @@ window.addEventListener("load",function(event) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				alert("Fick svar?");
+				// TODO: Restore error messages
+				alert("Fick svar?", this.responseText);
+			}
+			else if (this.readyState == 4 && this.status == 418) {
+				// TODO: Show error messages
+				alert("Servern gav fel", this.responseText);
 			}
 		};
 		xhttp.open("POST", "anmalan", true);
