@@ -3,26 +3,30 @@ window.addEventListener("load",function(event) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				// TODO: Restore error messages
-				alert("Fick svar?", this.responseText);
+				// TODO: Unecessary?
+				document.getElementById("name_error").style.display = 'none';
+				document.getElementById("email_error").style.display = 'none';
 			}
 			else if (this.readyState == 4 && this.status == 418) {
-				// TODO: Show error messages
-				alert("Servern gav fel", this.responseText);
+				// TODO: Show error messages from json (not hardcoded)
+				alert(this.responseText);
+				let n = document.getElementById("name_error");
+				n.textContent = "FEEL";
+				n.style.display = 'block';
 			}
 		};
 		xhttp.open("POST", "anmalan", true);
 		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		var jsonobj = JSON.stringify({
-			name: document.getElementById("name").value,
-			email: document.getElementById("email").value,
-			gluten: document.getElementById("gluten").checked,
-			laktos: document.getElementById("laktos").checked,
+			name: 		document.getElementById("name").value,
+			email: 		document.getElementById("email").value,
+			gluten: 	document.getElementById("gluten").checked,
+			laktos: 	document.getElementById("laktos").checked,
 			vegetarian: document.getElementById("vegetarian").checked,
-			vegan: document.getElementById("vegan").checked,
-			allergy: document.getElementById("allergy").value,
-			other: document.getElementById("other").value,
-			time: new Date()});
+			vegan: 		document.getElementById("vegan").checked,
+			allergy: 	document.getElementById("allergy").value,
+			other: 		document.getElementById("other").value,
+			time: 		new Date()});
 		alert(jsonobj);
 		xhttp.send(jsonobj);
 	};

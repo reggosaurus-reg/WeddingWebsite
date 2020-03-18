@@ -68,8 +68,16 @@ h2 {
 	font-style:italic;
 }
 
-.text {
+p.text {
 	color: var(--color-text);
+}
+
+p.error {
+	color: var(--color-menu-background);
+	font-style: italic;
+	margin-top: 0.5em;
+	margin-bottom: 0;
+	display: none;
 }
 
 .header {
