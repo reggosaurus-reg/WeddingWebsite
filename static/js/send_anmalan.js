@@ -20,7 +20,6 @@ window.addEventListener("load",function(event) {
 			laktos: document.getElementById("laktos").checked,
 			vegetarian: document.getElementById("vegetarian").checked,
 			vegan: document.getElementById("vegan").checked,
-			allergy_check: document.getElementById("allergy_check").checked,
 			allergy: document.getElementById("allergy").value,
 			other: document.getElementById("other").value,
 			time: new Date()});
