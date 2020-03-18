@@ -11,11 +11,11 @@ window.addEventListener("load",function(event) {
 		var jsonobj = JSON.stringify({
 			name: document.getElementById("name").value,
 			email: document.getElementById("email").value,
-			gluten: document.getElementById("gluten").value,
-			laktos: document.getElementById("laktos").value,
-			vegetarian: document.getElementById("vegetarian").value,
-			vegan: document.getElementById("vegan").value,
-			allergy_check: document.getElementById("allergy_check").value,
+			gluten: document.getElementById("gluten").checked,
+			laktos: document.getElementById("laktos").checked,
+			vegetarian: document.getElementById("vegetarian").checked,
+			vegan: document.getElementById("vegan").checked,
+			allergy_check: document.getElementById("allergy_check").checked,
 			allergy: document.getElementById("allergy").value,
 			other: document.getElementById("other").value,
 			time: new Date()});
