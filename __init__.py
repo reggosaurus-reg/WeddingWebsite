@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g, request
+from flask import Flask, render_template, g, request, json
 import sqlite3
 import re
 
@@ -51,28 +51,28 @@ def signup_page():
 @app.route('/anmalan', methods=["POST"])
 def sign_another_page():
     data = request.get_json(force=True)
+    faulty = check_signup_data(data)
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
-    faulty = check_signup_data(data)
-    print(faulty)
-    if not faulty:
-        """
-        try:
-            c.execute("insert into Person (name, info) \
-                    values ('%s', 'Testdata')" % data['name'])
-            db.commit()
-        except sqlite3.IntegrityError:
-            # TODO: Send error to html page? (Mark area red) Or do that check earlier (js)?
-            print("That person already signed up!")
-        # TODO: Except name error (wrong json...)
-        """
-        return "OK", 200
-    else:
-        # TODO: Jsonify faulty
-        return faulty, 418
 
-    show_db()
-    return render_template("anmal_ny.html"), 200
+    try:
+        c.execute("insert into Person (name, info) \
+                values ('%s', 'Testdata')" % data['name'])
+        # Save data if no data check has gone wrong
+        if not faulty:
+            db.commit()
+    except sqlite3.IntegrityError:
+        faulty['name'] = "'" + data['name'] + "' är redan anmäld. \
+        Kontakta sidansvarig om du misstänker att något inte stämmer."
+        return json.jsonify(faulty), 418
+
+    # TODO: Except name error (wrong json...)
+
+    if faulty:
+        return json.jsonify(faulty), 418
+    else:
+        show_db() # DEBUG
+        return render_template("anmal_ny.html"), 200
 
 
 @app.route('/allaanmalda')
@@ -83,6 +83,7 @@ def list_page():
 ### OTHER
 
 def check_signup_data(data):
+    """ Examines entered data and returns a dictionary as {field: error_message} """
     faulty = {}
     ok_email = re.compile("[A-z0-9]+@[A-z0-9]+\.[A-z0-9]+")
     if not data['name']:
