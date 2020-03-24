@@ -2,8 +2,9 @@ from flask import Flask, render_template, g, request, json
 import sqlite3
 import re
 
-app = Flask(__name__)
+app      = Flask(__name__)
 DATABASE = 'database/database.db'
+SCHEMA   = 'database/schema.sql'
 
 
 ### ROUTES
@@ -48,8 +49,19 @@ def sign_another_page():
     c = db.cursor()
 
     try:
-        c.execute("insert into Person (name, info) \
-                values ('%s', 'Testdata')" % data['name'])
+        # TODO: Insert actual data
+        c.execute("insert into Person \
+        (name, email, info, gluten, laktos, vegetarian, vegan, allergy) \
+                values ('%s', '%s', '%s', '%i', '%i', '%i', '%i', '%s')" % (
+                    data['name'],
+                    data['email'],
+                    data['other'],
+                    data['gluten'],
+                    data['laktos'],
+                    data['vegetarian'],
+                    data['vegan'],
+                    data['allergy']
+                    ))
         # Save data if no data check has gone wrong
         if not faulty:
             db.commit()
@@ -63,19 +75,17 @@ def sign_another_page():
     if faulty:
         return json.jsonify(faulty), 418
     else:
-        print(get_db_content()) # DEBUG
+        #print(get_db_content()) # DEBUG
         return render_template("anmal_ny.html"), 200
 
 
 @app.route('/allaanmalda')
 def list_page():
-    content = []
     # TODO: Wipe DB and add email and time column
     # (Update in html and css too)
-    titles = ("name", "info",
+    titles = ("name", "email", "info", "time",
               "gluten", "laktos", "vegetarian", "vegan", "other_allergy")
-    for entry in get_db_content():
-       content.append(dict(zip(titles, entry)))
+    content = [dict(zip(titles, entry)) for entry in get_db_content()]
     for i in range(len(content)):
         content[i] = dict(zip(("number", "person"), (i + 1, content[i])))
     return render_template("allaanmalda.html", data=content)
@@ -91,6 +101,14 @@ def get_db_content():
     return c.fetchall()
 
 
+def init_db():
+    """ Creates a database if none exists. """
+    db = sqlite3.connect(DATABASE)
+    with app.open_resource(SCHEMA, mode='r') as f:
+        db.cursor().executescript(f.read())
+    db.commit()
+
+
 def check_signup_data(data):
     """ Examines entered data and returns a dictionary as {field: error_message} """
     faulty = {}
@@ -104,4 +122,5 @@ def check_signup_data(data):
 
 
 if __name__ == '__main__':
+    init_db()
     app.run()

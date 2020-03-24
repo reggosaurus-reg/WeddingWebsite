@@ -33,8 +33,7 @@ window.addEventListener("load",function(event) {
 			vegetarian: document.getElementById("vegetarian").checked,
 			vegan: 		document.getElementById("vegan").checked,
 			allergy: 	document.getElementById("allergy").value,
-			other: 		document.getElementById("other").value,
-			time: 		new Date()});
+			other: 		document.getElementById("other").value});
 		xhttp.send(jsonobj);
 	};
 });
