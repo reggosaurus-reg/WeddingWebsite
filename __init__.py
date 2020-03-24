@@ -70,12 +70,14 @@ def sign_another_page():
 @app.route('/allaanmalda')
 def list_page():
     content = []
-    # TODO: Wipe DB and add email column
+    # TODO: Wipe DB and add email and time column
+    # (Update in html and css too)
     titles = ("name", "info",
               "gluten", "laktos", "vegetarian", "vegan", "other_allergy")
     for entry in get_db_content():
        content.append(dict(zip(titles, entry)))
-    #content = dict(enumerate(content))
+    for i in range(len(content)):
+        content[i] = dict(zip(("number", "person"), (i + 1, content[i])))
     return render_template("allaanmalda.html", data=content)
 
 

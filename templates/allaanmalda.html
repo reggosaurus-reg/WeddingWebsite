@@ -11,16 +11,34 @@
 	<p style="text-align:center">Detta är hemligt... Skriv in lösenordet!</p>
 </div>
 <div id="secretlist" style="display:none">
-	<p>Snart kommer man att se en lista med alla anmälda här!</p>
+	<p>Detta är alla som hittills är anmälda!</p>
 	<p id="people_list"></p>
 
-	<ul>
-	{% for item in data %}
-		<li>{{item.name}}</li>
-		<li>{{item.info}}</li>
-		<li>{{item.gluten}}</li>
-	{% endfor %}
-	</ul>
+	<table id="people">
+		<tr>
+    		<th>#</th>
+    		<th>Namn</th>
+			<th>Info</th>
+			<th class="bool">Gluten</th>
+			<th class="bool">Laktos</th>
+			<th class="bool">Vegetarian</th>
+			<th class="bool">Vegan</th>
+			<th class="bool">Andra allergier</th>
+	  	</tr>
+		{% for entry in data %}
+		  <tr>
+			  <td>{{entry.number}}</td>
+			  <td>{{entry.person.name}}</td>
+			  <td>{{entry.person.info}}</td>
+			  <td class="bool">{{entry.person.gluten}}</td>
+			  <td class="bool">{{entry.person.laktos}}</td>
+			  <td class="bool">{{entry.person.vegetarian}}</td>
+			  <td class="bool">{{entry.person.vegan}}</td>
+			  <td class="bool">{{entry.person.other_allergy}}</td>
+		  </tr>
+		{% endfor %}
+	</table>
+
 
 </div>
 {% endblock %}
