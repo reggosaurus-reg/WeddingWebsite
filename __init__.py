@@ -6,14 +6,6 @@ app = Flask(__name__)
 DATABASE = 'database/database.db'
 
 
-def show_db():
-    print("DB person content:")
-    db = sqlite3.connect(DATABASE)
-    c = db.cursor()
-    c.execute("select * from Person")
-    print(c.fetchall())
-
-
 ### ROUTES
 
 
@@ -71,16 +63,31 @@ def sign_another_page():
     if faulty:
         return json.jsonify(faulty), 418
     else:
-        show_db() # DEBUG
+        print(get_db_content()) # DEBUG
         return render_template("anmal_ny.html"), 200
 
 
 @app.route('/allaanmalda')
 def list_page():
-    return render_template("allaanmalda.html")
+    content = []
+    # TODO: Wipe DB and add email column
+    titles = ("name", "info",
+              "gluten", "laktos", "vegetarian", "vegan", "other_allergy")
+    for entry in get_db_content():
+       content.append(dict(zip(titles, entry)))
+    #content = dict(enumerate(content))
+    return render_template("allaanmalda.html", data=content)
 
 
 ### OTHER
+
+
+def get_db_content():
+    db = sqlite3.connect(DATABASE)
+    c = db.cursor()
+    c.execute("select * from Person")
+    return c.fetchall()
+
 
 def check_signup_data(data):
     """ Examines entered data and returns a dictionary as {field: error_message} """

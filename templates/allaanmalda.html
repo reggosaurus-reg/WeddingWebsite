@@ -12,5 +12,15 @@
 </div>
 <div id="secretlist" style="display:none">
 	<p>Snart kommer man att se en lista med alla anmälda här!</p>
+	<p id="people_list"></p>
+
+	<ul>
+	{% for item in data %}
+		<li>{{item.name}}</li>
+		<li>{{item.info}}</li>
+		<li>{{item.gluten}}</li>
+	{% endfor %}
+	</ul>
+
 </div>
 {% endblock %}
