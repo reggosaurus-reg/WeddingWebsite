@@ -16,7 +16,7 @@
 
 	<table id="people">
 		<tr>
-    		<th>#</th>
+    		<th class="bool">##</th>
     		<th>Anmäld</th>
     		<th>Namn</th>
 			<th>E-post</th>
@@ -29,15 +29,15 @@
 	  	</tr>
 		{% for entry in data %}
 		  <tr>
-			  <td>{{entry.number}}</td>
-			  <td>{{entry.person.time}}</td>
+			  <td class="bool">{{entry.number}}</td>
+			  <td class="bool">{{entry.person.time}}</td>
 			  <td>{{entry.person.name}}</td>
 			  <td>{{entry.person.email}}</td>
 			  <td class="bool">{{entry.person.gluten}}</td>
 			  <td class="bool">{{entry.person.laktos}}</td>
 			  <td class="bool">{{entry.person.vegetarian}}</td>
 			  <td class="bool">{{entry.person.vegan}}</td>
-			  <td class="bool">{{entry.person.other_allergy}}</td>
+			  <td>{{entry.person.other_allergy}}</td>
 			  <td>{{entry.person.info}}</td>
 		  </tr>
 		{% endfor %}

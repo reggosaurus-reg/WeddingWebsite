@@ -259,6 +259,7 @@ nav {
 
 
 table {
+	table-layout: auto;
 	width: 100%;
 	border-collapse: collapse;
 }
@@ -280,8 +281,10 @@ td.bool, th.bool {
 	text-align: center;
 }
 
+tr:nth-child(even) {background-color: var(--color-text-menu);}
+
 tr:hover {
-	background-color: var(--color-text-menu);
+	background-color: var(--color-menu-background-marked);
 }
 
 @media only screen and (max-width: 600px) {

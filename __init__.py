@@ -49,7 +49,6 @@ def sign_another_page():
     c = db.cursor()
 
     try:
-        # TODO: Insert actual data
         c.execute("insert into Person \
         (name, email, info, gluten, laktos, vegetarian, vegan, allergy) \
                 values ('%s', '%s', '%s', '%i', '%i', '%i', '%i', '%s')" % (
@@ -81,11 +80,16 @@ def sign_another_page():
 
 @app.route('/allaanmalda')
 def list_page():
-    # TODO: Wipe DB and add email and time column
-    # (Update in html and css too)
-    titles = ("name", "email", "info", "time",
+    def to_person_dict(data):
+        titles = ("name", "email", "info", "time",
               "gluten", "laktos", "vegetarian", "vegan", "other_allergy")
-    content = [dict(zip(titles, entry)) for entry in get_db_content()]
+        new = dict(zip(titles, data))
+        time = new["time"]
+        time = time[8:10] + "/" + time[6:7]
+        new["time"] = time
+        return new
+
+    content = [to_person_dict(entry) for entry in get_db_content()]
     for i in range(len(content)):
         content[i] = dict(zip(("number", "person"), (i + 1, content[i])))
     return render_template("allaanmalda.html", data=content)
@@ -115,7 +119,6 @@ def check_signup_data(data):
     ok_email = re.compile("[A-z0-9]+@[A-z0-9]+\.[A-z0-9]+")
     if not data['name']:
         faulty['name'] = "Du måste ange ditt fullständiga namn!"
-    # TODO: Namnet redan anmält
     if not ok_email.fullmatch(data['email']):
         faulty['email'] = "'" + data['email'] + "' är inte en giltig e-postadress."
     return faulty
