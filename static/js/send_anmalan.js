@@ -3,23 +3,11 @@ window.addEventListener("load",function(event) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("name_error").style.display = 'none';
-				document.getElementById("email_error").style.display = 'none';
+				removeErrors();
 				// TODO: Notify that signup was successful!
 			}
 			else if (this.readyState == 4 && this.status == 418) {
-				// Show error messages from json if a field was faulty
-				var faulty = JSON.parse(this.responseText);
-				if (faulty.name != "undefined") {
-					let n = document.getElementById("name_error");
-					n.textContent = faulty.name;
-					n.style.display = 'block';
-				}
-				if (faulty.email != "undefined") {
-					let e = document.getElementById("email_error");
-					e.textContent = faulty.email;
-					e.style.display = 'block';
-				}
+				setErrors(JSON.parse(this.responseText));
 			}
 		};
 		xhttp.open("POST", "anmalan", true);
@@ -40,3 +28,25 @@ window.addEventListener("load",function(event) {
 
 
 // TODO: Have classes on required fields, change onclick or something
+
+function removeErrors() {
+	document.getElementById("name_error").style.display = 'none';
+	document.getElementById("email_error").style.display = 'none';
+	document.getElementById("info_error").style.display = 'none';
+	document.getElementById("allergy_error").style.display = 'none';
+}
+
+function setErrors(faulty) {
+	setErrorIfFaulty(faulty.name, "name_error");
+	setErrorIfFaulty(faulty.email, "email_error");
+	setErrorIfFaulty(faulty.info, "info_error");
+	setErrorIfFaulty(faulty.allergy, "allergy_error");
+}
+
+function setErrorIfFaulty(fieldContent, elementId) {
+	if (fieldContent != "undefined") {
+		let e = document.getElementById(elementId);
+		e.textContent = fieldContent;
+		e.style.display = 'block';
+	}
+}

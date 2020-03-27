@@ -5,6 +5,10 @@ import re
 app      = Flask(__name__)
 DATABASE = 'database/database.db'
 SCHEMA   = 'database/schema.sql'
+NAME_LENGTH     = 100
+EMAIL_LENGTH    = 100
+INFO_LENGTH     = 500
+ALLERGY_LENGTH  = 200
 
 
 ### ROUTES
@@ -116,11 +120,29 @@ def init_db():
 def check_signup_data(data):
     """ Examines entered data and returns a dictionary as {field: error_message} """
     faulty = {}
+    # Lengths
+    name_diff = len(data['name']) - NAME_LENGTH
+    email_diff = len(data['email']) - EMAIL_LENGTH
+    info_diff = len(data['other']) - INFO_LENGTH
+    allergy_diff = len(data['allergy']) - ALLERGY_LENGTH
+    if name_diff > 0:
+        faulty['name'] = "Ditt namn är {} tecken för långt.".format(name_diff)
+    if email_diff > 0:
+        faulty['email'] = "Din e-post är {} tecken för lång.".format(email_diff)
+    if info_diff > 0:
+        faulty['info'] = "Ditt meddelande är {} tecken för långt.".format(info_diff)
+    if allergy_diff > 0:
+        faulty['allergy'] = "Texten är {} tecken för lång.".format(allergy_diff)
+
+    # Format
+    # TODO: a.b.c@a.b should be ok
+    # TODO: At least two names
     ok_email = re.compile("[A-z0-9]+@[A-z0-9]+\.[A-z0-9]+")
     if not data['name']:
         faulty['name'] = "Du måste ange ditt fullständiga namn!"
     if not ok_email.fullmatch(data['email']):
-        faulty['email'] = "'" + data['email'] + "' är inte en giltig e-postadress."
+        faulty['email'] = "'{}' är inte en giltig e-postadress.".format(data['email'])
+
     return faulty
 
 

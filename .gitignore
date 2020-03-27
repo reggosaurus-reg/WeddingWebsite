@@ -3,3 +3,4 @@ inspiration/
 __pycache__/
 todo.txt
 venv
+database/database.db
