@@ -53,9 +53,10 @@ def sign_another_page():
     c = db.cursor()
 
     try:
-        c.execute("insert into Person \
-        (name, email, info, gluten, laktos, vegetarian, vegan, allergy) \
-                values ('%s', '%s', '%s', '%i', '%i', '%i', '%i', '%s')" % (
+        # This way of calling execute (execute(sql,args)) also should escape input
+        c.execute("INSERT INTO Person \
+                    (name, email, info, gluten, laktos, vegetarian, vegan, allergy) \
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (
                     data['name'],
                     data['email'],
                     data['other'],
@@ -105,7 +106,7 @@ def list_page():
 def get_db_content():
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
-    c.execute("select * from Person")
+    c.execute("SELECT * FROM Person")
     return c.fetchall()
 
 
