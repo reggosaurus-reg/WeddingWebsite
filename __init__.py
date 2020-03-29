@@ -9,6 +9,10 @@ NAME_LENGTH     = 100
 EMAIL_LENGTH    = 100
 INFO_LENGTH     = 500
 ALLERGY_LENGTH  = 200
+LOCAL = "[A-z0-9!#$%&'*+-/=?^_`{|}~\.]+"
+DOMAIN = "[A-z0-9]+\.[A-z0-9\-\.]*[A-z0-9]"
+OK_EMAIL = re.compile(LOCAL + "@" + DOMAIN) # Not entirely correct, but almost
+OK_NAME = re.compile(".+ .+")
 
 
 ### ROUTES
@@ -48,6 +52,8 @@ def signup_page():
 @app.route('/anmalan', methods=["POST"])
 def sign_another_page():
     data = request.get_json(force=True)
+    data['name'] = data['name'].title().strip()
+    data['email'] = data['email'].lower().strip()
     faulty = check_signup_data(data)
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
@@ -136,12 +142,9 @@ def check_signup_data(data):
         faulty['allergy'] = "Texten är {} tecken för lång.".format(allergy_diff)
 
     # Format
-    # TODO: a.b.c@a.b should be ok
-    # TODO: At least two names
-    ok_email = re.compile("[A-z0-9]+@[A-z0-9]+\.[A-z0-9]+")
-    if not data['name']:
+    if not OK_NAME.fullmatch(data['name']):
         faulty['name'] = "Du måste ange ditt fullständiga namn!"
-    if not ok_email.fullmatch(data['email']):
+    if not OK_EMAIL.fullmatch(data['email']):
         faulty['email'] = "'{}' är inte en giltig e-postadress.".format(data['email'])
 
     return faulty
