@@ -1,7 +1,17 @@
 window.addEventListener("load",function(event) {
 	document.getElementById("signup").onclick = (e) => {
+		// Timeout
 		setMessage("anmalan_status", "Försöker skicka din anmälan...");
+		setTimeout(function() {
+			setMessage("anmalan_status",
+			"Anmälan kunde inte skickas. Försök igen!");
+		}, 5000);
+
+		// Create and configure request
 		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "anmalan", true);
+		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				removeErrors();
@@ -12,8 +22,7 @@ window.addEventListener("load",function(event) {
 				setErrors(JSON.parse(this.responseText));
 			}
 		};
-		xhttp.open("POST", "anmalan", true);
-		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
 		// Pack and send field data
 		var jsonobj = JSON.stringify({
 			name: 		document.getElementById("name").value,
