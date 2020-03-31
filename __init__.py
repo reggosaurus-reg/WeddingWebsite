@@ -86,7 +86,7 @@ def sign_another_page():
         return json.jsonify(faulty), 418
     else:
         #print(get_db_content()) # DEBUG
-        return render_template("anmal_ny.html"), 200
+        return "Tack för din anmälan, {}!".format(data["name"]), 200
 
 
 @app.route('/allaanmalda')
