@@ -1,3 +1,56 @@
 {% extends "templates/page.html" %}
 
 {% block pagename %}Viktig information{% endblock %}
+
+
+{% block content %}
+
+<p>
+	<span class="inline_header">Vi gifter oss</span>
+	i Broby kyrka lördagen den 1 augusti 2020 kl. 13:00.  Därefter kommer vi
+	att ha en fest på Hässleholmsgården i Hässleholm för inbjudna.  Mellan
+	Broby och Hässleholm tar det en knapp halvtimme att köra med bil.  På denna
+	karta är de båda platserna utmärkta: 
+	<a class="normal" href="https://www.google.com/maps/dir/Broby+kyrka,+Kyrkogatan+6,+289+92+Broby/H%C3%A4ssleholmsg%C3%A5rden,+Hovdalav%C3%A4gen,+H%C3%A4ssleholm/@56.2018797,13.773779,11z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x4656ad01cf06fe31:0x6217c2528a902e7d!2m2!1d14.0795404!2d56.2546896!1m5!1m1!1s0x4653fd779e378899:0xc784b277cca9eb8b!2m2!1d13.7471933!2d56.1523132!3e0">Vägbeskrivning</a>
+</p>
+
+<p>
+	<span class="inline_header">Klädkoden är mörk kostym.</span>
+	Klädkoden mörk kostym innebär för män precis som det låter att man har en
+	mörk kostym. För kvinnor innebär klädkoden att man bär klänning, kjol
+	eller en byxdress. Klänningen eller kjolen kan vara knälång eller vadlång.
+	En enklare långklänning fungerar också. Kvinnor ska ej bära vitt eller
+	svart.
+</p>
+
+<p>
+	<span class="inline_header">Om du vill hålla tal</span>
+	eller liknande (vilket såklart skulle vara otroligt uppskattat), 
+	ber vi dig kontakta någon av våra värdar. Mer information om detta under fliken 
+	<a class="normal" href="/vardar">Värdar</a>.
+</p>
+
+<p>
+	<span class="inline_header">Glöm inte att anmäla dig!</span>
+	Om du har fått en inbjudan till festen, se till att anmäla dig.
+	Formulär och information om detta finns på 
+	<a class="normal" href="/anmalan">anmälningssidan</a>.
+</p>
+
+<p>
+	<span class="inline_header">Hemsidan</span>
+	är skapad av
+	<a href= "https://github.com/reggosaurus-reg" class="normal"
+		style="display:inline">Regina Hansson</a>. 
+	Vid problem mejla <span class="bold">regina96.jl@hotmail.com.</span>
+</p>
+
+<p>
+	<span class="inline_header">Övriga frågor?</span>
+	Mejla dem till värdarna på <span class="bold">peremilochmaja@hotmail.com</span>.
+</p>
+
+<img class="center" alt="Blomma" height=80
+	src="{{ url_for('static', filename ='img/small_flower_free.png') }}">
+
+{% endblock %}

@@ -7,20 +7,97 @@
 {% block pagename %}Välkomna!{% endblock %}
 
 {% block content %}
-	<div class="flex-container">
-		<div>
-			<img class="border welcome"
-		 	src="{{ url_for('static', filename ='img/majaochperemil.jpg') }}"
-			alt="Maja och Per-Emils förlovningsbild">
-		</div>
-		<div style="min-width:30%;max-width:60%">
-			<p class="text">Vad roligt att just du hittat hit.
-			Här kommer all information du behöver att finnas.
-			Hoppas att vi ses den 1:a augusti 2020!</p>
-		</div>
-	</div>
-	<div id="counter">
-		<h1>Bröllop om</h1>
-		<h1 style="font-style:italic" id="countdown"></h1>
-	</div>
+<p class="text ingress">
+	Vad roligt att just du hittat hit. Vi hoppas att du har möjlighet
+	att vara med och förgylla vår dag! Här på hemsidan kommer du att
+	hitta massor av information, anmälan och vår önskelista. 
+</p>
+
+<img class="border welcome" style="float:right;margin-left:1em;margin-top:0"
+	 src="{{ url_for('static', filename ='img/majaochperemil.jpg') }}"
+	 alt="Maja och Per-Emils förlovningsbild">
+
+<div class="post_content">
+	<span class="inline_header">Fem frågor till brudparet</span>
+	<br>
+	<br>
+	<!--
+	<p class="text">
+		För att ladda upp lite har brudparet fått svara på ett par frågor.
+	</p>
+	!-->
+
+	<span class="inline">
+		Vilket är viktigast: stor bröllopstårta eller pampig klänning?</span>
+		<p class="text">
+			<span class="bold">Maja:</span>
+			Pampig klänning!
+		</p>
+		<p class="text">
+			<span class="bold">Per-Emil:</span>
+			Klänningen, helt klart. Tårtan ska vara god, inte nödvändigtvis
+			stor.
+		</p>
+	<span class="inline">
+		Favoritlåt att ha på under bröllopsplaneringen?</span>
+		<p class="text">
+			<span class="bold">Maja:</span>
+			Vi har inte lyssnat så mycket på musik under planeringen än så
+			länge. Men om jag måste välja något så skulle jag säga att jag
+			föredrar instrumental musik när man ska sitta och prata och
+			planera. 
+		</p>
+		<p class="text">
+			<span class="bold">Per-Emil:</span>
+			Vi har inte haft tillräckligt många dedikerade tillfällen av
+			bröllopsplanering och de vi haft har inte innefattat så mycket
+			musik. Men Majas röst är ju som ljuv musik i mina öron så det får
+			väl bli mitt svar.
+		</p>
+	<span class="inline">
+		Vad kommer pauserna från sommarens bröllopsplanering att bestå av?</span>
+		<p class="text">
+			<span class="bold">Maja:</span>
+			Promenader i det förhoppningsvis fina sommarvädret, gärna i skogen. 
+		</p>
+		<p class="text">
+			<span class="bold">Per-Emil:</span>
+			Avbrotten lär mestadels vara jobb... Men i vår planering? Kanske
+			bad, jag har gärna mysiga filmkvällar och troligen ett par längre
+			diskussioner kring aktuella händelser i världen.
+		</p>
+	<span class="inline">
+		Vad ser du fram emot mest med bröllopsdagen?</span>
+		<p class="text">
+			<span class="bold">Maja:</span>
+			Att vi ska gifta oss och börja vårt liv tillsammans. Mer
+			specifikt under själva dagen ser jag fram emot precis när vi
+			har gift oss och ska gå ut ur kyrkan. 
+		</p>
+		<p class="text">
+			<span class="bold">Per-Emil:</span>
+			Att få se Maja i den pampiga bröllopsklänningen? Nej, men att
+			genomföra det tillsammans med henne och att få göra något så viktigt
+			omgiven av alla våra vänner.
+		</p>
+	<span class="inline">
+		Blir det "something old, something new, something borrowed, something blue?"</span>
+		<p class="text">
+			<span class="bold">Maja:</span>
+			Det blir det.
+		</p>
+	<span class="inline">
+		Blir det en fräsig "nygifta"-bil från kyrkan?</span>
+		<p class="text">
+			<span class="bold">Per-Emil:</span>
+			Alltså det är ju svårt att inte säga ja på den frågan. Men än är
+			ingen bil bestämd, och fräsig är en rätt vag definition. 😉
+		</p>
+</div>
+
+<div class="center" id="counter">
+	<h1 id="countdown_header">Bröllop om</h1>
+	<h1 id="countdown"></h1>
+</div>
+
 {% endblock %}

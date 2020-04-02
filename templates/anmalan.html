@@ -1,14 +1,20 @@
-<!-- TODO: Merge production into signup (fix ingresses), mobile styling, password for allaanmalda --!>
 {% extends "templates/page.html" %}
 
 {% block pagename %}Anmälan{% endblock %}
+
 {% block script %}
 	<script src="{{ url_for('static', filename='js/send_anmalan.js') }}"></script>
 {% endblock %}
 
 
 {% block content %}
-<div id="signup_form">
+
+<p class="text ingress">
+För att anmäla dig, fyll i dina uppgifter nedan. Om ni är ett par eller en
+familj som fått inbjudan, anmäl er ändå en person i taget.
+</p>
+
+<div id="signup_form" class="center">
 	<div class="signup_entry">
 		<label for="name">Ditt namn:</label>
 		<input type="text" id="name" placeholder="Förnamn + Efternamn">
@@ -56,7 +62,7 @@
 		<p class="error" id="info_error"></p>
 	</div>
 
-  <p class="error center" id="anmalan_status"></p>
+  <p class="error center text" id="anmalan_status"></p>
   <button class="center" id="signup">Anmäl</button>
 </div>
 {% endblock %}

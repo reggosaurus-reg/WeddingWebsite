@@ -2,58 +2,98 @@
 
 {% block pagename %}Boende{% endblock %}
 
-
 {% block content %}
 
-<div id="hotels">
-	<p class="text" style="text-align:center;margin-bottom:3em">
-	Har du/ni långt att åka och letar efter ett ställe att övernatta på i samband med
-	bröllopet? Här kommer några förslag på boende!
-	</p>
+<p class="text ingress">
+Har du/ni långt att åka och letar efter ett ställe att övernatta på i samband med
+bröllopet? Här kommer några förslag på boende!
+</p>
 
-	<div class="hotel">
-		<img class="border"
+<div class="post">
+	<img class="border post web"
+		 src="{{ url_for('static', filename ='img/boende_hlm_gard.jpg') }}"
+		 alt="Hässleholmsgårdens vandrarhem">
+	<div class="post_content">
+		<h1 class="small">Hässleholmsgårdens vandrarhem</h1>
+		<img class="border post mobile"
 			 src="{{ url_for('static', filename ='img/boende_hlm_gard.jpg') }}"
 			 alt="Hässleholmsgårdens vandrarhem">
-		<div>
-			<h1>Hässleholmsgårdens vandrarhem</h1>
-			<p class="text hotell_desc">
-			Närmre festligheterna går det knappast komma! 
-			</p>
-			<a href="http://www.hassleholmsgardensvandrarhem.se/">
-				Mer information om boendet här</a>
-		</div>
+		<p class="text">
+		Närmre festligheterna går det knappast komma! 
+		</p>
+		<a class="normal" href="http://www.hassleholmsgardensvandrarhem.se/">
+			Mer information om boendet här</a>
 	</div>
+</div>
 
-	<div class="hotel">
-		<img class="border"
+<div class="post">
+	<img class="border post web"
+		 src="{{ url_for('static', filename ='img/boende_hlm_statt.jpg') }}"
+		 alt="Hotell Statt">
+	<div class="post_content">
+		<h1 class="small">Hotell Statt</h1>
+		<img class="border post mobile"
 			 src="{{ url_for('static', filename ='img/boende_hlm_statt.jpg') }}"
 			 alt="Hotell Statt">
-		<div>
-			<h1>Hotell Statt</h1>
-			<p class="text hotell_desc">
-			Närmre stationen går det knappast komma! 
-			</p>
-			<a href="https://statt.se/">
-				Mer information om boendet här</a>
-		</div>
+		<p class="text">
+		Närmre Hässleholms centralstation går det knappast komma! 
+		</p>
+		<a class="normal" href="https://statt.se/">
+			Mer information om boendet här</a>
 	</div>
+</div>
 
-	<div class="hotel">
-		<img class="border"
+<div class="post">
+	<img class="border post web"
+		 src="{{ url_for('static', filename ='img/boende_hva_hotell.jpg') }}"
+		 alt="Hotell Vita Hästen">
+	<div class="post_content">
+		<h1 class="small">Hotell Vita Hästen</h1>
+		<img class="border post mobile"
 			 src="{{ url_for('static', filename ='img/boende_hva_hotell.jpg') }}"
 			 alt="Hotell Vita Hästen">
-		<div>
-			<h1>Hotell Vita Hästen</h1>
-			<p class="text hotell_desc">
-			Närmre brudgummens föräldrahem går det knappast komma! 
-			</p>
-			<a href="http://www.vita-hasten.com/">
-				Mer information om boendet här</a>
-		</div>
+		<p class="text">
+		Närmre brudgummens föräldrahem går det knappast komma! 
+		</p>
+		<a class="normal" href="http://www.vita-hasten.com/">
+			Mer information om boendet här</a>
 	</div>
-
 </div>
+
+<div class="post">
+	<img class="border post web"
+		 src="{{ url_for('static', filename ='img/boende_hva_vandrarhem.jpg') }}"
+		 alt="Hästveda Vandrarhem">
+	<div class="post_content">
+		<h1 class="small">Hästveda Vandrarhem</h1>
+		<img class="border post mobile"
+			 src="{{ url_for('static', filename ='img/boende_hva_vandrarhem.jpg') }}"
+			 alt="Hästveda Vandrarhem">
+		<p class="text">
+		Närmre naturen går det knappast komma!
+		</p>
+		<a class="normal" href="http://www.hästvedavandrarhem.se/">
+			Mer information om boendet här</a>
+	</div>
+</div>
+
+<div class="post">
+	<img class="border post web"
+		 src="{{ url_for('static', filename ='img/boende_osby_hotell.jpg') }}"
+		 alt="Stora Hotellet">
+	<div class="post_content">
+		<h1 class="small">Stora Hotellet</h1>
+		<img class="border post mobile"
+			 src="{{ url_for('static', filename ='img/boende_osby_hotell.jpg') }}"
+			 alt="Stora Hotellet">
+		<p class="text">
+		Närmre Osby går det knappast komma!
+		</p>
+		<a class="normal" href="https://www.storahotelletosby.com/">
+			Mer information om boendet här</a>
+	</div>
+</div>
+
 {% endblock %}
 
 

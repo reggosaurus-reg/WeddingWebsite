@@ -13,7 +13,7 @@
 
 <body>
 
-	<div class="flex-decenter" style="flex-direction:column;height:100vh">
+	<div class="flex-decenter column" style="min-height:100vh">
 		{% include "templates/menu.html" %}
 		<article style="flex-grow:2">
 			<img 
@@ -25,7 +25,7 @@
 			<div class="header">
 				<h1>{% block pagename %}Namnlös sida{% endblock %}</h1>
 			</div>
-			<div style="z-index:1">
+			<div id="content">
 				{% block content %}
 				<p class="text" style="text-align:center">
 					Den som väntar på något gott... Innehåll kommer!
@@ -34,7 +34,7 @@
 			</div>
 		</article>
 
-		{% include "templates/footer.html" %}
+		<!--{% include "templates/footer.html" %}!-->
 	</div>
 
 </body>

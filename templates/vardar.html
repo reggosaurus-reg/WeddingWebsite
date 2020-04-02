@@ -1,3 +1,56 @@
 {% extends "templates/page.html" %}
 
 {% block pagename %}Värdar{% endblock %}
+
+{% block content %}
+
+<p class="ingress">
+Våra väldigt fina värdar för festen heter Klara och Johannes!
+</p>
+
+<div class="post">
+	<img class="border post web"
+		 src="{{ url_for('static', filename ='img/vard_klara.jpg') }}"
+		 alt="Klara Eriksson">
+	<div class="post_content">
+		<h1 class="small">Klara Eriksson</h1>
+		<img class="border post mobile"
+			 src="{{ url_for('static', filename ='img/vard_klara.jpg') }}"
+			 alt="Klara Eriksson">
+		<p class="text">
+			Klara fyller snart 22 år och är syster till Maja. För närvarande
+			arbetar hon som säljare på IKEA. Hon säljer främst sängar och
+			garderober, så är du i behov av något av det vet du vem du ska
+			prata med!
+		</p>
+	</div>
+</div>
+
+<div class="post">
+	<img class="border post web"
+		 src="{{ url_for('static', filename ='img/vard_johannes.jpg') }}"
+		 alt="Johannes Arvidsson">
+	<div class="post_content">
+		<h1 class="small">Johannes Arvidsson</h1> 
+		<img class="border post mobile"
+			 src="{{ url_for('static', filename ='img/vard_johannes.jpg') }}"
+			 alt="Johannes Arvidsson">
+		<p class="text">
+			Johannes fyller snart 22 år och är kusin till Per-Emil. Han har
+			precis slutat arbeta som ungdomsledare i Ängelholm. Per-Emil och
+			Johannes hade en pågående "vem-är-längst"-tävling under hela
+			uppväxten. 
+		</p>
+	</div>
+</div>
+
+<h1 class="small">Hålla tal</h1>
+<p>
+Om du vill hålla tal eller framföra något annat under festen så kontakta våra
+värdar på <span class="bold">peremilochmaja@hotmail.com</span>. Skriv med
+namn, om det gäller tal eller spex samt beräknad tidsåtgång. Det går även bra att 
+ställa frågor via samma e-postadress.
+</p>
+
+
+{% endblock %}
