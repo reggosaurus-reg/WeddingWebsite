@@ -8,41 +8,44 @@
 
 {% block content %}
 <div id="unsecret" >
-	<p style="text-align:center">Detta är hemligt... Skriv in lösenordet!</p>
+	<p class="ingress">Detta är hemligt... Skriv in lösenordet!</p>
 </div>
 <div id="secretlist" style="display:none">
-	<p>Detta är alla som hittills är anmälda!</p>
+	<p class="ingress">Detta är alla som hittills är anmälda!</p>
 	<p id="people_list"></p>
 
 	<table id="people">
 		<tr>
-    		<th class="bool">##</th>
+    		<th class="center">##</th>
     		<th>Anmäld</th>
     		<th>Namn</th>
 			<th>E-post</th>
-			<th class="bool">Gluten</th>
-			<th class="bool">Laktos</th>
-			<th class="bool">Vegetarian</th>
-			<th class="bool">Vegan</th>
-			<th class="bool">Andra allergier</th>
+			<th class="center">Gluten</th>
+			<th class="center">Laktos</th>
+			<th class="center">Vegetarian</th>
+			<th class="center">Vegan</th>
+			<th class="center">Andra allergier</th>
 			<th>Övrigt</th>
+			<th>Ta bort</th>
 	  	</tr>
 		{% for entry in data %}
 		  <tr>
-			  <td class="bool">{{entry.number}}</td>
-			  <td class="bool">{{entry.person.time}}</td>
-			  <td>{{entry.person.name}}</td>
+			  <td class="center">{{entry.number}}</td>
+			  <td class="center">{{entry.person.time}}</td>
+			  <td class="people_name">{{entry.person.name}}</td>
 			  <td>{{entry.person.email}}</td>
-			  <td class="bool">{{entry.person.gluten}}</td>
-			  <td class="bool">{{entry.person.laktos}}</td>
-			  <td class="bool">{{entry.person.vegetarian}}</td>
-			  <td class="bool">{{entry.person.vegan}}</td>
+			  <td class="center">{{entry.person.gluten}}</td>
+			  <td class="center">{{entry.person.laktos}}</td>
+			  <td class="center">{{entry.person.vegetarian}}</td>
+			  <td class="center">{{entry.person.vegan}}</td>
 			  <td>{{entry.person.other_allergy}}</td>
 			  <td>{{entry.person.info}}</td>
+			  <td class="center people_remove"><input type="checkbox" id="gluten"></td>
 		  </tr>
 		{% endfor %}
 	</table>
 
+  	<button class="center" id="remove">Ta bort valda</button>
 
 </div>
 {% endblock %}

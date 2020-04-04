@@ -347,7 +347,7 @@ td {
 	vertical-align: middle;
 }
 
-td.bool, th.bool {
+td.center, th.center {
 	text-align: center;
 }
 
