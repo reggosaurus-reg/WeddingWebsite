@@ -187,7 +187,11 @@ button {
 	padding-bottom: 0.5em;
 	padding-right: 2em;
 	padding-left: 2em;
-	width: -moz-min-content;
+	display: block;
+}
+
+button#remove {
+	margin-top: 2em;
 }
 
 div.signup_entry {
