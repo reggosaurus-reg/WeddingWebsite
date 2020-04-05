@@ -2,48 +2,74 @@ window.onload = () => {
 
 	// Show page if correct password
 
-	var password = prompt("Vad heter Reginas katt?");
-	var xhttp = new XMLHttpRequest();
+	// TODO: Prettier, incorporated in html
+	let password = prompt("Vad heter Reginas katt?");
+	let xhttp = new XMLHttpRequest();
 	xhttp.open("POST", "allaanmalda", true);
 	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-	// TODO: Test password access, then make sure deletion works
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
+			// Pretty print booleans and calculate summary
+			let totals = {"g": 0, "l": 0, "vt": 0, "vg": 0}
+			let bools = document.querySelectorAll(".bool");
+			for (let i = 0; i < bools.length; i++) {
+				let b = parseInt(bools[i].innerHTML);
+				let type = bools[i].classList[2];
+				if (b) {
+					bools[i].innerHTML = "x";
+					totals[type] += 1;
+				} else {
+					bools[i].innerHTML = "-";
+				}
+			}
+
+			// Print summary
+			for (let type in totals) {
+				document.querySelector("#total_" + type).innerHTML = totals[type];
+			}
+
+			// Show list
 			document.getElementById("secretlist").style.display = "block";
 			document.getElementById("unsecret").style.display = "none";
 		}
+
 		if (this.readyState == 4 && this.status == 401) {
+			// Hide list
 			document.getElementById("secretlist").style.display = "none";
 			document.getElementById("unsecret").style.display = "block";
 		}
 	};
 
-	var jsonobj = JSON.stringify({enter_password: password});
+	let jsonobj = JSON.stringify({enter_password: password});
 	xhttp.send(jsonobj);
 
 	// "Remove" request
 
 	document.getElementById("remove").onclick = (e) => {
 		// Create and configure request
-		var xhttp = new XMLHttpRequest();
+		let xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "allaanmalda", true);
 		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4) {
 				alert(this.responseText);
+				if (this.status == 200) {
+					// TODO: Reload without password. Split into two pages?
+					//location.reload(true);
+				}
 			}
 		};
 
 		// Pack data
-		var names = document.querySelectorAll(".people_name");
-		var checkboxes = document.querySelectorAll(".people_remove input");
+		let names = document.querySelectorAll(".people_name");
+		let checkboxes = document.querySelectorAll(".people_remove input");
 		// Filter out entries to remove
-		var to_remove = [];
-		for (var i = 1; i < names.length; i++) {
-			var name = names[i].innerHTML;
-			var remove = checkboxes[i].checked;
+		let to_remove = [];
+		for (let i = 1; i < names.length; i++) {
+			let name = names[i].innerHTML;
+			let remove = checkboxes[i].checked;
 			if (remove) {
 				to_remove.push(name)
 			}
@@ -53,7 +79,7 @@ window.onload = () => {
 		if (confirm("Are you sure you wish to remove " + to_remove.length +
 			" entries in the database?")) {
 			password = prompt("Really?");
-			var jsonobj = JSON.stringify({
+			let jsonobj = JSON.stringify({
 				remove: to_remove,
 				remove_password: password
 			});

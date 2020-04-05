@@ -1,3 +1,4 @@
+<!-- TODO: Shorten headlines, is this safe to show? Move to server w/ 2 pages. --!>
 {% extends "templates/page.html" %}
 
 {% block script %}
@@ -20,10 +21,10 @@
     		<th>Anmäld</th>
     		<th>Namn</th>
 			<th>E-post</th>
-			<th class="center">Gluten</th>
-			<th class="center">Laktos</th>
-			<th class="center">Vegetarian</th>
-			<th class="center">Vegan</th>
+			<th class="center">G</th>
+			<th class="center">L</th>
+			<th class="center">Vt</th>
+			<th class="center">Vn</th>
 			<th class="center">Andra allergier</th>
 			<th>Övrigt</th>
 			<th>Ta bort</th>
@@ -34,16 +35,29 @@
 			  <td class="center">{{entry.person.time}}</td>
 			  <td class="people_name">{{entry.person.name}}</td>
 			  <td>{{entry.person.email}}</td>
-			  <td class="center">{{entry.person.gluten}}</td>
-			  <td class="center">{{entry.person.laktos}}</td>
-			  <td class="center">{{entry.person.vegetarian}}</td>
-			  <td class="center">{{entry.person.vegan}}</td>
+			  <td class="center bool g">{{entry.person.gluten}}</td>
+			  <td class="center bool l">{{entry.person.laktos}}</td>
+			  <td class="center bool vt">{{entry.person.vegetarian}}</td>
+			  <td class="center bool vg">{{entry.person.vegan}}</td>
 			  <td>{{entry.person.other_allergy}}</td>
 			  <td>{{entry.person.info}}</td>
 			  <td class="center people_remove">
 				  <input type="checkbox" autocomplete="off"></td>
 		  </tr>
 		{% endfor %}
+		<tr>
+			<th class="center"></th>
+			<th class="center"></th>
+			<th class="people_name"></th>
+			<th style="text-align:right">Allergier:</th>
+			<th class="center" id="total_g">0</th>
+			<th class="center" id="total_l">0</th>
+			<th class="center" id="total_vt">0</th>
+			<th class="center" id="total_vg">0</th>
+			<th></th>
+			<th></th>
+			<th class="center people_remove"></th>
+		</tr>
 	</table>
 
   	<button class="center" id="remove">Ta bort valda</button>
