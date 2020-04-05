@@ -1,6 +1,7 @@
 from flask import Flask, render_template, g, request, json
 import sqlite3
 import re
+from passwords import PASSWORDS
 
 app      = Flask(__name__)
 DATABASE = 'database/database.db'
@@ -89,7 +90,7 @@ def sign_another_page():
         return "Tack för din anmälan, {}!".format(data["name"]), 200
 
 
-@app.route('/allaanmalda')
+@app.route('/allaanmalda', methods=["GET"])
 def list_page():
     def to_person_dict(data):
         titles = ("name", "email", "info", "time",
@@ -106,10 +107,42 @@ def list_page():
     return render_template("allaanmalda.html", data=content)
 
 
+@app.route('/allaanmalda', methods=["POST"])
+def route_allaanmalda():
+    """Passes the call to correct function."""
+    data = request.get_json(force=True)
+    if "enter_password" in data:
+        if not correct_password(data["enter_password"], "enter"):
+            return "Fel lösenord", 401
+        else:
+            return "Rätt lösenord", 200
+    if "remove_password" in data:
+        return remove_entries(data["remove_password"], data["remove"])
+    return "Ogiltigt data skickades.", 401
+
+
 ### OTHER
 
 
+def remove_entries(password, to_remove):
+    """Removes requested entries if authorized."""
+    if not correct_password(password, "remove"):
+        return "Fel lösenord. Inga ändringar gjordes.", 401
+
+    db = sqlite3.connect(DATABASE)
+    c = db.cursor()
+    try:
+        for name in to_remove:
+            c.execute("DELETE FROM Person WHERE name=?", (name,))
+        db.commit()
+    # Should be no possible errors, but...
+    except:
+        return "Något gick fel.", 501
+    return "Alla markerade anmälningar togs bort.", 200
+
+
 def get_db_content():
+    """Returns everything in the database."""
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
     c.execute("SELECT * FROM Person")
@@ -117,15 +150,20 @@ def get_db_content():
 
 
 def init_db():
-    """ Creates a database if none exists. """
+    """Creates a database if none exists."""
     db = sqlite3.connect(DATABASE)
     with app.open_resource(SCHEMA, mode='r') as f:
         db.cursor().executescript(f.read())
     db.commit()
 
 
+def correct_password(entered, occasion):
+    """Checks if a password is valid according to the password array."""
+    return entered == PASSWORDS[occasion]
+
+
 def check_signup_data(data):
-    """ Examines entered data and returns a dictionary as {field: error_message} """
+    """Examines entered data and returns a dictionary as {field: error_message}."""
     faulty = {}
     # Lengths
     name_diff = len(data['name']) - NAME_LENGTH

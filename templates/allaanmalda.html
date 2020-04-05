@@ -1,7 +1,7 @@
 {% extends "templates/page.html" %}
 
 {% block script %}
-	<script src="{{ url_for('static', filename='js/password.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/show_anmalda.js') }}"></script>
 {% endblock %}
 
 {% block pagename %}Alla anmälda{% endblock %}
@@ -40,7 +40,7 @@
 			  <td class="center">{{entry.person.vegan}}</td>
 			  <td>{{entry.person.other_allergy}}</td>
 			  <td>{{entry.person.info}}</td>
-			  <td class="center people_remove"><input type="checkbox" id="gluten"></td>
+			  <td class="center people_remove"><input type="checkbox"></td>
 		  </tr>
 		{% endfor %}
 	</table>
