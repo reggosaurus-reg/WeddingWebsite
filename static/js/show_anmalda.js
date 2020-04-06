@@ -57,7 +57,7 @@ window.onload = () => {
 				alert(this.responseText);
 				if (this.status == 200) {
 					// TODO: Reload without password. Split into two pages?
-					//location.reload(true);
+					location.reload(true);
 				}
 			}
 		};
@@ -69,7 +69,8 @@ window.onload = () => {
 		let to_remove = [];
 		for (let i = 1; i < names.length; i++) {
 			let name = names[i].innerHTML;
-			let remove = checkboxes[i].checked;
+			// TODO BUG: checkboxes[i] is undefined
+			let remove = check_boxes[i].checked;
 			if (remove) {
 				to_remove.push(name)
 			}
@@ -85,5 +86,30 @@ window.onload = () => {
 			});
 			xhttp.send(jsonobj);
 		}
+	};
+
+	// Get csv
+
+	document.getElementById("download").onclick = (e) => {
+		// Create and configure request
+		let xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "allaanmalda", true);
+		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				let preamble = "data:text/csv;charset=utf-8,";
+				var encodedUri = encodeURI(preamble + this.responseText);
+				var link = document.createElement("a");
+				link.setAttribute("href", encodedUri);
+				link.setAttribute("download", "wedding_guests.csv");
+				document.body.appendChild(link);
+				link.click();
+			}
+		};
+
+		// Send data
+		let jsonobj = JSON.stringify({ fetch_csv: true });
+		xhttp.send(jsonobj);
 	};
 };

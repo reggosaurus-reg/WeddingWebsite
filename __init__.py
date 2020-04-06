@@ -1,11 +1,13 @@
-from flask import Flask, render_template, g, request, json
+from flask import Flask, render_template, g, request, json, send_file
 import sqlite3
+import csv
 import re
 from passwords import PASSWORDS
 
 app      = Flask(__name__)
 DATABASE = 'database/database.db'
 SCHEMA   = 'database/schema.sql'
+CSV_FILE = 'database/database.csv'
 NAME_LENGTH     = 100
 EMAIL_LENGTH    = 100
 INFO_LENGTH     = 500
@@ -118,6 +120,13 @@ def route_allaanmalda():
             return "Rätt lösenord", 200
     if "remove_password" in data:
         return remove_entries(data["remove_password"], data["remove"])
+    if "fetch_csv" in data:
+        # Update and send csv-file
+        titles = ("Namn", "E-post", "Övrigt", "Anmäld",
+              "Gluten", "Laktos", "Vegetarian", "Vegan", "Andra allergier")
+        content = [titles] + get_db_content()
+        csv.writer(open(CSV_FILE,"w+")).writerows(content)
+        return send_file(CSV_FILE), 200
     return "Ogiltigt data skickades.", 401
 
 
@@ -181,7 +190,7 @@ def check_signup_data(data):
 
     # Format
     if not OK_NAME.fullmatch(data['name']):
-        faulty['name'] = "Du måste ange ditt fullständiga namn!"
+        faulty['name'] = "Du måste ange ditt fullständiga namn (dvs för- och efternamn)!"
     if not OK_EMAIL.fullmatch(data['email']):
         faulty['email'] = "'{}' är inte en giltig e-postadress.".format(data['email'])
 
