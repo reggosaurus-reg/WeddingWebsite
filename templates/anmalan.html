@@ -10,60 +10,69 @@
 
 {% block content %}
 
-<p class="ingress">
-För att anmäla dig, fyll i dina uppgifter nedan. Om ni är ett par eller en
-familj som fått inbjudan, anmäl er ändå en person i taget.
-</p>
+<div id="too_late">
+	<p class="ingress">
+		Anmälningstiden har gått ut.
+	</p>
+</div>
 
-<div id="signup_form" class="center">
-	<div class="signup_entry">
-		<label for="name">Ditt namn:</label>
-		<input type="text" id="name" placeholder="Förnamn + Efternamn">
-		<p class="error" id="name_error"></p>
+<div id="time_left">
+	<p class="ingress">
+	För att anmäla dig, fyll i dina uppgifter nedan. Om ni är ett par eller en
+	familj som fått inbjudan, anmäl er ändå en person i taget. 
+	<br>Senaste anmälningsdag är 1 juni!
+	</p>
+
+	<div id="signup_form" class="center">
+		<div class="signup_entry">
+			<label for="name">Ditt namn:</label>
+			<input type="text" id="name" placeholder="Förnamn + Efternamn">
+			<p class="error" id="name_error"></p>
+		</div>
+
+		<div class="signup_entry">
+			<label for="email">Din e-postadress:</label>
+			<input type="text" id="email" placeholder="exempel@hotmail.com">
+			<p class="error" id="email_error"></p>
+		</div>
+
+		<div class="signup_entry">
+			<label>Jag är...</label>
+			<label class="container">
+				<input type="checkbox" id="gluten">
+				<span class="checkmark"></span>
+				glutenintolerant
+			</label>
+			<label class="container">
+				<input type="checkbox" id="laktos">
+				<span class="checkmark"></span>
+				laktosintolerant
+			</label>
+			<label class="container">
+				<input type="checkbox" id="vegetarian">
+				<span class="checkmark"></span>
+				vegetarian
+			</label>
+			<label class="container">
+				<input type="checkbox" id="vegan">
+				<span class="checkmark"></span>
+				vegan
+			</label>
+			<label class="container">
+				<input type="text" id="allergy" placeholder="övriga allergier">
+			</label>
+			<p class="error" id="allergy_error"></p>
+		</div>
+
+		<div class="signup_entry">
+			<label for="other">Något mer vi bör veta?</label>
+			<!-- TODO: Make this a textarea (but style it as the rest) --!>
+			<input type="text" id="other" placeholder="Berätta i så fall vad här!">
+			<p class="error" id="info_error"></p>
+		</div>
+
+	  <p class="error center text" id="anmalan_status"></p>
+	  <button class="center" id="signup">Anmäl</button>
 	</div>
-
-	<div class="signup_entry">
-		<label for="email">Din e-postadress:</label>
-		<input type="text" id="email" placeholder="exempel@hotmail.com">
-		<p class="error" id="email_error"></p>
-	</div>
-
-	<div class="signup_entry">
-		<label>Jag är...</label>
-		<label class="container">
-			<input type="checkbox" id="gluten">
-			<span class="checkmark"></span>
-			glutenintolerant
-		</label>
-		<label class="container">
-			<input type="checkbox" id="laktos">
-			<span class="checkmark"></span>
-			laktosintolerant
-		</label>
-		<label class="container">
-			<input type="checkbox" id="vegetarian">
-			<span class="checkmark"></span>
-			vegetarian
-		</label>
-		<label class="container">
-			<input type="checkbox" id="vegan">
-			<span class="checkmark"></span>
-			vegan
-		</label>
-		<label class="container">
-			<input type="text" id="allergy" placeholder="övriga allergier">
-		</label>
-		<p class="error" id="allergy_error"></p>
-	</div>
-
-	<div class="signup_entry">
-		<label for="other">Något mer vi bör veta?</label>
-		<!-- TODO: Make this a textarea (but style it as the rest) --!>
-		<input type="text" id="other" placeholder="Berätta i så fall vad här!">
-		<p class="error" id="info_error"></p>
-	</div>
-
-  <p class="error center text" id="anmalan_status"></p>
-  <button class="center" id="signup">Anmäl</button>
 </div>
 {% endblock %}
