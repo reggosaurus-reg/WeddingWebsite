@@ -1,58 +1,19 @@
 window.onload = () => {
-
-	// Show page if correct password
-
-	// TODO: Prettier, incorporated in html
+	// SHOW CORRECT PAGE VERSION
 	let password = prompt("Vad heter Reginas katt?");
-	let xhttp = new XMLHttpRequest();
-	xhttp.open("POST", "allaanmalda", true);
-	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			// Pretty print booleans and calculate summary
-			let totals = {"g": 0, "l": 0, "vt": 0, "vg": 0}
-			let bools = document.querySelectorAll(".bool");
-			for (let i = 0; i < bools.length; i++) {
-				let b = parseInt(bools[i].innerHTML);
-				let type = bools[i].classList[2];
-				if (b) {
-					bools[i].innerHTML = "x";
-					totals[type] += 1;
-				} else {
-					bools[i].innerHTML = "-";
-				}
+	function ready() {
+		if (this.readyState == 4) {
+			switch(this.status) {
+				case 200: showPageContent(); break;
+				case 401: hidePageContent(); break;
 			}
-
-			// Print summary
-			for (let type in totals) {
-				document.querySelector("#total_" + type).innerHTML = totals[type];
-			}
-
-			// Show list
-			document.getElementById("secretlist").style.display = "block";
-			document.getElementById("unsecret").style.display = "none";
 		}
+	}
+	sendPost(ready, { enter_password: password });
 
-		if (this.readyState == 4 && this.status == 401) {
-			// Hide list
-			document.getElementById("secretlist").style.display = "none";
-			document.getElementById("unsecret").style.display = "block";
-		}
-	};
-
-	let jsonobj = JSON.stringify({enter_password: password});
-	xhttp.send(jsonobj);
-
-	// "Remove" request
-
+	// REMOVE ENTRIES
 	document.getElementById("remove").onclick = (e) => {
-		// Create and configure request
-		let xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "allaanmalda", true);
-		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-		xhttp.onreadystatechange = function() {
+		function ready() {
 			if (this.readyState == 4) {
 				alert(this.responseText);
 				if (this.status == 200) {
@@ -60,56 +21,93 @@ window.onload = () => {
 					location.reload(true);
 				}
 			}
-		};
-
-		// Pack data
-		let names = document.querySelectorAll(".people_name");
-		let checkboxes = document.querySelectorAll(".people_remove input");
-		// Filter out entries to remove
-		let to_remove = [];
-		for (let i = 1; i < names.length; i++) {
-			let name = names[i].innerHTML;
-			// TODO BUG: checkboxes[i] is undefined
-			let remove = check_boxes[i].checked;
-			if (remove) {
-				to_remove.push(name)
-			}
 		}
 
-		// Send data
+		let to_remove = getNamesToRemove();
 		if (confirm("Are you sure you wish to remove " + to_remove.length +
 			" entries in the database?")) {
 			password = prompt("Really?");
-			let jsonobj = JSON.stringify({
-				remove: to_remove,
-				remove_password: password
-			});
-			xhttp.send(jsonobj);
+			sendPost(ready, { remove: to_remove, remove_password: password });
 		}
 	};
 
-	// Get csv
-
+	// GET CSV
 	document.getElementById("download").onclick = (e) => {
-		// Create and configure request
-		let xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "allaanmalda", true);
-		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-		xhttp.onreadystatechange = function() {
+		function ready() {
 			if (this.readyState == 4 && this.status == 200) {
-				let preamble = "data:text/csv;charset=utf-8,";
-				var encodedUri = encodeURI(preamble + this.responseText);
-				var link = document.createElement("a");
-				link.setAttribute("href", encodedUri);
-				link.setAttribute("download", "wedding_guests.csv");
-				document.body.appendChild(link);
-				link.click();
+				downloadCsvFile(this.responseText);
 			}
 		};
-
-		// Send data
-		let jsonobj = JSON.stringify({ fetch_csv: true });
-		xhttp.send(jsonobj);
+		sendPost(ready, { fetch_csv: true });
 	};
 };
+
+
+// TODO: Move this to another file and import/require from send_anmalan.js too
+function sendPost(readyFn, dataAsDict) {
+	let xhttp = new XMLHttpRequest();
+	xhttp.open("POST", "allaanmalda", true);
+	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xhttp.onreadystatechange = readyFn;
+	xhttp.send(JSON.stringify(dataAsDict));
+}
+
+
+function showPageContent() {
+	// Pretty print booleans and calculate summary
+	let totals = {"g": 0, "l": 0, "vt": 0, "vg": 0}
+	let bools = document.querySelectorAll(".bool");
+	for (let i = 0; i < bools.length; i++) {
+		let b = parseInt(bools[i].innerHTML);
+		let type = bools[i].classList[2];
+		if (b) {
+			bools[i].innerHTML = "x";
+			totals[type] += 1;
+		} else {
+			bools[i].innerHTML = "-";
+		}
+	}
+
+	// Print summary
+	for (let type in totals) {
+		document.querySelector("#total_" + type).innerHTML = totals[type];
+	}
+
+	// Show table
+	document.getElementById("secretlist").style.display = "block";
+	document.getElementById("unsecret").style.display = "none";
+}
+
+
+function hidePageContent() {
+	document.getElementById("secretlist").style.display = "none";
+	document.getElementById("unsecret").style.display = "block";
+}
+
+
+function getNamesToRemove() {
+	let names = document.querySelectorAll(".people_name");
+	let checkboxes = document.querySelectorAll(".people_remove input");
+	// Filter out entries to remove
+	let to_remove = [];
+	for (let i = 1; i < names.length; i++) {
+		let name = names[i].innerHTML;
+		// TODO BUG: checkboxes[i] is undefined
+		let remove = checkboxes[i].checked;
+		if (remove) {
+			to_remove.push(name)
+		}
+	}
+	return to_remove;
+}
+
+
+function downloadCsvFile(content) {
+	let preamble = "data:text/csv;charset=utf-8,";
+	var encodedUri = encodeURI(preamble + content);
+	var link = document.createElement("a");
+	link.setAttribute("href", encodedUri);
+	link.setAttribute("download", "wedding_guests.csv");
+	document.body.appendChild(link);
+	link.click();
+}

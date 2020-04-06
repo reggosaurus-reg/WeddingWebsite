@@ -17,6 +17,7 @@ DOMAIN = "[A-z0-9]+\.[A-z0-9\-\.]*[A-z0-9]"
 OK_EMAIL = re.compile(LOCAL + "@" + DOMAIN) # Not entirely correct, but almost
 OK_NAME = re.compile(".+ .+")
 
+# TODO: Re-order Person etc in DB when adding wishlist!!!
 
 ### ROUTES
 

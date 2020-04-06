@@ -1,14 +1,5 @@
 window.addEventListener("load",function(event) {
-	let deadline = new Date("Jun 2, 2020 00:00:00").getTime();
-	let now = new Date().getTime();
-	if (deadline - now < 0) {
-		document.getElementById("too_late").style.display = "block";
-		document.getElementById("time_left").style.display = "none";
-	} else {
-		document.getElementById("too_late").style.display = "none";
-		document.getElementById("time_left").style.display = "block";
-	}
-
+	showIfNotPastDeadline();
 	document.getElementById("signup").onclick = (e) => {
 		// Timeout
 		setMessage("anmalan_status", "Försöker skicka din anmälan...");
@@ -49,6 +40,18 @@ window.addEventListener("load",function(event) {
 
 
 // TODO: Have classes on required fields, change onclick or something
+
+function showIfNotPastDeadline() {
+	let deadline = new Date("Jun 2, 2020 00:00:00").getTime();
+	let now = new Date().getTime();
+	if (deadline - now < 0) {
+		document.getElementById("too_late").style.display = "block";
+		document.getElementById("time_left").style.display = "none";
+	} else {
+		document.getElementById("too_late").style.display = "none";
+		document.getElementById("time_left").style.display = "block";
+	}
+}
 
 function removeErrors() {
 	document.getElementById("name_error").style.display = 'none';
