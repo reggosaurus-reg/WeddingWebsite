@@ -17,7 +17,6 @@ DOMAIN = "[A-z0-9]+\.[A-z0-9\-\.]*[A-z0-9]"
 OK_EMAIL = re.compile(LOCAL + "@" + DOMAIN) # Not entirely correct, but almost
 OK_NAME = re.compile(".+ .+")
 
-# TODO: Re-order Person etc in DB when adding wishlist!!!
 
 ### ROUTES
 
@@ -65,16 +64,16 @@ def sign_another_page():
     try:
         # This way of calling execute (execute(sql,args)) also should escape input
         c.execute("INSERT INTO Person \
-                    (name, email, info, gluten, laktos, vegetarian, vegan, allergy) \
+                    (name, email, gluten, laktos, vegetarian, vegan, allergy, info) \
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (
                     data['name'],
                     data['email'],
-                    data['other'],
                     data['gluten'],
                     data['laktos'],
                     data['vegetarian'],
                     data['vegan'],
-                    data['allergy']
+                    data['allergy'],
+                    data['other'],
                     ))
         # Save data if no data check has gone wrong
         if not faulty:
@@ -96,8 +95,8 @@ def sign_another_page():
 @app.route('/allaanmalda', methods=["GET"])
 def list_page():
     def to_person_dict(data):
-        titles = ("name", "email", "info", "time",
-              "gluten", "laktos", "vegetarian", "vegan", "other_allergy")
+        titles = ("time", "name", "email", "gluten", "laktos",
+                "vegetarian", "vegan", "other_allergy", "info")
         new = dict(zip(titles, data))
         time = new["time"]
         time = time[8:10] + "/" + time[6:7]
@@ -123,8 +122,8 @@ def route_allaanmalda():
         return remove_entries(data["remove_password"], data["remove"])
     if "fetch_csv" in data:
         # Update and send csv-file
-        titles = ("Namn", "E-post", "Övrigt", "Anmäld",
-              "Gluten", "Laktos", "Vegetarian", "Vegan", "Andra allergier")
+        titles = ("Anmäld", "Namn", "E-post", "Gluten", "Laktos",
+                "Vegetarian", "Vegan", "Andra allergier", "Övrigt")
         content = [titles] + get_db_content()
         csv.writer(open(CSV_FILE,"w+")).writerows(content)
         return send_file(CSV_FILE), 200

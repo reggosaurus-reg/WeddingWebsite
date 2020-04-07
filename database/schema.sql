@@ -1,20 +1,20 @@
-CREATE TABLE IF NOT EXISTS "Wish"
+CREATE TABLE IF NOT EXISTS "Wishlist"
 (
     [name] NVARCHAR(100) PRIMARY KEY NOT NULL,
-    [description] NVARCHAR(100) NOT NULL,
+    [description] NVARCHAR(100),
     [nr_wished] INTEGER NOT NULL,
     [nr_reserved] INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "Person"
 (
+	[time] DATETIME DEFAULT CURRENT_TIMESTAMP,
     [name] NVARCHAR(100) PRIMARY KEY NOT NULL,
     [email] NVARCHAR(100),
-    [info] NVARCHAR(500),
-	[time] DATETIME DEFAULT CURRENT_TIMESTAMP,
 	[gluten] BOOL DEFAULT FALSE,
 	[laktos] BOOL DEFAULT FALSE,
 	[vegetarian] BOOL DEFAULT FALSE,
 	[vegan] BOOL DEFAULT FALSE,
-    [allergy] NVARCHAR(200)
+    [allergy] NVARCHAR(200),
+    [info] NVARCHAR(500)
 );
