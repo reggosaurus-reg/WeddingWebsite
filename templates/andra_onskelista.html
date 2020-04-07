@@ -1,0 +1,53 @@
+<!-- TODO: Shorten headlines, is this safe to show? Move to server w/ 2 pages. --!>
+{% extends "templates/page.html" %}
+
+{% block script %}
+	<script src="{{ url_for('static', filename='js/modify_wishlist.js') }}"></script>
+{% endblock %}
+
+{% block pagename %}Ändra önskelistan{% endblock %}
+
+{% block content %}
+<div id="unsecret" >
+	<p class="ingress">Detta är hemligt... Skriv in lösenordet!</p>
+</div>
+<div id="secretlist" style="display:none">
+	<p class="ingress">Så här ser önskelistan ut just nu!</p>
+	<p id="people_list"></p>
+
+	<!-- Visa/dölj antal --!>
+	<table id="wishlist">
+		<tr>
+    		<th class="center">##</th>
+    		<th>Sak</th>
+    		<th># Önskad</th>
+			<th># Ifylld</th>
+			<th>Ta bort</th>
+	  	</tr>
+		{% for entry in data %}
+		  <tr>
+			  <td class="center">{{entry.number}}</td>
+			  <td class="center">{{entry.wish.name}}</td>
+			  <td class="center">{{entry.wish.wished}}</td>
+			  <td class="center">{{entry.wish.reserved}}</td>
+			  <td class="center wishlist_remove">
+				  <input type="checkbox" autocomplete="off"></td>
+		  </tr>
+		{% endfor %}
+		<tr class="add_row">
+			<th></th>
+			<th class="add_name"><input type="text" autocomplete="off"></td></th>
+			<th class="add_wished"><input type="text" autocomplete="off"></td></th>
+			<th></th>
+			<td class="center wishlist_">
+				<button id="add_row">En till</td>
+		</tr>
+	</table>
+
+	<div class="horizontal_buttons">
+		<button id="add">Lägg till ifyllda</button>
+		<button id="remove">Ta bort valda</button>
+	</div>
+
+</div>
+{% endblock %}

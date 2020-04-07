@@ -36,10 +36,20 @@ def info_page():
 def tm_page():
     return render_template("vardar.html")
 
-
 @app.route('/onskelista')
 def wishlist_page():
     return render_template("onskelista.html")
+
+@app.route('/andraonskelista')
+def modify_wishlist_page():
+    def to_wish_dict(data):
+        titles = ("name", "wished", "reserved")
+        return dict(zip(titles, data))
+
+    content = [to_wish_dict(entry) for entry in get_db_content("Wishlist")]
+    for i in range(len(content)):
+        content[i] = dict(zip(("number", "wish"), (i + 1, content[i])))
+    return render_template("andra_onskelista.html", data=content)
 
 
 @app.route('/boende')
@@ -103,7 +113,7 @@ def list_page():
         new["time"] = time
         return new
 
-    content = [to_person_dict(entry) for entry in get_db_content()]
+    content = [to_person_dict(entry) for entry in get_db_content("Person")]
     for i in range(len(content)):
         content[i] = dict(zip(("number", "person"), (i + 1, content[i])))
     return render_template("allaanmalda.html", data=content)
@@ -124,7 +134,7 @@ def route_allaanmalda():
         # Update and send csv-file
         titles = ("Anmäld", "Namn", "E-post", "Gluten", "Laktos",
                 "Vegetarian", "Vegan", "Andra allergier", "Övrigt")
-        content = [titles] + get_db_content()
+        content = [titles] + get_db_content("Person")
         csv.writer(open(CSV_FILE,"w+")).writerows(content)
         return send_file(CSV_FILE), 200
     return "Ogiltigt data skickades.", 401
@@ -150,11 +160,12 @@ def remove_entries(password, to_remove):
     return "Alla markerade anmälningar togs bort.", 200
 
 
-def get_db_content():
-    """Returns everything in the database."""
+def get_db_content(table):
+    """Returns everything from table in the database."""
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
-    c.execute("SELECT * FROM Person")
+    request = "SELECT * FROM {}".format(table)
+    c.execute(request)
     return c.fetchall()
 
 
