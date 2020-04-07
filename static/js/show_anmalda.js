@@ -24,8 +24,11 @@ window.onload = () => {
 		}
 
 		let to_remove = getNamesToRemove();
-		if (confirm("Are you sure you wish to remove " + to_remove.length +
-			" entries in the database?")) {
+		if (to_remove.length == 0) {
+			alert("Du har inte valt någon att ta bort.");
+		}
+		else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
+			" person(er) från databasen?")) {
 			password = prompt("Really?");
 			sendPost(ready, { remove: to_remove, remove_password: password });
 		}
@@ -90,9 +93,10 @@ function getNamesToRemove() {
 	let checkboxes = document.querySelectorAll(".people_remove input");
 	// Filter out entries to remove
 	let to_remove = [];
-	for (let i = 1; i < names.length; i++) {
+	console.assert(names.length == checkboxes.length,
+		"Name and box lengths differ. Something's wrong.");
+	for (let i = 0; i < names.length; i++) {
 		let name = names[i].innerHTML;
-		// TODO BUG: checkboxes[i] is undefined
 		let remove = checkboxes[i].checked;
 		if (remove) {
 			to_remove.push(name)
