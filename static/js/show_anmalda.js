@@ -1,7 +1,7 @@
 window.onload = () => {
 	// SHOW CORRECT PAGE VERSION
-	let password = prompt("Vad heter Reginas katt?");
-	function ready() {
+	var password = prompt("Vad heter Reginas katt?");
+	function readyShow() {
 		if (this.readyState == 4) {
 			switch(this.status) {
 				case 200: showPageContent(); break;
@@ -9,16 +9,23 @@ window.onload = () => {
 			}
 		}
 	}
-	sendPost(ready, { enter_password: password });
+
+	function readyReload() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.body.innerHTML = this.responseText;
+			showPageContent()
+		}
+	}
+
+	sendPost(readyShow, { enter_password: password });
 
 	// REMOVE ENTRIES
 	document.getElementById("remove").onclick = (e) => {
-		function ready() {
+		function readyRemove() {
 			if (this.readyState == 4) {
 				alert(this.responseText);
 				if (this.status == 200) {
-					// TODO: Reload without password. Split into two pages?
-					location.reload(true);
+					sendGet(readyReload);
 				}
 			}
 		}
@@ -29,19 +36,19 @@ window.onload = () => {
 		}
 		else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
 			" person(er) från databasen?")) {
-			password = prompt("Really?");
-			sendPost(ready, { remove: to_remove, remove_password: password });
+			let sure = prompt("Helt säker?");
+			sendPost(readyRemove, { remove: to_remove, remove_password: sure });
 		}
 	};
 
 	// GET CSV
 	document.getElementById("download").onclick = (e) => {
-		function ready() {
+		function readyCsv() {
 			if (this.readyState == 4 && this.status == 200) {
 				downloadCsvFile(this.responseText);
 			}
 		};
-		sendPost(ready, { fetch_csv: true });
+		sendPost(readyCsv, { fetch_csv: true });
 	};
 };
 
@@ -53,6 +60,14 @@ function sendPost(readyFn, dataAsDict) {
 	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xhttp.onreadystatechange = readyFn;
 	xhttp.send(JSON.stringify(dataAsDict));
+}
+
+
+function sendGet(readyFn) {
+	let xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "allaanmalda", true);
+	xhttp.onreadystatechange = readyFn;
+	xhttp.send();
 }
 
 
