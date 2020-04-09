@@ -1,7 +1,8 @@
 window.onload = () => {
 	// SHOW CORRECT PAGE VERSION
-	let password = prompt("Vad heter Reginas katt?");
-	function ready() {
+	//let password = prompt("Vad heter Reginas katt?");
+	let password = "paMpigt";
+	function readyShow() {
 		if (this.readyState == 4) {
 			switch(this.status) {
 				case 200: showPageContent(); break;
@@ -9,20 +10,27 @@ window.onload = () => {
 			}
 		}
 	}
-	sendPost(ready, { enter_password: password });
 
-	// REMOVE ENTRIES
-	document.getElementById("remove").onclick = (e) => {
-		function ready() {
-			if (this.readyState == 4) {
-				alert(this.responseText);
-				if (this.status == 200) {
-					// TODO: Reload without password. Split into two pages?
-					location.reload(true);
-				}
+	function readyReload() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.body.innerHTML = this.responseText;
+			showPageContent()
+		}
+	}
+
+	function readyUpdate() {
+		if (this.readyState == 4) {
+			alert(this.responseText);
+			if (this.status == 200) {
+				sendGet(readyReload, "andraonskelista");
 			}
 		}
+	}
 
+	sendPost(readyShow, "andraonskelista", { enter_password: password });
+
+	// REMOVE ENTRIES // TODO
+	document.getElementById("remove").onclick = (e) => {
 		let to_remove = getNamesToRemove();
 		if (to_remove.length == 0) {
 			alert("Du har inte valt någon att ta bort.");
@@ -30,27 +38,37 @@ window.onload = () => {
 		else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
 			" person(er) från databasen?")) {
 			password = prompt("Really?");
-			sendPost(ready, { remove: to_remove, remove_password: password });
+			sendPost(readyUpdate, "andraonskelista",
+				{ remove: to_remove, remove_password: password });
 		}
 	};
 
 	// TODO: Add new input row
-	// TODO: Add all inputed
+
+	// ADD ALL INPUTED
+	document.getElementById("add").onclick = (e) => {
+		sendPost(readyUpdate, "andraonskelista", getItemsToAdd());
+	}
 };
 
 
 // TODO: Move this to another file and import/require from send_anmalan.js too
-function sendPost(readyFn, dataAsDict) {
+function sendPost(readyFn, url, dataAsDict) {
 	let xhttp = new XMLHttpRequest();
-	xhttp.open("POST", "allaanmalda", true);
+	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xhttp.onreadystatechange = readyFn;
 	xhttp.send(JSON.stringify(dataAsDict));
 }
 
+function sendGet(readyFn, url) {
+	let xhttp = new XMLHttpRequest();
+	xhttp.open("GET", url, true);
+	xhttp.onreadystatechange = readyFn;
+	xhttp.send();
+}
 
 function showPageContent() {
-	// TODO: Remove
 	// Pretty print booleans and calculate summary
 	let totals = {"g": 0, "l": 0, "vt": 0, "vg": 0}
 	let bools = document.querySelectorAll(".bool");
@@ -78,30 +96,18 @@ function hidePageContent() {
 }
 
 
-function getNamesToRemove() {
-	let names = document.querySelectorAll(".people_name");
-	let checkboxes = document.querySelectorAll(".people_remove input");
-	// Filter out entries to remove
-	let to_remove = [];
-	console.assert(names.length == checkboxes.length,
-		"Name and box lengths differ. Something's wrong.");
-	for (let i = 0; i < names.length; i++) {
-		let name = names[i].innerHTML;
-		let remove = checkboxes[i].checked;
-		if (remove) {
-			to_remove.push(name)
-		}
+function getItemsToAdd() {
+	let items_ = document.querySelectorAll(".add_name input");
+	let numbers_ = document.querySelectorAll(".add_wished input");
+	console.assert(items_.length == numbers_.length,
+		"Item and number lengths differ. Something's wrong.");
+	i_list = [];
+	n_list = [];
+	for (let i = 0; i < items_.length; i++) {
+		i_list.push(items_[i].value);
+		n_list.push(numbers_[i].value);
 	}
-	return to_remove;
+	to_add = {items: i_list, numbers: n_list};
+	return {add: to_add};
 }
 
-
-function downloadCsvFile(content) {
-	let preamble = "data:text/csv;charset=utf-8,";
-	var encodedUri = encodeURI(preamble + content);
-	var link = document.createElement("a");
-	link.setAttribute("href", encodedUri);
-	link.setAttribute("download", "wedding_guests.csv");
-	document.body.appendChild(link);
-	link.click();
-}

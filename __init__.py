@@ -40,7 +40,7 @@ def tm_page():
 def wishlist_page():
     return render_template("onskelista.html")
 
-@app.route('/andraonskelista')
+@app.route('/andraonskelista', methods=["GET"])
 def modify_wishlist_page():
     def to_wish_dict(data):
         titles = ("name", "wished", "reserved")
@@ -50,6 +50,23 @@ def modify_wishlist_page():
     for i in range(len(content)):
         content[i] = dict(zip(("number", "wish"), (i + 1, content[i])))
     return render_template("andra_onskelista.html", data=content)
+
+@app.route('/andraonskelista', methods=["POST"])
+def add_to_wishlist():
+    data = request.get_json(force=True)
+    # Password check is duplicated code from allaanmalda
+    if "enter_password" in data:
+        if not correct_password(data["enter_password"], "enter"):
+            return "Fel lösenord", 401
+        else:
+            return "Rätt lösenord", 200
+    if "add" in data:
+        items = data["add"]["items"]
+        numbers = data["add"]["numbers"]
+        print(items)
+        for i in range(len(items)):
+            print(items[i], numbers[i])
+            # TODO: Add to db
 
 
 @app.route('/boende')
@@ -210,4 +227,4 @@ def check_signup_data(data):
 
 if __name__ == '__main__':
     init_db()
-    app.run()
+    app.run(host="0.0.0.0")
