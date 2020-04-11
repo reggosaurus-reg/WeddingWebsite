@@ -231,7 +231,7 @@ input[type=text]:hover, input[type=text]:focus {
   	border-bottom: 2px solid var(--color-menu-background-marked);
 }
 
-input[type=text]#reserve {
+input[type=text].reserve_num {
   	border: 2px solid var(--color-menu-background-marked);
 }
 

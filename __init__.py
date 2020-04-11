@@ -36,9 +36,40 @@ def info_page():
 def tm_page():
     return render_template("vardar.html")
 
-@app.route('/onskelista')
+@app.route('/onskelista', methods=["GET"])
 def wishlist_page():
     return render_template("onskelista.html", data=get_wishlist_content())
+
+@app.route('/onskelista', methods=["POST"])
+def reserve():
+    data = request.get_json(force=True)
+    if "numbers" in data and "items" in data:
+        items = data["items"]
+        numbers = data["numbers"]
+        db = sqlite3.connect(DATABASE)
+        c = db.cursor()
+        for i in range(len(items)):
+            try:
+                number = int(numbers[i])
+            except ValueError:
+                return numbers[i] + " är ingen siffra.", 418
+            # TODO: Lock this
+            try:
+                c.execute("SELECT nr_wished FROM Wishlist WHERE name=?", (items[i],))
+                wished = c.fetchall()[0][0]
+                c.execute("SELECT nr_to_buy FROM Wishlist WHERE name=?", (items[i],))
+                free = c.fetchall()[0][0]
+            except IndexError:
+                return "Något gick fel. Ladda om sidan och försök igen!", 418
+            if number > free:
+                err = "Så många behövs inte! Reservera {} eller färre.".format(free)
+                return err, 418
+            query = "UPDATE Wishlist SET nr_to_buy=? WHERE name=?"
+            c.execute(query, (free - number, items[i]))
+            db.commit()
+            # Unlock here (could do in db, but... mhe)
+        return "Registrerat!", 200
+    return "Inte implementerat än", 501
 
 @app.route('/andraonskelista', methods=["GET"])
 def modify_wishlist_page():

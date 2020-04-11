@@ -1,5 +1,9 @@
 {% extends "templates/page.html" %}
 
+{% block script %}
+	<script src="{{ url_for('static', filename='js/wishlist_reserve.js') }}"></script>
+{% endblock %}
+
 {% block pagename %}Önskelista{% endblock %}
 
 {% block content %}
@@ -26,11 +30,11 @@ tänker köpa, och tryck sedan på "Bekräfta".
 	{% for entry in data %}
 	  <tr>
 		<td class="center">{{entry.number}}</td>
-		<td>{{entry.wish.name}}</td>
+		<td class="reserve_name">{{entry.wish.name}}</td>
 		<td class="center">{{entry.wish.wished}}</td>
 		<td class="center">{{entry.wish.left_to_buy}}</td>
 		<td class="center">
-			<input id="reserve" class="center" size=2
+			<input class="center reserve_num" size=2
 			autocomplete="off" type="text"></td>
 	  </tr>
 	{% endfor %}
@@ -38,7 +42,7 @@ tänker köpa, och tryck sedan på "Bekräfta".
 
 	<div id="reserve_div">
 		<p class="error" id="reserve_error"></p>
-		<button id="confirm">Bekräfta</button>
+		<button id="reserve">Bekräfta</button>
 	</div>
 
 {% endblock %}

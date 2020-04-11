@@ -47,7 +47,8 @@ window.onload = () => {
 	// TODO: Add new input row
 
 	// ADD ALL INPUTED
-	document.getElementById("add").onclick = (e) => {
+	document.getElementById("add").onclick = function() {
+		alert("ok"); // This add only works once, then button doesn't react
 		sendPost(readyUpdate, "andraonskelista", getItemsToAdd());
 	}
 };
@@ -102,13 +103,13 @@ function getItemsToAdd() {
 	let numbers_ = document.querySelectorAll(".add_wished input");
 	console.assert(items_.length == numbers_.length,
 		"Item and number lengths differ. Something's wrong.");
-	i_list = [];
-	n_list = [];
+	let i_list = [];
+	let n_list = [];
 	for (let i = 0; i < items_.length; i++) {
 		i_list.push(items_[i].value);
 		n_list.push(numbers_[i].value);
 	}
-	to_add = {items: i_list, numbers: n_list};
+	let to_add = {items: i_list, numbers: n_list};
 	return {add: to_add};
 }
 
