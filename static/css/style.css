@@ -196,6 +196,10 @@ button#remove {
 	margin-top: 2em;
 }
 
+#reserve_div {
+	text-align: center;
+	margin-top: 2em;
+}
 .right {
 	text-align: right;
 }
@@ -225,6 +229,10 @@ input[type=text] {
 
 input[type=text]:hover, input[type=text]:focus {
   	border-bottom: 2px solid var(--color-menu-background-marked);
+}
+
+input[type=text]#reserve {
+  	border: 2px solid var(--color-menu-background-marked);
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

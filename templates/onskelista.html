@@ -21,19 +21,24 @@ tänker köpa, och tryck sedan på "Bekräfta".
 		<th>Sak</th>
 		<th class="center">Önskat oss</th>
 		<th class="center">Kvar att köpa</th>
+		<th class="center">Jag tänker köpa</th>
 	</tr>
 	{% for entry in data %}
 	  <tr>
-		  <td class="center">{{entry.number}}</td>
-		  <td>{{entry.wish.name}}</td>
-		  <td class="center">{{entry.wish.wished}}</td>
-		  <td class="center">{{entry.wish.left_to_buy}}</td>
+		<td class="center">{{entry.number}}</td>
+		<td>{{entry.wish.name}}</td>
+		<td class="center">{{entry.wish.wished}}</td>
+		<td class="center">{{entry.wish.left_to_buy}}</td>
+		<td class="center">
+			<input id="reserve" class="center" size=2
+			autocomplete="off" type="text"></td>
 	  </tr>
 	{% endfor %}
 </table>
 
-	<div class="horizontal_buttons">
-		<button id="add">Bekräfta</button>
+	<div id="reserve_div">
+		<p class="error" id="reserve_error"></p>
+		<button id="confirm">Bekräfta</button>
 	</div>
 
 {% endblock %}

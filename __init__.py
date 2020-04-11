@@ -188,7 +188,6 @@ def get_wishlist_content():
         return dict(zip(titles, data))
 
     content = [to_wish_dict(entry) for entry in get_db_content("Wishlist")]
-    print("CONTENT\n", get_db_content("Wishlist"))
     for i in range(len(content)):
         content[i] = dict(zip(("number", "wish"), (i + 1, content[i])))
     return content
