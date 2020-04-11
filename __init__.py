@@ -71,11 +71,11 @@ def reserve():
         return "Registrerat!", 200
     return "Inte implementerat än", 501
 
-@app.route('/andraonskelista', methods=["GET"])
+@app.route('/onskelistaadmin', methods=["GET"])
 def modify_wishlist_page():
-    return render_template("andra_onskelista.html", data=get_wishlist_content())
+    return render_template("onskelista_admin.html", data=get_wishlist_content())
 
-@app.route('/andraonskelista', methods=["POST"])
+@app.route('/onskelistaadmin', methods=["POST"])
 def add_to_wishlist():
     data = request.get_json(force=True)
     # Password check is duplicated code from allaanmalda
@@ -155,7 +155,7 @@ def sign_another_page():
         return "Tack för din anmälan, {}!".format(data["name"]), 200
 
 
-@app.route('/allaanmalda', methods=["GET"])
+@app.route('/anmalanadmin', methods=["GET"])
 def list_page():
     def to_person_dict(data):
         titles = ("time", "name", "email", "gluten", "laktos",
@@ -172,7 +172,7 @@ def list_page():
     return render_template("allaanmalda.html", data=content)
 
 
-@app.route('/allaanmalda', methods=["POST"])
+@app.route('/anmalanadmin', methods=["POST"])
 def route_allaanmalda():
     """Passes the call to correct function."""
     data = request.get_json(force=True)

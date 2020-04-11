@@ -2,7 +2,8 @@
 {% extends "templates/page.html" %}
 
 {% block script %}
-	<script src="{{ url_for('static', filename='js/modify_wishlist.js') }}"></script>
+	<script>var PAGE_TYPE = "admin_wishlist";</script>
+	<script src="{{ url_for('static', filename='js/interact_with_server.js') }}"></script>
 {% endblock %}
 
 {% block pagename %}Ändra önskelistan{% endblock %}

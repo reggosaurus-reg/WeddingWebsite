@@ -4,7 +4,8 @@
 {% block pagename %}Anmälan{% endblock %}
 
 {% block script %}
-	<script src="{{ url_for('static', filename='js/send_anmalan.js') }}"></script>
+	<script>var PAGE_TYPE = "signup";</script>
+	<script src="{{ url_for('static', filename='js/interact_with_server.js') }}"></script>
 {% endblock %}
 
 
