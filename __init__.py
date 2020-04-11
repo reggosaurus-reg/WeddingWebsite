@@ -87,6 +87,7 @@ def add_to_wishlist():
     if "add" in data:
         items = data["add"]["items"]
         numbers = data["add"]["numbers"]
+	# TODO: Check valid input
         db = sqlite3.connect(DATABASE)
         c = db.cursor()
         try:

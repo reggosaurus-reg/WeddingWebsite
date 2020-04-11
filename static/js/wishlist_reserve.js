@@ -1,26 +1,30 @@
 window.onload = () => {
-	function readyReload() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.body.innerHTML = this.responseText;
-		}
-	}
-
-	function readyUpdate() {
-		if (this.readyState == 4) {
-			let e = document.getElementById("reserve_error");
-			e.textContent = this.responseText;
-			e.style.display = 'block';
-			if (this.status == 200) {
-				sendGet(readyReload, "onskelista");
-			}
-		}
-	}
-
 	document.getElementById("reserve").onclick = (e) => {
 		sendPost(readyUpdate, "onskelista", getItemsToReserve());
 	}
-
 }
+
+function readyReload() {
+	if (this.readyState == 4 && this.status == 200) {
+		document.body.innerHTML = this.responseText;
+		document.getElementById("reserve").onclick = (e) => {
+			sendPost(readyUpdate, "onskelista", getItemsToReserve());
+		}
+	}
+}
+
+function readyUpdate() {
+	if (this.readyState == 4) {
+		let e = document.getElementById("reserve_error");
+		e.textContent = this.responseText;
+		e.style.display = 'block';
+		if (this.status == 200) {
+			sendGet(readyReload, "onskelista");
+			// TODO: Gray out items with 0 free
+		}
+	}
+}
+
 // TODO: Move this to another file and import/require from send_anmalan.js too
 function sendPost(readyFn, url, dataAsDict) {
 	let xhttp = new XMLHttpRequest();

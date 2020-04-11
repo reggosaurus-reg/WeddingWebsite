@@ -1,58 +1,47 @@
 window.onload = () => {
-	// SHOW CORRECT PAGE VERSION
 	let password = prompt("Vad heter Reginas katt?");
-	function readyShow() {
-		if (this.readyState == 4) {
-			switch(this.status) {
-				case 200: showPageContent(); break;
-				case 401: hidePageContent(); break;
-			}
-		}
-	}
-
-	function readyReload() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.body.innerHTML = this.responseText;
-			showPageContent()
-		}
-	}
-
-	function readyUpdate() {
-		if (this.readyState == 4) {
-			let e = document.getElementById("modify_error");
-			e.textContent = this.responseText;
-			e.style.display = 'block';
-			if (this.status == 200) {
-				sendGet(readyReload, "andraonskelista");
-			}
-		}
-	}
-
 	sendPost(readyShow, "andraonskelista", { enter_password: password });
+}
 
-	// REMOVE ENTRIES // TODO
-	document.getElementById("remove").onclick = (e) => {
-		let to_remove = getItemsToRemove();
-		if (to_remove.length == 0) {
-			alert("Du har inte valt någon att ta bort.");
-		}
-		else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
-			" sak(er) från databasen?")) {
-			password = prompt("Really?");
-			sendPost(readyUpdate, "andraonskelista",
-				{ remove: to_remove, remove_password: password });
-		}
-	};
-
-	// TODO: Add new input row
-
-	// ADD ALL INPUTED
-	document.getElementById("add").onclick = function() {
-		alert("ok"); // This add only works once, then button doesn't react
-		sendPost(readyUpdate, "andraonskelista", getItemsToAdd());
+function removeFunction() {
+	let to_remove = getItemsToRemove();
+	if (to_remove.length == 0) {
+		alert("Du har inte valt någon att ta bort.");
 	}
-};
+	else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
+		" sak(er) från databasen?")) {
+		password = prompt("Really?");
+		sendPost(readyUpdate, "andraonskelista",
+			{ remove: to_remove, remove_password: password });
+	}
+}
 
+function readyShow() {
+	if (this.readyState == 4) {
+		switch(this.status) {
+			case 200: setupPageContent(); break;
+			case 401: hidePageContent(); break;
+		}
+	}
+}
+
+function readyReload() {
+	if (this.readyState == 4 && this.status == 200) {
+		document.body.innerHTML = this.responseText;
+		setupPageContent()
+	}
+}
+
+function readyUpdate() {
+	if (this.readyState == 4) {
+		let e = document.getElementById("modify_error");
+		e.textContent = this.responseText;
+		e.style.display = 'block';
+		if (this.status == 200) {
+			sendGet(readyReload, "andraonskelista");
+		}
+	}
+}
 
 // TODO: Move this to another file and import/require from send_anmalan.js too
 function sendPost(readyFn, url, dataAsDict) {
@@ -70,7 +59,7 @@ function sendGet(readyFn, url) {
 	xhttp.send();
 }
 
-function showPageContent() {
+function setupPageContent() {
 	// Pretty print booleans and calculate summary
 	let totals = {"g": 0, "l": 0, "vt": 0, "vg": 0}
 	let bools = document.querySelectorAll(".bool");
@@ -88,6 +77,12 @@ function showPageContent() {
 	// Show table
 	document.getElementById("secretlist").style.display = "block";
 	document.getElementById("unsecret").style.display = "none";
+
+	// Setup buttons
+	document.getElementById("remove").onclick = removeFunction;
+	document.getElementById("add").onclick = () => {
+		sendPost(readyUpdate, "andraonskelista", getItemsToAdd());
+	}
 }
 
 
@@ -99,6 +94,7 @@ function hidePageContent() {
 
 
 function getItemsToAdd() {
+	// TODO: Only updates one at once... bloated code.
 	let items_ = document.querySelectorAll(".add_name input");
 	let numbers_ = document.querySelectorAll(".add_wished input");
 	console.assert(items_.length == numbers_.length,
