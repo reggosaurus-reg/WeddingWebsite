@@ -1,7 +1,6 @@
 window.onload = () => {
 	// SHOW CORRECT PAGE VERSION
-	//let password = prompt("Vad heter Reginas katt?");
-	let password = "paMpigt";
+	let password = prompt("Vad heter Reginas katt?");
 	function readyShow() {
 		if (this.readyState == 4) {
 			switch(this.status) {
@@ -20,7 +19,9 @@ window.onload = () => {
 
 	function readyUpdate() {
 		if (this.readyState == 4) {
-			alert(this.responseText);
+			let e = document.getElementById("modify_error");
+			e.textContent = this.responseText;
+			e.style.display = 'block';
 			if (this.status == 200) {
 				sendGet(readyReload, "andraonskelista");
 			}
@@ -31,12 +32,12 @@ window.onload = () => {
 
 	// REMOVE ENTRIES // TODO
 	document.getElementById("remove").onclick = (e) => {
-		let to_remove = getNamesToRemove();
+		let to_remove = getItemsToRemove();
 		if (to_remove.length == 0) {
 			alert("Du har inte valt någon att ta bort.");
 		}
 		else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
-			" person(er) från databasen?")) {
+			" sak(er) från databasen?")) {
 			password = prompt("Really?");
 			sendPost(readyUpdate, "andraonskelista",
 				{ remove: to_remove, remove_password: password });
@@ -111,3 +112,19 @@ function getItemsToAdd() {
 	return {add: to_add};
 }
 
+function getItemsToRemove() {
+	let names = document.querySelectorAll(".remove_name");
+	let checkboxes = document.querySelectorAll(".remove_checkbox input");
+	// Filter out entries to remove
+	let to_remove = [];
+	console.assert(names.length == checkboxes.length,
+		"Name and box lengths differ. Something's wrong.");
+	for (let i = 0; i < names.length; i++) {
+		let name = names[i].innerHTML;
+		let remove = checkboxes[i].checked;
+		if (remove) {
+			to_remove.push(name)
+		}
+	}
+	return to_remove;
+}

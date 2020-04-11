@@ -18,34 +18,36 @@
 	<!-- Visa/dölj antal --!>
 	<table id="wishlist">
 		<tr>
-    		<th class="center">##</th>
-    		<th>Sak</th>
-    		<th># Önskad</th>
-			<th># Ifylld</th>
-			<th>Ta bort</th>
+			<th class="center">##</th>
+			<th>Sak</th>
+			<th class="center">Önskat oss</th>
+			<th class="center">Kvar att köpa</th>
+			<th class="center">Ta bort</th>
 	  	</tr>
 		{% for entry in data %}
 		  <tr>
 			  <td class="center">{{entry.number}}</td>
-			  <td class="center">{{entry.wish.name}}</td>
+			  <td class="center remove_name">{{entry.wish.name}}</td>
 			  <td class="center">{{entry.wish.wished}}</td>
-			  <td class="center">{{entry.wish.reserved}}</td>
-			  <td class="center wishlist_remove">
+			  <td class="center">{{entry.wish.left_to_buy}}</td>
+			  <td class="center remove_checkbox">
 				  <input type="checkbox" autocomplete="off"></td>
 		  </tr>
 		{% endfor %}
-		<tr class="add_row">
+		<tr>
 			<th></th>
-			<th class="add_name"><input type="text" autocomplete="off"></td></th>
-			<th class="add_wished"><input type="text" autocomplete="off"></td></th>
+			<th class="add_name">
+				<input type="text" class="center" autocomplete="off"></td></th>
+			<th class="add_wished">
+				<input type="text" class="center" autocomplete="off"></td></th>
 			<th></th>
 			<td class="center wishlist_">
-				<button id="add_row">En till</td>
+				<button id="add">Lägg till</td>
 		</tr>
 	</table>
 
-	<div class="horizontal_buttons">
-		<button id="add">Lägg till ifyllda</button>
+	<div class="right">
+		<p class="error" id="modify_error"></p>
 		<button id="remove">Ta bort valda</button>
 	</div>
 

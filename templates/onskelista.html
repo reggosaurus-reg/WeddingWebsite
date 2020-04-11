@@ -8,10 +8,32 @@
 Er närvaro på vår bröllopsdag räcker gott och väl, men om ni vill ge oss
 någonting utöver det så finns här några förslag. (Och om ni vill ge oss något
 annat blir vi självklart glada även för det!) 
-
+<br>
+<br>
 Om ni vill ge oss något från denna önskelista är vi tacksamma om ni fyller det
-här, så att det inte blir flera som köper samma sak.
+här, så att det inte blir flera som köper samma sak. Skriv antalet saker ni 
+tänker köpa, och tryck sedan på "Bekräfta". 
 </p>
 
+<table>
+	<tr>
+		<th class="center">##</th>
+		<th>Sak</th>
+		<th class="center">Önskat oss</th>
+		<th class="center">Kvar att köpa</th>
+	</tr>
+	{% for entry in data %}
+	  <tr>
+		  <td class="center">{{entry.number}}</td>
+		  <td>{{entry.wish.name}}</td>
+		  <td class="center">{{entry.wish.wished}}</td>
+		  <td class="center">{{entry.wish.left_to_buy}}</td>
+	  </tr>
+	{% endfor %}
+</table>
+
+	<div class="horizontal_buttons">
+		<button id="add">Bekräfta</button>
+	</div>
 
 {% endblock %}

@@ -38,18 +38,11 @@ def tm_page():
 
 @app.route('/onskelista')
 def wishlist_page():
-    return render_template("onskelista.html")
+    return render_template("onskelista.html", data=get_wishlist_content())
 
 @app.route('/andraonskelista', methods=["GET"])
 def modify_wishlist_page():
-    def to_wish_dict(data):
-        titles = ("name", "wished", "reserved")
-        return dict(zip(titles, data))
-
-    content = [to_wish_dict(entry) for entry in get_db_content("Wishlist")]
-    for i in range(len(content)):
-        content[i] = dict(zip(("number", "wish"), (i + 1, content[i])))
-    return render_template("andra_onskelista.html", data=content)
+    return render_template("andra_onskelista.html", data=get_wishlist_content())
 
 @app.route('/andraonskelista', methods=["POST"])
 def add_to_wishlist():
@@ -63,10 +56,22 @@ def add_to_wishlist():
     if "add" in data:
         items = data["add"]["items"]
         numbers = data["add"]["numbers"]
-        print(items)
-        for i in range(len(items)):
-            print(items[i], numbers[i])
-            # TODO: Add to db
+        db = sqlite3.connect(DATABASE)
+        c = db.cursor()
+        try:
+            for i in range(len(items)):
+                c.execute("INSERT INTO Wishlist\
+                        (name, nr_wished, nr_to_buy) \
+                        VALUES (?, ?, ?)", (
+                        items[i],
+                        numbers[i],
+                        numbers[i]))
+                db.commit()
+        except sqlite3.IntegrityError as e:
+            return "Den saken finns redan.", 418
+        return "Lade till {} saker i önskelistan.".format(len(items)), 200
+    if "remove" in data:
+        return remove_entries("Wishlist", data["remove_password"], data["remove"])
 
 
 @app.route('/boende')
@@ -115,7 +120,6 @@ def sign_another_page():
     if faulty:
         return json.jsonify(faulty), 418
     else:
-        #print(get_db_content()) # DEBUG
         return "Tack för din anmälan, {}!".format(data["name"]), 200
 
 
@@ -146,7 +150,7 @@ def route_allaanmalda():
         else:
             return "Rätt lösenord", 200
     if "remove_password" in data:
-        return remove_entries(data["remove_password"], data["remove"])
+        return remove_entries("Person", data["remove_password"], data["remove"])
     if "fetch_csv" in data:
         # Update and send csv-file
         titles = ("Anmäld", "Namn", "E-post", "Gluten", "Laktos",
@@ -160,21 +164,34 @@ def route_allaanmalda():
 ### OTHER
 
 
-def remove_entries(password, to_remove):
+def remove_entries(table, password, to_remove):
     """Removes requested entries if authorized."""
     if not correct_password(password, "remove"):
         return "Fel lösenord. Inga ändringar gjordes.", 401
 
     db = sqlite3.connect(DATABASE)
     c = db.cursor()
+    request = "DELETE FROM {} WHERE name=?".format(table)
     try:
         for name in to_remove:
-            c.execute("DELETE FROM Person WHERE name=?", (name,))
+            c.execute(request, (name,))
         db.commit()
     # Should be no possible errors, but...
     except:
         return "Något gick fel.", 501
     return "Alla markerade anmälningar togs bort.", 200
+
+
+def get_wishlist_content():
+    def to_wish_dict(data):
+        titles = ("name", "description", "wished", "left_to_buy")
+        return dict(zip(titles, data))
+
+    content = [to_wish_dict(entry) for entry in get_db_content("Wishlist")]
+    print("CONTENT\n", get_db_content("Wishlist"))
+    for i in range(len(content)):
+        content[i] = dict(zip(("number", "wish"), (i + 1, content[i])))
+    return content
 
 
 def get_db_content(table):

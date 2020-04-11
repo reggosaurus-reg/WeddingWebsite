@@ -178,10 +178,6 @@ div#signup_form {
 	justify-content: left;
 }
 
-div.horizontal_buttons {
-	text-align: right;
-}
-
 button {
 	background-color: var(--color-menu-background-marked);
 	color: var(--color-text-menu-marked);
@@ -198,6 +194,10 @@ button {
 
 button#remove {
 	margin-top: 2em;
+}
+
+.right {
+	text-align: right;
 }
 
 div.signup_entry {

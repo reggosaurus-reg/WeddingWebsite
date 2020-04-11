@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS "Wishlist"
     [name] NVARCHAR(100) PRIMARY KEY NOT NULL,
     [description] NVARCHAR(100),
     [nr_wished] INTEGER NOT NULL,
-    [nr_reserved] INTEGER NOT NULL
+    [nr_to_buy] INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS "Person"
