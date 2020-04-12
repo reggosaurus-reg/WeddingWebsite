@@ -30,14 +30,14 @@ window.onload = () => {
 			break;
 		case "admin_signup":
 			let passwordS = prompt("Vad heter Reginas katt?");
-			sendPost(readyShowSA, { enter_password: passwordS });
+			sendPost(readyShowSA, "anmalanadmin", { enter_password: passwordS });
 			// REMOVE ENTRIES
 			document.getElementById("remove").onclick = (e) => {
 				function readyRemove() {
 					if (this.readyState == 4) {
 						alert(this.responseText);
 						if (this.status == 200) {
-							sendGet(readyReloadWA);
+							sendGet(readyReloadSA, "anmalanadmin");
 						}
 					}
 				}
@@ -49,7 +49,7 @@ window.onload = () => {
 				else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
 					" person(er) från databasen?")) {
 					let sure = prompt("Helt säker?");
-					sendPost(readyRemove, { remove: to_remove, remove_password: sure });
+					sendPost(readyRemove, "anmalanadmin", { remove: to_remove, remove_password: sure });
 				}
 			};
 
@@ -60,7 +60,7 @@ window.onload = () => {
 						downloadCsvFile(this.responseText);
 					}
 				};
-				sendPost(readyCsv, { fetch_csv: true });
+				sendPost(readyCsv, "anmalanadmin", { fetch_csv: true });
 			};
 			break;
 		case "admin_wishlist":

@@ -169,7 +169,7 @@ def list_page():
     content = [to_person_dict(entry) for entry in get_db_content("Person")]
     for i in range(len(content)):
         content[i] = dict(zip(("number", "person"), (i + 1, content[i])))
-    return render_template("allaanmalda.html", data=content)
+    return render_template("anmalan_admin.html", data=content)
 
 
 @app.route('/anmalanadmin', methods=["POST"])
