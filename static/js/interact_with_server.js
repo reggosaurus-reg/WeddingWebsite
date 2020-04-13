@@ -1,13 +1,17 @@
+let SIGNUP_NOT_RECEIVED = "Anmälan kunde inte tas emot. Försök igen!";
 window.onload = () => {
 	switch (PAGE_TYPE) {
 		case "signup":
 			showIfNotPastDeadline();
 			document.getElementById("signup").onclick = (e) => {
 				// Timeout
-				setMessage("anmalan_status", "Försöker skicka din anmälan...");
+				let timeout_message = "Försöker skicka din anmälan...";
+				setMessage("anmalan_status", timeout_message);
 				setTimeout(function() {
-					setMessage("anmalan_status",
-					"Anmälan kunde inte skickas. Försök igen!");
+					if (document.getElementById("anmalan_status") == timeout_message) {
+						setMessage("anmalan_status",
+						"Anmälan kunde inte tas emot. Försök igen!");
+					}
 				}, 5000);
 
 				// Pack and send field data
@@ -127,7 +131,11 @@ function readyShowS() {
 	if (this.readyState == 4 && this.status == 200) {
 		removeErrors();
 		clearFilledData();
-		setMessage("anmalan_status", this.responseText);
+		if (document.getElementById("anmalan_status") == SIGNUP_NOT_RECEIVED) {
+			setMessage("anmalan_status", "Nu kunde anmälan tas emot! " + this.responseText);
+		} else {
+			setMessage("anmalan_status", this.responseText);
+		}
 	}
 	else if (this.readyState == 4 && this.status == 418) {
 		setErrors(JSON.parse(this.responseText));
