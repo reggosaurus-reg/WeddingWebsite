@@ -234,7 +234,7 @@ function setupPageContent() {
 
 	// Setup buttons
 	document.getElementById("remove").onclick = removeFunction;
-	document.getElementById("add").onclick = () => {
+	document.getElementById("add_item").onclick = () => {
 		sendPost(readyUpdateWA, "onskelistaadmin", getItemsToAdd());
 	}
 }
@@ -249,16 +249,26 @@ function hidePageContent() {
 function getItemsToAdd() {
 	// TODO: Only updates one at once... bloated code.
 	let items_ = document.querySelectorAll(".add_name input");
+	let desc = document.querySelectorAll(".add_description input");
+	let cat = document.querySelectorAll(".add_cathegory input");
+	let url = document.querySelectorAll(".add_url input");
 	let numbers_ = document.querySelectorAll(".add_wished input");
 	console.assert(items_.length == numbers_.length,
 		"Item and number lengths differ. Something's wrong.");
 	let i_list = [];
+	let d_list = [];
+	let c_list = [];
+	let u_list = [];
 	let n_list = [];
 	for (let i = 0; i < items_.length; i++) {
 		i_list.push(items_[i].value);
+		d_list.push(desc[i].value);
+		c_list.push(cat[i].value);
+		u_list.push(url[i].value);
 		n_list.push(numbers_[i].value);
 	}
-	let to_add = {items: i_list, numbers: n_list};
+	let to_add = {items: i_list, descriptions: d_list, cathegories: c_list,
+		urls: u_list, numbers: n_list};
 	return {add: to_add};
 }
 

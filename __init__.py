@@ -86,6 +86,9 @@ def add_to_wishlist():
             return "Rätt lösenord", 200
     if "add" in data:
         items = data["add"]["items"]
+        descriptions = data["add"]["descriptions"]
+        cathegories = data["add"]["cathegories"]
+        urls = data["add"]["urls"]
         numbers = data["add"]["numbers"]
 	# TODO: Check valid input
         db = sqlite3.connect(DATABASE)
@@ -93,14 +96,18 @@ def add_to_wishlist():
         try:
             for i in range(len(items)):
                 c.execute("INSERT INTO Wishlist\
-                        (name, nr_wished, nr_to_buy) \
-                        VALUES (?, ?, ?)", (
+                        (name, description, cathegory, url, nr_wished, nr_to_buy) \
+                        VALUES (?, ?, ?, ?, ?, ?)", (
                         items[i],
+                        descriptions[i],
+                        cathegories[i],
+                        urls[i],
                         numbers[i],
                         numbers[i]))
                 db.commit()
         except sqlite3.IntegrityError as e:
             return "Den saken finns redan.", 418
+        # TODO: Foreign key error
         return "Lade till {} saker i önskelistan.".format(len(items)), 200
     if "remove" in data:
         return remove_entries("Wishlist", data["remove_password"], data["remove"])
@@ -216,7 +223,7 @@ def remove_entries(table, password, to_remove):
 
 def get_wishlist_content():
     def to_wish_dict(data):
-        titles = ("name", "description", "wished", "left_to_buy")
+        titles = ("name", "description", "cathegory", "url", "wished", "left_to_buy")
         return dict(zip(titles, data))
 
     content = [to_wish_dict(entry) for entry in get_db_content("Wishlist")]
