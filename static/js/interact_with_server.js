@@ -337,7 +337,7 @@ function downloadCsvFile(content) {
 
 // ---- SIGNUP
 function showIfNotPastDeadline() {
-	let deadline = new Date("Jun 2, 2020 00:00:00").getTime();
+	let deadline = new Date("Jul 2, 2020 00:00:00").getTime();
 	let now = new Date().getTime();
 	if (deadline - now < 0) {
 		document.getElementById("too_late").style.display = "block";
