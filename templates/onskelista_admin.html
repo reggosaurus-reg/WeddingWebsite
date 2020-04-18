@@ -19,7 +19,7 @@
 	{% for cat, wishes in data.items() %}
 		<h1 class="small">{{cat}}</h1>
 		<table class="wishlist">
-			<tr>
+			<tr class="head">
 				<th class="center">Önskat oss</th>
 				<th class="center">Kvar att köpa</th>
 				<th>Sak</th>
@@ -28,23 +28,23 @@
 			</tr>
 			{% for wish in wishes %}
 				<tr>
-					<td class="center">{{wish.wished}}</td>
-					<td class="center left_to_buy">{{wish.left_to_buy}}</td>
-					{% if wish.url|length > 0 %}
-						<td class="remove_name">
+					<td class="center" label="Önskat oss">{{wish.wished}}</td>
+					<td class="center left_to_buy" label="Kvar att köpa">{{wish.left_to_buy}}</td>
+					{% if wishiurl|length > 0 %}
+						<td class="remove_name" label="Sak">
 						<a class="normal" href="{{wish.url}}">{{wish.name}}</a></td>
 					{% else %}
-						<td class="remove_name">{{wish.name}}</td>
+						<td class="remove_name" label="Sak">{{wish.name}}</td>
 					{% endif %}
-					<td>{{wish.description}}</td>
-					<td class="center remove_checkbox">
+					<td label="Beskrivning">{{wish.description}}</td>
+					<td class="center remove_checkbox" label="Ta bort">
 						<input type="checkbox" autocomplete="off"></td>
 				</tr>
 			{% endfor %}
 		</table>
 	{% endfor %}
 
-	<div class="right">
+	<div class="wishlist_button">
 		<p class="error" id="modify_error"></p>
 		<button id="show_hide" {% if data|length == 0 %}style="display:none" {% endif %} >
 		Visa/dölj antal</button>
@@ -60,33 +60,31 @@
 		</tr>
 	</table>
 
-	<div class="right">
+	<div class="wishlist_button">
 		<button id="add_cat">Lägg till kategori</button>
 	</div>
 	<br>
 	<table id="add">
 		<tr>
-			<th></th>
-			<th class="add_wished">
-				<input type="text" class="center" autocomplete="off"  placeholder="#*" size=2></th>
-			<th class="add_name">
+			<th class="add_wished" label="Antal *">
+				<input type="text" class="center" autocomplete="off" placeholder="#*"</th>
+			<th class="add_name" label="Titel *">
 				<input type="text" class="center" autocomplete="off" placeholder="Grej*"></th>
-			<th class="add_cathegory">
+			<th class="add_cathegory" label="Kategori*">
 				<select>
 				{% for cat in data %}
 					<option value="{{cat}}">{{cat}}</option>
 				{% endfor %}
 				</select>
-			<th class="add_description">
+			<th class="add_description" label="Beskrivning">
 				<input type="text" class="center" autocomplete="off" placeholder="Beskrivning"></th>
-			<th class="add_url">
+			<th class="add_url" label="URL">
 				<input type="text" class="center" autocomplete="off" placeholder="URL"></th>
-			<th></th>
 		</tr>
 	</table>
 
 
-	<div class="right">
+	<div class="wishlist_button">
 		<button id="add_item">Lägg till sak</button>
 	</div>
 

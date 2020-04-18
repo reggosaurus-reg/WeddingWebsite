@@ -189,18 +189,15 @@ button {
 	padding-left: 2em;
 	//display: block;
 	cursor: pointer;
-	margin-left: 1em;
-}
-
-button#remove {
-	margin-top: 2em;
+	margin-top: 0.5em;
 }
 
 #reserve_div {
 	text-align: center;
 	margin-top: 2em;
 }
-.right {
+
+.wishlist_button {
 	text-align: right;
 }
 
@@ -218,7 +215,7 @@ label {
 
 input[type=text] {
   	display: inline-block;
-  	border: 1px solid var(--color-text-menu-marked);
+  	border: 0px solid var(--color-text-menu-marked);
   	border-bottom: 2px solid var(--color-text-menu);
   	box-sizing: border-box;
 	color: var(--color-text);
@@ -372,6 +369,7 @@ td {
 	vertical-align: middle;
 	border: 1px solid var(--color-menu-background);
 	padding: 0.2em;
+	color: var(--color-text);
 }
 
 td.center, th.center {
@@ -453,7 +451,7 @@ tr.empty_wish:hover {
 		font-size: 1em;
 	}
 
-	td, tr { display: block; }
+	td, th, tr { display: block; }
 
 	tr.head {display: none;}
 
@@ -469,13 +467,16 @@ tr.empty_wish:hover {
 
 	td.center { text-align: left; }
 
-	td {
+	td, th {
 	  border: none;
 	  border-bottom: 1px solid var(--color-menu-background);
 	  position: relative;
-	  padding-left: 50%;
 	  text-align: left;
 	}
+
+	td {
+	  padding-left: 50%;
+  	}
 
 	td:before {
 	  content: attr(label);
@@ -484,5 +485,11 @@ tr.empty_wish:hover {
 	  margin-left: -100%;
 	  width: 100%;
 	  white-space: nowrap;
+	color: var(--color-menu-background);
+	font-weight: bold;
+	}
+
+	.wishlist_button {
+		text-align: center;
 	}
 }
