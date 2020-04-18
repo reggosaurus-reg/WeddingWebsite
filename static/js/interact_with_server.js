@@ -69,7 +69,7 @@ window.onload = () => {
 			break;
 		case "admin_wishlist":
 			let passwordW = prompt("Vad heter Reginas katt?");
-			sendPost(readyShowW, "onskelistaadmin", { enter_password: passwordW });
+			sendPost(readyShowWA, "onskelistaadmin", { enter_password: passwordW });
 			break;
 		// TODO: Put homepage here
 		default:
@@ -153,7 +153,7 @@ function readyShowSA() {
 function readyReloadWA() {
 	if (this.readyState == 4 && this.status == 200) {
 		document.body.innerHTML = this.responseText;
-		setupPageContent()
+		setupPageContent();
 	}
 }
 
@@ -167,7 +167,7 @@ function readyUpdateWA() {
 		}
 	}
 }
-function readyShowW() {
+function readyShowWA() {
 	if (this.readyState == 4) {
 		switch(this.status) {
 			case 200: setupPageContent(); break;
@@ -217,23 +217,11 @@ function removeFunction() {
 	}
 }
 function setupPageContent() {
-	// Pretty print booleans and calculate summary
-	let totals = {"g": 0, "l": 0, "vt": 0, "vg": 0}
-	let bools = document.querySelectorAll(".bool");
-	for (let i = 0; i < bools.length; i++) {
-		let b = parseInt(bools[i].innerHTML);
-		let type = bools[i].classList[2];
-		if (b) {
-			bools[i].innerHTML = "x";
-			totals[type] += 1;
-		} else {
-			bools[i].innerHTML = "-";
-		}
-	}
-
 	// Show table
 	document.getElementById("secretlist").style.display = "block";
 	document.getElementById("unsecret").style.display = "none";
+
+	hideNumbersFunction();
 
 	// Setup buttons
 	document.getElementById("remove").onclick = removeFunction;
@@ -249,6 +237,22 @@ function setupPageContent() {
 function hidePageContent() {
 	document.getElementById("secretlist").style.display = "none";
 	document.getElementById("unsecret").style.display = "block";
+}
+
+function hideNumbersFunction() {
+	let numbers = document.querySelectorAll(".left_to_buy");
+	for (let i = 0; i < numbers.length; i++) {
+		numbers[i].style.visibility = "hidden";
+	}
+	document.getElementById("show_hide").onclick = showNumbersFunction;
+}
+
+function showNumbersFunction() {
+	let numbers = document.querySelectorAll(".left_to_buy");
+	for (let i = 0; i < numbers.length; i++) {
+		numbers[i].style.visibility = "visible";
+	}
+	document.getElementById("show_hide").onclick = hideNumbersFunction;
 }
 
 function getCathegoryToAdd() {
