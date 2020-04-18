@@ -31,7 +31,12 @@
 				<tr>
 					<td class="center">{{wish.wished}}</td>
 					<td class="center">{{wish.left_to_buy}}</td>
-					<td class="remove_name">{{wish.name}}</td>
+					{% if wish.url|length > 0 %}
+						<td class="remove_name">
+						<a class="normal" href="{{wish.url}}">{{wish.name}}</a></td>
+					{% else %}
+						<td class="remove_name">{{wish.name}}</td>
+					{% endif %}
 					<td>{{wish.description}}</td>
 					<td class="center remove_checkbox">
 						<input type="checkbox" autocomplete="off"></td>
@@ -40,7 +45,26 @@
 		</table>
 	{% endfor %}
 
+	<div class="right">
+		<p class="error" id="modify_error"></p>
+		<button id="remove" {% if data|length == 0 %}style="display:none" {% endif %} >
+		Ta bort valda</button>
+	</div>
+
 	<h1 class="small">Lägg till</h1>
+
+	<table>
+		<tr>
+			<th></th>
+			<th><input type="text" id="new_cat" autocomplete="off" placeholder="Ny kategori*"></th>
+			<th></th>
+		</tr>
+	</table>
+
+	<div class="right">
+		<button id="add_cat">Lägg till kategori</button>
+	</div>
+	<br>
 	<table id="add">
 		<tr>
 			<th></th>
@@ -49,7 +73,11 @@
 			<th class="add_name">
 				<input type="text" class="center" autocomplete="off" placeholder="Grej*"></th>
 			<th class="add_cathegory">
-				<input type="text" class="center" autocomplete="off" placeholder="Kategori*"></th>
+				<select>
+				{% for cat in data %}
+					<option value="{{cat}}">{{cat}}</option>
+				{% endfor %}
+				</select>
 			<th class="add_description">
 				<input type="text" class="center" autocomplete="off" placeholder="Beskrivning"></th>
 			<th class="add_url">
@@ -60,13 +88,7 @@
 
 
 	<div class="right">
-		<p class="error" id="modify_error"></p>
-		<button id="add_item">Lägg till sak</button></td>
-		<div class="horizontal_buttons">
-			<input type="text" id="new_cat" autocomplete="off" placeholder="Ny kategori*"></th>
-			<button id="add_cat">Lägg till kategori</button>
-			<button id="remove">Ta bort valda</button>
-		</div>
+		<button id="add_item">Lägg till sak</button>
 	</div>
 
 </div>

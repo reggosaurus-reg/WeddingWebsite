@@ -256,8 +256,8 @@ function getCathegoryToAdd() {
 function getItemsToAdd() {
 	// TODO: Only updates one at once... bloated code.
 	let items_ = document.querySelectorAll(".add_name input");
-	let desc = document.querySelectorAll(".add_description input"); // TODO: Dropdown
-	let cat = document.querySelectorAll(".add_cathegory input");
+	let desc = document.querySelectorAll(".add_description input");
+	let cat = document.querySelectorAll(".add_cathegory select");
 	let url = document.querySelectorAll(".add_url input");
 	let numbers_ = document.querySelectorAll(".add_wished input");
 	console.assert(items_.length == numbers_.length,

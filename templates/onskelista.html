@@ -9,44 +9,55 @@
 
 {% block content %}
 
-<p class="ingress">
-Er närvaro på vår bröllopsdag räcker gott och väl, men om ni vill ge oss
-någonting utöver det så finns här några förslag. (Och om ni vill ge oss något
-annat blir vi självklart glada även för det!) 
-<br>
-<br>
-Om ni vill ge oss något från denna önskelista är vi tacksamma om ni fyller i det
-här, så att det inte blir flera som köper samma sak. Skriv antalet saker ni 
-tänker köpa, och tryck sedan på "Bekräfta". 
-</p>
+{% if data|length > 0 %}
+	<p class="ingress">
+	Er närvaro på vår bröllopsdag räcker gott och väl, men om ni vill ge oss
+	någonting utöver det så finns här några förslag. (Och om ni vill ge oss något
+	annat blir vi självklart glada även för det!) 
+	<br>
+	<br>
+	Om ni vill ge oss något från denna önskelista är vi tacksamma om ni fyller i det
+	här, så att det inte blir flera som köper samma sak. Skriv antalet saker ni 
+	tänker köpa, och tryck sedan på "Bekräfta". 
+	</p>
 
-{% for cat, wishes in data.items() %}
-	<h1 class="small">{{cat}}</h1>
-	<table class="wishlist">
-		<tr>
-			<th class="center">Önskat oss</th>
-			<th class="center">Kvar att köpa</th>
-			<th>Sak</th>
-			<th>Beskrivning</th>
-			<th class="center">Jag tänker köpa</th>
-		</tr>
-		{% for wish in wishes %}
+	{% for cat, wishes in data.items() %}
+		<h1 class="small">{{cat}}</h1>
+		<table class="wishlist">
 			<tr>
-				<td class="center">{{wish.wished}}</td>
-				<td class="center">{{wish.left_to_buy}}</td>
-				<td class="remove_name">{{wish.name}}</td>
-				<td>{{wish.description}}</td>
-				<td class="center">
-					<input class="center reserve_num" size=2
-					autocomplete="off" type="text"></td>
+				<th class="center">Önskat oss</th>
+				<th class="center">Kvar att köpa</th>
+				<th>Sak</th>
+				<th>Beskrivning</th>
+				<th class="center">Jag tänker köpa</th>
 			</tr>
-		{% endfor %}
-	</table>
-{% endfor %}
+			{% for wish in wishes %}
+				<tr>
+					<td class="center">{{wish.wished}}</td>
+					<td class="center">{{wish.left_to_buy}}</td>
+					{% if wish.url|length > 0 %}
+						<td class="remove_name">
+						<a class="normal" href="{{wish.url}}">{{wish.name}}</a></td>
+					{% else %}
+						<td class="remove_name">{{wish.name}}</td>
+					{% endif %}
+					<td>{{wish.description}}</td>
+					<td class="center">
+						<input class="center reserve_num" size=2
+						autocomplete="off" type="text"></td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
 
-<div id="reserve_div">
-	<p class="error" id="reserve_error"></p>
-	<button id="reserve">Bekräfta</button>
-</div>
+	<div id="reserve_div">
+		<p class="error" id="reserve_error"></p>
+		<button id="reserve">Bekräfta</button>
+	</div>
+{% else %}
+	<p class="ingress">Er närvaro på vår bröllopsdag räcker gott och väl men om
+	ni vill ge oss någonting utöver det så kommer här snart att finnas lite
+	förslag. </p>
+{% endif %}
 
 {% endblock %}

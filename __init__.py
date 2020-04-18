@@ -97,6 +97,8 @@ def add_to_wishlist():
             for i in range(len(items)):
                 if not (numbers[i] and items[i] and cathegories[i]):
                     return "Fyll i alla obligatoriska fält.", 418
+                if not urls[i].startswith("http"):
+                    return "Url:en måste börja med 'http' - kopiera den från webläsaren.", 418
                 # TODO Kat excist
                 # TODO antal be int
                 c.execute("INSERT INTO Wishlist\
@@ -249,8 +251,6 @@ def get_wishlist_content():
             data[wish["cathegory"]].append(wish)
         except KeyError:
             continue
-    #data = [{k: v} for k, v in data.items()]
-    print(data)
     return data
 
 
