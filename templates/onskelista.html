@@ -24,7 +24,7 @@
 	{% for cat, wishes in data.items() %}
 		<h1 class="small">{{cat}}</h1>
 		<table class="wishlist">
-			<tr>
+			<tr class="head">
 				<th class="center">Önskat oss</th>
 				<th class="center">Kvar att köpa</th>
 				<th>Sak</th>
@@ -33,16 +33,16 @@
 			</tr>
 			{% for wish in wishes %}
 				<tr {% if wish.left_to_buy == 0 %} class="empty_wish" {% endif %}>
-					<td class="center">{{wish.wished}}</td>
-					<td class="center">{{wish.left_to_buy}}</td>
+					<td class="center" label="Önskat oss">{{wish.wished}}</td>
+					<td class="center" label="Kvar att köpa">{{wish.left_to_buy}}</td>
 					{% if wish.url|length > 0 %}
-						<td class="reserve_name">
+						<td class="reserve_name" label="Sak">
 						<a class="normal" href="{{wish.url}}">{{wish.name}}</a></td>
 					{% else %}
-						<td class="reserve_name">{{wish.name}}</td>
+						<td class="reserve_name" label="Sak">{{wish.name}}</td>
 					{% endif %}
-					<td>{{wish.description}}</td>
-					<td class="center">
+					<td label="Beskrivning">{{wish.description}}</td>
+					<td class="center" label="Jag tänker köpa">
 						<input class="center reserve_num" size=2
 						{% if wish.left_to_buy == 0 %}disabled{% endif %}
 						autocomplete="off" type="text"></td>
