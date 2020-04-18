@@ -235,6 +235,11 @@ input[type=text].reserve_num {
   	border: 2px solid var(--color-menu-background-marked);
 }
 
+.empty_wish input.reserve_num {
+  	border: 2px solid gray;
+}
+
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: var(--color-military-green);
   opacity: 1; /* Firefox */
@@ -355,24 +360,32 @@ table {
 th {
 	text-align: left;
 	vertical-align: middle;
+	padding: 0.2em;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
+	border: 1px solid var(--color-menu-background);
 	background-color: var(--color-menu-background);
 	color: var(--color-text-menu);
 }
 
 td {
 	vertical-align: middle;
+	border: 1px solid var(--color-menu-background);
+	padding: 0.2em;
 }
 
 td.center, th.center {
 	text-align: center;
 }
 
-tr:nth-child(even) {background-color: var(--color-text-menu);}
+tr.empty_wish {background-color: lightgray;}
 
 tr:hover {
-	background-color: var(--color-menu-background-marked);
+	background-color: var(--color-text-menu);
+}
+
+tr.empty_wish:hover {
+	background-color: lightgray;
 }
 
 @media only screen and (max-width: 600px) {
