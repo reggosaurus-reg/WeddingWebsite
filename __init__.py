@@ -84,17 +84,21 @@ def add_to_wishlist():
             return "Fel lösenord", 401
         else:
             return "Rätt lösenord", 200
-    if "add" in data:
-        items = data["add"]["items"]
-        descriptions = data["add"]["descriptions"]
-        cathegories = data["add"]["cathegories"]
-        urls = data["add"]["urls"]
-        numbers = data["add"]["numbers"]
+    if "add_item" in data:
+        items = data["add_item"]["items"]
+        descriptions = data["add_item"]["descriptions"]
+        cathegories = data["add_item"]["cathegories"]
+        urls = data["add_item"]["urls"]
+        numbers = data["add_item"]["numbers"]
 	# TODO: Check valid input
         db = sqlite3.connect(DATABASE)
         c = db.cursor()
         try:
             for i in range(len(items)):
+                if not (numbers[i] and items[i] and cathegories[i]):
+                    return "Fyll i alla obligatoriska fält.", 418
+                # TODO Kat excist
+                # TODO antal be int
                 c.execute("INSERT INTO Wishlist\
                         (name, description, cathegory, url, nr_wished, nr_to_buy) \
                         VALUES (?, ?, ?, ?, ?, ?)", (
@@ -109,6 +113,18 @@ def add_to_wishlist():
             return "Den saken finns redan.", 418
         # TODO: Foreign key error
         return "Lade till {} saker i önskelistan.".format(len(items)), 200
+    if "add_cathegory" in data:
+        cat = data["add_cathegory"]
+        if not cat:
+            return "Fyll i alla obligatoriska fält.", 418
+        db = sqlite3.connect(DATABASE)
+        c = db.cursor()
+        try:
+            c.execute("INSERT INTO Cathegory (name) VALUES (?)", (cat,))
+            db.commit()
+        except sqlite3.IntegrityError as e:
+            return "Den kategorin finns redan.", 418
+        return "Lade till en kategori i önskelistan.", 200
     if "remove" in data:
         return remove_entries("Wishlist", data["remove_password"], data["remove"])
 

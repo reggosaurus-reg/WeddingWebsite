@@ -237,6 +237,9 @@ function setupPageContent() {
 	document.getElementById("add_item").onclick = () => {
 		sendPost(readyUpdateWA, "onskelistaadmin", getItemsToAdd());
 	}
+	document.getElementById("add_cat").onclick = () => {
+		sendPost(readyUpdateWA, "onskelistaadmin", getCathegoryToAdd());
+	}
 }
 
 
@@ -245,11 +248,15 @@ function hidePageContent() {
 	document.getElementById("unsecret").style.display = "block";
 }
 
+function getCathegoryToAdd() {
+	let cat = document.querySelector("#new_cat");
+	return {add_cathegory: cat.value};
+}
 
 function getItemsToAdd() {
 	// TODO: Only updates one at once... bloated code.
 	let items_ = document.querySelectorAll(".add_name input");
-	let desc = document.querySelectorAll(".add_description input");
+	let desc = document.querySelectorAll(".add_description input"); // TODO: Dropdown
 	let cat = document.querySelectorAll(".add_cathegory input");
 	let url = document.querySelectorAll(".add_url input");
 	let numbers_ = document.querySelectorAll(".add_wished input");
@@ -269,7 +276,7 @@ function getItemsToAdd() {
 	}
 	let to_add = {items: i_list, descriptions: d_list, cathegories: c_list,
 		urls: u_list, numbers: n_list};
-	return {add: to_add};
+	return {add_item: to_add};
 }
 
 function getItemsToRemove() {
