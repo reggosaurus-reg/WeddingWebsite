@@ -68,7 +68,7 @@ def reserve():
             c.execute(query, (free - number, items[i]))
             db.commit()
             # Unlock here (could do in db, but... mhe)
-        return "Registrerat!", 200
+        return "Reserverade dina val!", 200
     return "Inte implementerat än", 501
 
 @app.route('/onskelistaadmin', methods=["GET"])
@@ -90,17 +90,18 @@ def add_to_wishlist():
         cathegories = data["add_item"]["cathegories"]
         urls = data["add_item"]["urls"]
         numbers = data["add_item"]["numbers"]
-	# TODO: Check valid input
         db = sqlite3.connect(DATABASE)
         c = db.cursor()
         try:
             for i in range(len(items)):
                 if not (numbers[i] and items[i] and cathegories[i]):
                     return "Fyll i alla obligatoriska fält.", 418
-                if not urls[i].startswith("http"):
+                if urls[i] and not urls[i].startswith("http"):
                     return "Url:en måste börja med 'http' - kopiera den från webläsaren.", 418
-                # TODO Kat excist
-                # TODO antal be int
+                try:
+                    number = int(numbers[i])
+                except ValueError:
+                    return numbers[i] + " är ingen siffra.", 418
                 c.execute("INSERT INTO Wishlist\
                         (name, description, cathegory, url, nr_wished, nr_to_buy) \
                         VALUES (?, ?, ?, ?, ?, ?)", (
@@ -113,7 +114,6 @@ def add_to_wishlist():
                 db.commit()
         except sqlite3.IntegrityError as e:
             return "Den saken finns redan.", 418
-        # TODO: Foreign key error
         return "Lade till {} saker i önskelistan.".format(len(items)), 200
     if "add_cathegory" in data:
         cat = data["add_cathegory"]

@@ -105,7 +105,6 @@ function readyUpdateW() {
 		e.style.display = 'block';
 		if (this.status == 200) {
 			sendGet(readyReloadW, "onskelista");
-			// TODO: Gray out items with 0 free
 		}
 	}
 }
@@ -188,6 +187,10 @@ function getItemsToReserve() {
 		"Items and numbers lengths differ. Something's wrong.");
 	for (let i = 0; i < items.length; i++) {
 		let item = items[i].innerHTML;
+		// Treat if item name has url
+		if (items[i].children.length == 1) {
+			item = items[i].children[0].innerHTML;
+		}
 		let reserve_num = numbers[i].value;
 		if (reserve_num != "") {
 			i_list.push(item);
@@ -281,6 +284,7 @@ function getItemsToAdd() {
 
 function getItemsToRemove() {
 	let names = document.querySelectorAll(".remove_name");
+	// TODO: What if name is link?
 	let checkboxes = document.querySelectorAll(".remove_checkbox input");
 	// Filter out entries to remove
 	let to_remove = [];
@@ -288,6 +292,10 @@ function getItemsToRemove() {
 		"Name and box lengths differ. Something's wrong.");
 	for (let i = 0; i < names.length; i++) {
 		let name = names[i].innerHTML;
+		// Treat if item name has url
+		if (names[i].children.length == 1) {
+			name = names[i].children[0].innerHTML;
+		}
 		let remove = checkboxes[i].checked;
 		if (remove) {
 			to_remove.push(name)
