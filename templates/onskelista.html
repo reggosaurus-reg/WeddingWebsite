@@ -20,30 +20,33 @@ här, så att det inte blir flera som köper samma sak. Skriv antalet saker ni
 tänker köpa, och tryck sedan på "Bekräfta". 
 </p>
 
-<table>
-	<tr>
-		<th class="center">##</th>
-		<th>Sak</th>
-		<th class="center">Önskat oss</th>
-		<th class="center">Kvar att köpa</th>
-		<th class="center">Jag tänker köpa</th>
-	</tr>
-	{% for entry in data %}
-	  <tr>
-		<td class="center">{{entry.number}}</td>
-		<td class="reserve_name">{{entry.wish.name}}</td>
-		<td class="center">{{entry.wish.wished}}</td>
-		<td class="center">{{entry.wish.left_to_buy}}</td>
-		<td class="center">
-			<input class="center reserve_num" size=2
-			autocomplete="off" type="text"></td>
-	  </tr>
-	{% endfor %}
-</table>
+{% for cat, wishes in data.items() %}
+	<h1 class="small">{{cat}}</h1>
+	<table class="wishlist">
+		<tr>
+			<th class="center">Önskat oss</th>
+			<th class="center">Kvar att köpa</th>
+			<th>Sak</th>
+			<th>Beskrivning</th>
+			<th class="center">Jag tänker köpa</th>
+		</tr>
+		{% for wish in wishes %}
+			<tr>
+				<td class="center">{{wish.wished}}</td>
+				<td class="center">{{wish.left_to_buy}}</td>
+				<td class="remove_name">{{wish.name}}</td>
+				<td>{{wish.description}}</td>
+				<td class="center">
+					<input class="center reserve_num" size=2
+					autocomplete="off" type="text"></td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endfor %}
 
-	<div id="reserve_div">
-		<p class="error" id="reserve_error"></p>
-		<button id="reserve">Bekräfta</button>
-	</div>
+<div id="reserve_div">
+	<p class="error" id="reserve_error"></p>
+	<button id="reserve">Bekräfta</button>
+</div>
 
 {% endblock %}

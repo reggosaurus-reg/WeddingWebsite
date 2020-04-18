@@ -238,14 +238,20 @@ def remove_entries(table, password, to_remove):
 
 
 def get_wishlist_content():
+    data = {x[0]: [] for x in get_db_content("Cathegory")}
     def to_wish_dict(data):
         titles = ("name", "description", "cathegory", "url", "wished", "left_to_buy")
         return dict(zip(titles, data))
 
     content = [to_wish_dict(entry) for entry in get_db_content("Wishlist")]
-    for i in range(len(content)):
-        content[i] = dict(zip(("number", "wish"), (i + 1, content[i])))
-    return content
+    for wish in content:
+        try:
+            data[wish["cathegory"]].append(wish)
+        except KeyError:
+            continue
+    #data = [{k: v} for k, v in data.items()]
+    print(data)
+    return data
 
 
 def get_db_content(table):

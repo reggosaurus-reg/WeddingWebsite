@@ -17,26 +17,30 @@
 	<p id="people_list"></p>
 
 	<!-- Visa/dölj antal --!>
-	<table id="wishlist">
-		<tr>
-			<th class="center">Önskat oss</th>
-			<th class="center">Kvar att köpa</th>
-			<th>Sak</th>
-			<th>Beskrivning</th>
-			<th class="center">Ta bort</th>
-	  	</tr>
-		{% for entry in data %}
-		  <tr>
-			  <td class="center">{{entry.wish.wished}}</td>
-			  <td class="center">{{entry.wish.left_to_buy}}</td>
-			  <td class="remove_name">{{entry.wish.name}}</td>
-			  <td>{{entry.wish.description}}</td>
-			  <td class="center remove_checkbox">
-				  <input type="checkbox" autocomplete="off"></td>
-		  </tr>
-		{% endfor %}
-	</table>
+	{% for cat, wishes in data.items() %}
+		<h1 class="small">{{cat}}</h1>
+		<table class="wishlist">
+			<tr>
+				<th class="center">Önskat oss</th>
+				<th class="center">Kvar att köpa</th>
+				<th>Sak</th>
+				<th>Beskrivning</th>
+				<th class="center">Ta bort</th>
+			</tr>
+			{% for wish in wishes %}
+				<tr>
+					<td class="center">{{wish.wished}}</td>
+					<td class="center">{{wish.left_to_buy}}</td>
+					<td class="remove_name">{{wish.name}}</td>
+					<td>{{wish.description}}</td>
+					<td class="center remove_checkbox">
+						<input type="checkbox" autocomplete="off"></td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
 
+	<h1 class="small">Lägg till</h1>
 	<table id="add">
 		<tr>
 			<th></th>
