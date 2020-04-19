@@ -54,36 +54,36 @@
 
 	<h1 class="small">Lägg till</h1>
 
-	<table>
-		<tr>
-			<th><input type="text" id="new_cat" autocomplete="off" placeholder="Ny kategori*"></th>
-		</tr>
-	</table>
+	<div id="add_cat_form">
+		<input type="text" id="new_cat" autocomplete="off" placeholder="Ny kategori*">
+	</div>
 
 	<div class="wishlist_button">
 		<p class="error" id="cat_error"></p>
 		<button id="add_cat">Lägg till kategori</button>
 	</div>
 	<br>
-	<table id="add">
-		<tr>
-			<th class="add_name" label="Titel *">
-				<input type="text" class="center" autocomplete="off" placeholder="Grej*"></th>
-			<th class="add_wished" label="Antal *">
-				<input type="text" class="center" autocomplete="off" placeholder="#*"</th>
-			<th class="add_cathegory" label="Kategori*">
-				<select>
+	<div id="add_item_form" class="center">
+		<div class="add_name" label="Titel *">
+			<input type="text" class="center" autocomplete="off" placeholder="Grej*">
+		</div>
+		<div class="add_wished" label="Antal *">
+			<input type="text" class="center" autocomplete="off" size="2" placeholder="#*">
+		</div>
+		<div class="add_cathegory" label="Kategori*">
+			<select>
 				{% for cat in data %}
-					<option value="{{cat}}">{{cat}}</option>
+				<option value="{{cat}}">{{cat}}</option>
 				{% endfor %}
-				</select>
-			<th class="add_description" label="Beskrivning">
-				<input type="text" class="center" autocomplete="off" placeholder="Beskrivning"></th>
-			<th class="add_url" label="URL">
-				<input type="text" class="center" autocomplete="off" placeholder="URL"></th>
-		</tr>
-	</table>
-
+			</select>
+		</div>
+		<div class="add_description" label="Beskrivning">
+			<input type="text" class="center long" autocomplete="off" placeholder="Beskrivning">
+		</div>
+		<div class="add_url" label="URL">
+			<input type="text" class="center long" autocomplete="off" placeholder="URL">
+		</div>
+	</div>
 
 	<div class="wishlist_button">
 		<p class="error" id="add_error"></p>
