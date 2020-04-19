@@ -29,7 +29,12 @@ window.onload = () => {
 			break;
 		case "wishlist":
 			document.getElementById("reserve").onclick = (e) => {
-				sendPost(readyUpdateW, "onskelista", getItemsToReserve());
+				let to_reserve = getItemsToReserve();
+				if (to_reserve.items.length > 0) {
+					sendPost(readyUpdateW, "onskelista", to_reserve);
+				} else {
+					setMessage("reserve_error", "Välj något som du vill köpa först!");
+				}
 			}
 			break;
 		case "admin_signup":
@@ -104,7 +109,7 @@ function readyUpdateW() {
 		e.textContent = this.responseText;
 		e.style.display = 'block';
 		if (this.status == 200) {
-			sendGet(readyReloadW, "onskelista");
+			sendGet(readyReloadW, "onskelista?success=true");
 		}
 	}
 }
@@ -121,7 +126,12 @@ function readyReloadW() {
 	if (this.readyState == 4 && this.status == 200) {
 		document.body.innerHTML = this.responseText;
 		document.getElementById("reserve").onclick = (e) => {
-			sendPost(readyUpdateW, "onskelista", getItemsToReserve());
+			let to_reserve = getItemsToReserve();
+			if (to_reserve.items.length > 0) {
+				sendPost(readyUpdateW, "onskelista", to_reserve);
+			} else {
+				setMessage("reserve_error", "Välj något som du vill köpa först!");
+			}
 		}
 	}
 }

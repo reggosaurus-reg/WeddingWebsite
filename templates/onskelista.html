@@ -52,7 +52,11 @@
 	{% endfor %}
 
 	<div id="reserve_div">
-		<p class="error" id="reserve_error"></p>
+		{% if success is not none %}
+			<p class="error" id="reserve_error" style="display:block">Lyckades reservera dina val!</p>
+		{% else %}
+			<p class="error" id="reserve_error"></p>
+		{% endif %}
 		<button id="reserve">Bekräfta</button>
 	</div>
 {% else %}

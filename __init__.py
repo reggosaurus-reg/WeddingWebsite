@@ -38,7 +38,8 @@ def tm_page():
 
 @app.route('/onskelista', methods=["GET"])
 def wishlist_page():
-    return render_template("onskelista.html", data=get_wishlist_content())
+    return render_template("onskelista.html", data=get_wishlist_content(),
+            success=request.args.get('success'))
 
 @app.route('/onskelista', methods=["POST"])
 def reserve():
@@ -286,6 +287,8 @@ def check_signup_data(data):
     allergy_diff = len(data['allergy']) - ALLERGY_LENGTH
     if name_diff > 0:
         faulty['name'] = "Ditt namn är {} tecken för långt.".format(name_diff)
+    if "&" in data['name'] or " och " in data['name'].lower():
+        faulty['name'] = "Anmäl en person i taget! (Ditt namn innehåller 'och' i någon form.)".format(name_diff)
     if email_diff > 0:
         faulty['email'] = "Din e-post är {} tecken för lång.".format(email_diff)
     if info_diff > 0:
