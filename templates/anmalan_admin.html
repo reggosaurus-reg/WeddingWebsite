@@ -16,8 +16,8 @@
 	<p id="people_list"></p>
 
 	<table id="people">
-		<tr>
-    		<th class="center">##</th>
+		<tr class="head">
+    		<th class="center">#</th>
     		<th>Anmäld</th>
     		<th>Namn</th>
 			<th>E-post</th>
@@ -31,21 +31,21 @@
 	  	</tr>
 		{% for entry in data %}
 		  <tr>
-			  <td class="center">{{entry.number}}</td>
-			  <td class="center">{{entry.person.time}}</td>
-			  <td class="people_name">{{entry.person.name}}</td>
-			  <td>{{entry.person.email}}</td>
-			  <td class="center bool g">{{entry.person.gluten}}</td>
-			  <td class="center bool l">{{entry.person.laktos}}</td>
-			  <td class="center bool vt">{{entry.person.vegetarian}}</td>
-			  <td class="center bool vg">{{entry.person.vegan}}</td>
-			  <td>{{entry.person.other_allergy}}</td>
-			  <td>{{entry.person.info}}</td>
-			  <td class="center people_remove">
+			  <td class="center" label="#">{{entry.number}}</td>
+			  <td class="center" label="Anmäld">{{entry.person.time}}</td>
+			  <td class="people_name" label="Namn">{{entry.person.name}}</td>
+			  <td label="E-post">{{entry.person.email}}</td>
+			  <td class="center bool g" label="Gluten">{{entry.person.gluten}}</td>
+			  <td class="center bool l" label="Laktos">{{entry.person.laktos}}</td>
+			  <td class="center bool vt" label="Vegetarian">{{entry.person.vegetarian}}</td>
+			  <td class="center bool vg" label="Vegan">{{entry.person.vegan}}</td>
+			  <td label="Andra allergier">{{entry.person.other_allergy}}</td>
+			  <td label="Övrigt">{{entry.person.info}}</td>
+			  <td label="Ta bort" class="center people_remove">
 				  <input type="checkbox" autocomplete="off"></td>
 		  </tr>
 		{% endfor %}
-		<tr>
+		<tr class="head">
 			<th></th>
 			<th></th>
 			<th></th>
