@@ -1,19 +1,68 @@
 {% extends "templates/page.html" %}
 
+{% block script %}
+	<script>var PAGE_TYPE = "wishlist";</script>
+	<script src="{{ url_for('static', filename='js/interact_with_server.js') }}"></script>
+{% endblock %}
+
 {% block pagename %}Önskelista{% endblock %}
 
 {% block content %}
 
-<p class="ingress">
-Er närvaro på vår bröllopsdag räcker gott och väl men om ni vill ge oss
-någonting utöver det så kommer här snart att finnas lite förslag. 
+{% if data|length > 0 %}
+	<p class="ingress">
+	Er närvaro på vår bröllopsdag räcker gott och väl, men om ni vill ge oss
+	någonting utöver det så finns här några förslag. (Och om ni vill ge oss något
+	annat blir vi självklart glada även för det!)
+	<br>
+	<br>
+	Om ni vill ge oss något från denna önskelista är vi tacksamma om ni fyller i det
+	här, så minskar risken att flera köper samma sak. Skriv antalet saker ni
+	tänker köpa, och tryck sedan på "Bekräfta". Om en saks namn är kursiverat
+	och understruket så är det en klickbar länk till det specifika föremålet.
+	</p>
 
-<!--
-Om det ni ska ge finns på vår önskelista är vi tacksamma om ni bockar av det
-här så att det inte blir flera som köper samma sak. Om ni vill ge oss något
-annat är vi självklart även tacksamma för det. 
-!-->
-</p>
+	{% for cat, wishes in data.items() %}
+		<h1 class="small">{{cat}}</h1>
+		<table class="wishlist">
+			<tr class="head">
+				<th class="center">Önskat oss</th>
+				<th class="center">Kvar att köpa</th>
+				<th>Sak</th>
+				<th>Beskrivning</th>
+				<th class="center">Jag tänker köpa</th>
+			</tr>
+			{% for wish in wishes %}
+				<tr {% if wish.left_to_buy == 0 %} class="empty_wish" {% endif %}>
+					<td class="center" label="Önskat oss">{{wish.wished}}</td>
+					<td class="center" label="Kvar att köpa">{{wish.left_to_buy}}</td>
+					{% if wish.url|length > 0 %}
+						<td class="reserve_name" label="Sak">
+						<a class="normal" href="{{wish.url}}">{{wish.name}}</a></td>
+					{% else %}
+						<td class="reserve_name" label="Sak">{{wish.name}}</td>
+					{% endif %}
+					<td label="Beskrivning">{{wish.description}}</td>
+					<td class="center" label="Jag tänker köpa"><input class="center reserve_num" size=2
+						{% if wish.left_to_buy == 0 %}disabled{% endif %}
+						autocomplete="off" type="text"></td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
 
+	<div id="reserve_div">
+		{% if success is not none %}
+			<p class="error" id="reserve_error" style="display:block">Lyckades reservera dina val!</p>
+		{% else %}
+			<p class="error" id="reserve_error"></p>
+		{% endif %}
+		<button id="reserve">Bekräfta</button>
+	</div>
+{% else %}
+	<p class="ingress">Er närvaro på vår bröllopsdag räcker gott och väl men om
+	ni vill ge oss någonting utöver det så kommer här snart att finnas lite
+	förslag. </p>
+{% endif %}
 
 {% endblock %}

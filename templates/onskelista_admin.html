@@ -1,0 +1,94 @@
+<!-- TODO: Shorten headlines, is this safe to show? Move to server w/ 2 pages. --!>
+{% extends "templates/page.html" %}
+
+{% block script %}
+	<script>var PAGE_TYPE = "admin_wishlist";</script>
+	<script src="{{ url_for('static', filename='js/interact_with_server.js') }}"></script>
+{% endblock %}
+
+{% block pagename %}Ändra önskelistan{% endblock %}
+
+{% block content %}
+<div id="unsecret" >
+	<p class="ingress">Detta är hemligt... Skriv in lösenordet!</p>
+</div>
+<div id="secretlist" style="display:none">
+	<p class="ingress">Så här ser önskelistan ut just nu!</p>
+	<p id="people_list"></p>
+
+	{% for cat, wishes in data.items() %}
+		<h1 class="small">{{cat}}</h1>
+		<table class="wishlist">
+			<tr class="head">
+				<th class="center">Önskat oss</th>
+				<th class="center">Kvar att köpa</th>
+				<th>Sak</th>
+				<th>Beskrivning</th>
+				<th class="center">Ta bort</th>
+			</tr>
+			{% for wish in wishes %}
+				<tr>
+					<td class="center" label="Önskat oss">{{wish.wished}}</td>
+					<td class="center left_to_buy" label="Kvar att köpa">{{wish.left_to_buy}}</td>
+					{% if wishiurl|length > 0 %}
+						<td class="remove_name" label="Sak">
+						<a class="normal" href="{{wish.url}}">{{wish.name}}</a></td>
+					{% else %}
+						<td class="remove_name" label="Sak">{{wish.name}}</td>
+					{% endif %}
+					<td label="Beskrivning">{{wish.description}}</td>
+					<td class="center remove_checkbox" label="Ta bort">
+						<input type="checkbox" autocomplete="off"></td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+
+	<div class="wishlist_button">
+		<p class="error" id="remove_error"></p>
+		<button id="show_hide" {% if data|length == 0 %}style="display:none" {% endif %} >
+		Visa/dölj antal</button>
+		<button id="remove" {% if data|length == 0 %}style="display:none" {% endif %} >
+		Ta bort valda</button>
+	</div>
+
+	<h1 class="small">Lägg till</h1>
+
+	<div id="add_cat_form">
+		<input type="text" id="new_cat" autocomplete="off" placeholder="Ny kategori*">
+	</div>
+
+	<div class="wishlist_button">
+		<p class="error" id="cat_error"></p>
+		<button id="add_cat">Lägg till kategori</button>
+	</div>
+	<br>
+	<div id="add_item_form" class="center">
+		<div class="add_name" label="Titel *">
+			<input type="text" class="center" autocomplete="off" placeholder="Grej*">
+		</div>
+		<div class="add_wished" label="Antal *">
+			<input type="text" class="center" autocomplete="off" size="2" placeholder="#*">
+		</div>
+		<div class="add_cathegory" label="Kategori*">
+			<select>
+				{% for cat in data %}
+				<option value="{{cat}}">{{cat}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="add_description" label="Beskrivning">
+			<input type="text" class="center long" autocomplete="off" placeholder="Beskrivning">
+		</div>
+		<div class="add_url" label="URL">
+			<input type="text" class="center long" autocomplete="off" placeholder="URL">
+		</div>
+	</div>
+
+	<div class="wishlist_button">
+		<p class="error" id="add_error"></p>
+		<button id="add_item">Lägg till sak</button>
+	</div>
+
+</div>
+{% endblock %}

@@ -101,9 +101,21 @@ p {
 	color: var(--color-text);
 }
 
-.ingress {
+p.error {
+	color: var(--color-menu-background);
+	font-style: italic;
+	margin-top: 0.5em;
+	margin-bottom: 0;
+	display: none;
+}
+
+p.ingress {
  	text-align: center;
  	margin-bottom: 3em;
+}
+
+p#anmalan_status {
+	margin-bottom: 1em;
 }
 
 .header {
@@ -156,6 +168,95 @@ img.post.web {
 
 img.post.mobile {
 	display: none;
+}
+
+div#signup_form {
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
+button {
+	background-color: var(--color-menu-background-marked);
+	color: var(--color-text-menu-marked);
+	font-size: large;
+	font-style: italic;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	padding-right: 2em;
+	padding-left: 2em;
+	//display: block;
+	cursor: pointer;
+	margin-top: 0.5em;
+}
+
+#reserve_div {
+	text-align: center;
+	margin-top: 2em;
+}
+
+.wishlist_button {
+	text-align: right;
+}
+
+div.signup_entry {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2em;
+}
+
+label {
+	color: var(--color-text);
+	font-size: large;
+	margin-bottom: 0.3em;
+}
+
+input[type=text] {
+  	display: inline-block;
+  	border: 0px solid var(--color-text-menu-marked);
+  	border-bottom: 2px solid var(--color-text-menu);
+  	box-sizing: border-box;
+	color: var(--color-text);
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-top: 0.2em;
+}
+
+input[type=text]:hover, input[type=text]:focus {
+  	border-bottom: 2px solid var(--color-menu-background-marked);
+}
+
+input[type=text].reserve_num {
+  	border: 2px solid var(--color-menu-background-marked);
+}
+
+.empty_wish input.reserve_num {
+  	border: 2px solid gray;
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: var(--color-military-green);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--color-military-green);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--color-military-green);
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.center.text {
+	text-align: center;
 }
 
 .flex-container {
@@ -231,7 +332,7 @@ nav {
 .dropdown-menu a {
 	float: none;
 	color: var(--color-text-menu);
-	padding: 12px 16px;
+	padding: 12px 0px;
 	width: 100%;
 	text-align: center;
 	text-decoration: none;
@@ -245,6 +346,64 @@ nav {
 
 #countdown {
 	font-style: italic;
+}
+
+table {
+	table-layout: fixed;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th {
+	text-align: left;
+	vertical-align: middle;
+	padding: 0.2em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	border: 1px solid var(--color-menu-background);
+	background-color: var(--color-menu-background);
+	color: var(--color-text-menu);
+}
+
+div#add_item_form {
+	padding: 0.5em;
+	background-color: var(--color-menu-background);
+}
+
+div#add_cat_form {
+	padding: 1em;
+	background-color: var(--color-menu-background);
+}
+
+div#add_item_form * {
+	padding: 0.5em;
+}
+
+input.long {
+	width: 100%;
+}
+
+td {
+	vertical-align: middle;
+	border: 1px solid var(--color-menu-background);
+	padding: 0.2em;
+	color: var(--color-text);
+}
+
+td.center, th.center {
+	text-align: center;
+}
+
+.empty_wish input.reserve_num {background-color: gray;}
+
+tr.empty_wish {background-color: lightgray;}
+
+tr:hover {
+	background-color: var(--color-text-menu);
+}
+
+tr.empty_wish:hover {
+	background-color: lightgray;
 }
 
 @media only screen and (max-width: 600px) {
@@ -293,6 +452,7 @@ nav {
 
 	img.post.mobile {
 		display: block;
+		margin: auto;
 	}
 
 	.ingress {
@@ -310,5 +470,47 @@ nav {
 
 	#menu_names {
 		font-size: 1em;
+	}
+
+	td, th, tr { display: block; }
+
+	tr.head {display: none;}
+
+	thead tr {
+	  position: absolute;
+	  top: -9999px;
+	  left: -9999px;
+	}
+
+	tr { border: 1px solid var(--color-menu-background); }
+
+	tr + tr { margin-top: 1.5em; }
+
+	td.center { text-align: left; }
+
+	td, th {
+	  border: none;
+	  border-bottom: 1px solid var(--color-menu-background);
+	  position: relative;
+	  text-align: left;
+	}
+
+	td {
+	  padding-left: 50%;
+  	}
+
+	td:before {
+	  content: attr(label);
+	  display: inline-block;
+	  line-height: 1.5;
+	  margin-left: -100%;
+	  width: 100%;
+	  white-space: nowrap;
+	color: var(--color-menu-background);
+	font-weight: bold;
+	}
+
+	.wishlist_button {
+		text-align: center;
 	}
 }
