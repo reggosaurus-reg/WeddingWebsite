@@ -216,7 +216,7 @@ def route_allaanmalda():
         titles = ("Anmäld", "Namn", "E-post", "Gluten", "Laktos",
                 "Vegetarian", "Vegan", "Andra allergier", "Övrigt")
         content = [titles] + get_db_content("Person")
-        csv.writer(open(CSV_FILE,"w+")).writerows(content)
+        csv.writer(open(CSV_FILE,"w+", encoding='utf-8')).writerows(content)
         return send_file(CSV_FILE), 200
     return "Ogiltigt data skickades.", 401
 
