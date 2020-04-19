@@ -52,8 +52,10 @@ def reserve():
         for i in range(len(items)):
             try:
                 number = int(numbers[i])
+                if number < 0:
+                    return "Du kan inte reservera ett negativt antal...", 418
             except ValueError:
-                return numbers[i] + " är ingen siffra.", 418
+                return numbers[i] + " är inget heltal.", 418
             # TODO: Lock this
             try:
                 c.execute("SELECT nr_wished FROM Wishlist WHERE name=?", (items[i],))
@@ -102,7 +104,7 @@ def add_to_wishlist():
                 try:
                     number = int(numbers[i])
                 except ValueError:
-                    return numbers[i] + " är ingen siffra.", 418
+                    return numbers[i] + " är inget heltal.", 418
                 c.execute("INSERT INTO Wishlist\
                         (name, description, cathegory, url, nr_wished, nr_to_buy) \
                         VALUES (?, ?, ?, ?, ?, ?)", (

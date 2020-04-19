@@ -167,12 +167,14 @@ function readyReloadWA() {
 	}
 }
 
-function readyUpdateWA() {
-	if (this.readyState == 4) {
-		let e = document.getElementById("modify_error");
-		e.textContent = this.responseText;
-		e.style.display = 'block';
-		if (this.status == 200) {
+function readyUpdateWA(obj, id) {
+	if (obj.readyState == 4) {
+		document.getElementById("remove_error").style.display = 'none';
+		document.getElementById("add_error").style.display = 'none';
+		document.getElementById("cat_error").style.display = 'none';
+
+		setMessage(id, obj.responseText);
+		if (obj.status == 200) {
 			sendGet(readyReloadWA, "onskelistaadmin");
 		}
 	}
@@ -217,13 +219,13 @@ function getItemsToReserve() {
 function removeFunction() {
 	let to_remove = getItemsToRemove();
 	if (to_remove.length == 0) {
-		alert("Du har inte valt någon att ta bort.");
+		setMessage("remove_error", "Du har inte valt något att ta bort.");
 	}
 	else if (confirm("Är du säker på att du vill ta bort " + to_remove.length +
 		" sak(er) från databasen?")) {
 		password = prompt("Really?");
-		sendPost(readyUpdateWA, "onskelistaadmin",
-			{ remove: to_remove, remove_password: password });
+		sendPost(function() { readyUpdateWA(this, "remove_error"); },
+			"onskelistaadmin", { remove: to_remove, remove_password: password });
 	}
 }
 function setupPageContent() {
@@ -236,10 +238,12 @@ function setupPageContent() {
 	// Setup buttons
 	document.getElementById("remove").onclick = removeFunction;
 	document.getElementById("add_item").onclick = () => {
-		sendPost(readyUpdateWA, "onskelistaadmin", getItemsToAdd());
+		sendPost(function() {readyUpdateWA(this, "add_error"); },
+			"onskelistaadmin", getItemsToAdd());
 	}
 	document.getElementById("add_cat").onclick = () => {
-		sendPost(readyUpdateWA, "onskelistaadmin", getCathegoryToAdd());
+		sendPost(function() { readyUpdateWA(this, "cat_error"); },
+			"onskelistaadmin", getCathegoryToAdd());
 	}
 }
 

@@ -42,8 +42,7 @@
 						<td class="reserve_name" label="Sak">{{wish.name}}</td>
 					{% endif %}
 					<td label="Beskrivning">{{wish.description}}</td>
-					<td class="center" label="Jag tänker köpa">
-						<input class="center reserve_num" size=2
+					<td class="center" label="Jag tänker köpa"><input class="center reserve_num" size=2
 						{% if wish.left_to_buy == 0 %}disabled{% endif %}
 						autocomplete="off" type="text"></td>
 				</tr>

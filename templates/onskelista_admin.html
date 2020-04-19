@@ -45,7 +45,7 @@
 	{% endfor %}
 
 	<div class="wishlist_button">
-		<p class="error" id="modify_error"></p>
+		<p class="error" id="remove_error"></p>
 		<button id="show_hide" {% if data|length == 0 %}style="display:none" {% endif %} >
 		Visa/dölj antal</button>
 		<button id="remove" {% if data|length == 0 %}style="display:none" {% endif %} >
@@ -61,15 +61,16 @@
 	</table>
 
 	<div class="wishlist_button">
+		<p class="error" id="cat_error"></p>
 		<button id="add_cat">Lägg till kategori</button>
 	</div>
 	<br>
 	<table id="add">
 		<tr>
-			<th class="add_wished" label="Antal *">
-				<input type="text" class="center" autocomplete="off" placeholder="#*"</th>
 			<th class="add_name" label="Titel *">
 				<input type="text" class="center" autocomplete="off" placeholder="Grej*"></th>
+			<th class="add_wished" label="Antal *">
+				<input type="text" class="center" autocomplete="off" placeholder="#*"</th>
 			<th class="add_cathegory" label="Kategori*">
 				<select>
 				{% for cat in data %}
@@ -85,6 +86,7 @@
 
 
 	<div class="wishlist_button">
+		<p class="error" id="add_error"></p>
 		<button id="add_item">Lägg till sak</button>
 	</div>
 

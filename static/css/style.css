@@ -332,7 +332,7 @@ nav {
 .dropdown-menu a {
 	float: none;
 	color: var(--color-text-menu);
-	padding: 12px 16px;
+	padding: 12px 0px;
 	width: 100%;
 	text-align: center;
 	text-decoration: none;
@@ -375,6 +375,8 @@ td {
 td.center, th.center {
 	text-align: center;
 }
+
+.empty_wish input.reserve_num {background-color: gray;}
 
 tr.empty_wish {background-color: lightgray;}
 
@@ -432,6 +434,7 @@ tr.empty_wish:hover {
 
 	img.post.mobile {
 		display: block;
+		margin: auto;
 	}
 
 	.ingress {
