@@ -1,3 +1,5 @@
+PRAGMA foreign_keys=ON;
+
 CREATE TABLE IF NOT EXISTS "Wishlist"
 (
     [name] NVARCHAR(100) PRIMARY KEY NOT NULL,
