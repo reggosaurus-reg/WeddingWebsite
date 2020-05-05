@@ -8,7 +8,7 @@ window.onload = () => {
 				let timeout_message = "Försöker skicka din anmälan...";
 				setMessage("anmalan_status", timeout_message);
 				setTimeout(function() {
-					if (document.getElementById("anmalan_status") == timeout_message) {
+					if (document.getElementById("anmalan_status") === timeout_message) {
 						setMessage("anmalan_status",
 						"Anmälan kunde inte tas emot. Försök igen!");
 					}
